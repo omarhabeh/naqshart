@@ -1,0 +1,28 @@
+{
+    "private": true,
+    "scripts": {
+    "devDependencies": {
+        "axios": "^0.19",
+        "bootstrap": "^4.0.0",
+        "cross-env": "^7.0",
+        "jquery": "^3.2",
+        "laravel-mix": "^5.0.5",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.20.1",
+        "sass-loader": "^8.0.0",
+        "vue": "^2.6.11",
+        "vue-template-compiler": "^2.6.10",
+        "vuejs-form": "^1.2.9"
+    },
+    "dependencies": {
+        "vue-awesome-swiper": "^4.1.1",
+        "vue-i18n": "^8.24.0",
+        "vue-router": "^3.5.1",
+        "vuejs-validators": "^1.1.7",
+        "vuetify": "^2.4.6",
+        "vuex": "^3.6.2",
+        "swiper": "^6.5.0"
+    }
+}
