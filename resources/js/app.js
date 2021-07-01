@@ -38,7 +38,10 @@ import $ from "jquery";
 $.ajax({
     url: '/geo',
     success: function(res) {
-        lang = localStorage.setItem("locale", res);
+        localStorage.setItem("locale", res);
+    },
+    error:function(res){
+        localStorage.setItem("locale", 'en');
     }
 });
 const messages = {

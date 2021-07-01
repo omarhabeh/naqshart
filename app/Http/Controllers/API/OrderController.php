@@ -64,7 +64,7 @@ class OrderController extends Controller
         $responseData = json_decode($responseData);
         // dd($responseData);
         //  dd($request->all(),$order->items,$responseData);
-        if (isset($responseData->id) && isset($responseData->result->description) &&  str_contains($responseData->result->description, 'successfully')) {
+        if (isset($responseData->id) && isset($responseData->result->description) &&  str_contains($responseData->result->description, 'succ')) {
             //  return 'error' ;
             $key['small'] = "S_avalible";
             $key['medium'] = 'M_avalible';
