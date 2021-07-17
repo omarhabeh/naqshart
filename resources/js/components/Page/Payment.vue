@@ -1,5 +1,8 @@
 <template>
-  <section style="margin-top: 5%">
+
+  <section
+    style="margin-top: 3%; transition-duration: 5s; transition: all 2s linear"
+  >
     <div class="row" v-if="$i18n.locale == 'en'">
       <div class="col-md-5 sm_discount mt-4" style="background-color: #fafafa">
         <div
@@ -172,8 +175,13 @@
             </div>
           </div>
         </div>
-        <v-form class="form" @submit.prevent="send" autocomplete="on">
-          <v-container>
+        <v-form
+          class="form"
+          @submit.prevent="send"
+          autocomplete="on"
+          style="transition-duration: 5s; transition: all 2s linear"
+        >
+          <v-container v-if="step == 1">
             <div class="alert text-left mb-3">
               <h5 class="red--text" v-if="errors.items">
                 {{ $t("message.noitem") }}
@@ -272,28 +280,6 @@
               >
                 Shipping Address
               </h4>
-              <v-col cols="12" md="12" style="padding: 0px 12px">
-                <label>Address</label>
-                <v-text-field
-                  v-model="form.address"
-                  outlined
-                  style="border: none"
-                ></v-text-field>
-                <span class="red--text" v-if="errors.address">{{
-                  errors.address[0]
-                }}</span>
-              </v-col>
-              <v-col cols="12" md="12" style="padding: 0px 12px">
-                <label>Appartment (optional)</label>
-                <v-text-field
-                  v-model="form.apartment"
-                  outlined
-                  style="border: none"
-                ></v-text-field>
-                <span class="red--text" v-if="errors.apartment">{{
-                  errors.apartment[0]
-                }}</span>
-              </v-col>
               <v-col cols="12" sm="12" style="padding: 0px 12px">
                 <label>Country</label>
                 <v-select
@@ -320,18 +306,6 @@
                   errors.city[0]
                 }}</span>
               </v-col>
-
-              <!-- <v-col class="d-flex" cols="12" sm="4">
-                <v-select
-                  v-model="form.goverment"
-
-                  item-text="name"
-                  item-value="last"
-                  :items="item"
-                  label="governate"
-                  outlined
-                ></v-select>
-              </v-col>-->
               <v-col cols="4" sm="4" style="padding: 0px 12px">
                 <label>Post Code</label>
                 <v-text-field
@@ -344,6 +318,69 @@
                 }}</span>
               </v-col>
               <v-col cols="12" md="12" style="padding: 0px 12px">
+                <label>Address</label>
+                <v-text-field
+                  v-model="form.address"
+                  outlined
+                  style="border: none"
+                ></v-text-field>
+                <span class="red--text" v-if="errors.address">{{
+                  errors.address[0]
+                }}</span>
+              </v-col>
+              <v-col cols="12" md="12" style="padding: 0px 12px">
+                <label>Appartment (optional)</label>
+                <v-text-field
+                  v-model="form.apartment"
+                  outlined
+                  style="border: none"
+                ></v-text-field>
+                <span class="red--text" v-if="errors.apartment">{{
+                  errors.apartment[0]
+                }}</span>
+              </v-col>
+            </v-row>
+
+            <v-btn
+              color="#197bbd"
+              style="
+                float: right;
+                margin: 20px 0;
+                height: 10px;
+                font-weight: 100;
+                text-transform: none;
+              "
+              class="check_btn"
+              :disabled ="FormNotFinished()"
+              @click.prevent="next()"
+            >
+              Next
+            </v-btn>
+          </v-container>
+          <v-container v-if="step == 2">
+          <div class="content-box">
+              <div class="content-box__row content-box__row--no-border">
+                  <h2>Customer information</h2>
+              </div>
+              <div class="content-box__row">
+                    <div class="section__content">
+                        <div class="section__content__column section__content__column--half">
+                          <div class="text-container">
+                              <h3 class="heading-3">Contact information</h3>
+
+                              <p><bdo dir="ltr">{{this.form.email}}</bdo></p>
+                                  <h3 class="heading-3">Shipping address</h3>
+                                  <address class="address">{{this.form.fname}} {{this.form.lname}}<br />{{this.form.city}}<br />{{this.form.address}} {{this.form.postcode}}<br />{{this.form.country}}<br />‎{{this.form.phone}}</address>
+
+                        
+                          </div>
+                        </div>
+
+                    </div>
+              </div>
+            </div>
+            <v-row>
+              <!-- <v-col cols="10" md="12" style="padding: 0px 12px">
                 <label>Payment Method</label>
                 <v-select
                   v-model="form.paymentMethod"
@@ -352,7 +389,88 @@
                   dir="rtl"
                   style="border: none; text-align: right"
                 ></v-select>
-              </v-col>
+              </v-col> -->
+               <div class="logo_payment visa col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                    
+                  "
+                >
+                  <img
+                    src="/images/visa.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'VISA'"
+                  />
+                </v-btn>
+              </div>
+               <div class="logo_payment master col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                    
+                  "
+                >
+                  <img
+                    src="/images/master.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'MASTER'"
+                  />
+                </v-btn>
+              </div>
+               <div class="logo_payment mada col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                   
+                  "
+                >
+                  <img
+                    src="/images/mada.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'MADA'"
+                  />
+                </v-btn>
+              </div>
+              <div class="logo_payment apple col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="border: none !important; background: none"
+                >
+                  <img
+                    src="/images/applepay.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'APPLE'"
+                  />
+                </v-btn>
+              </div>
+              <div class="logo_payment stc col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                   
+                  "
+                >
+                  <img
+                    src="/images/stcpay.jpeg"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'STC_PAY'"
+                  />
+                </v-btn>
+              </div>
             </v-row>
             <v-btn
               color="#197bbd"
@@ -367,6 +485,21 @@
               type="submit"
               >Continue to payment</v-btn
             >
+            <v-btn
+              color="#197bbd"
+              style="
+                float: right;
+                margin: 20px 0;
+                height: 10px;
+                font-weight: 100;
+                text-transform: none;
+                margin-right: 20px;
+              "
+              class="check_btn"
+              @click.prevent="prev()"
+            >
+              Previous
+            </v-btn>
           </v-container>
         </v-form>
       </div>
@@ -462,7 +595,32 @@
               <div style="clear:both"></div>
           </div>-->
           <!-- </div> -->
-
+          <div v-if="step == 2 && Shipping_res != null">
+            <span
+              style="
+                font-size: 1.2em;
+                padding-left: 10px;
+                color: #323232;
+                font-weight: 600;
+              "
+              >Shipping</span
+            >
+            <span style="float: right">
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.sar") }} {{ Shipping_res }}</strong
+                  >
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.usd1") }} {{ Shipping_res_us }}</strong
+                  >
+                </template>
+              </span>
+            </span>
+            <div style="clear: both"></div>
+          </div>
           <div>
             <span
               style="
@@ -471,7 +629,7 @@
                 color: #323232;
                 font-weight: 600;
               "
-              >Total</span
+              >Subtotal</span
             >
             <span style="float: right">
               <span style="color: #737171; padding-right: 10px">
@@ -489,11 +647,39 @@
             </span>
             <div style="clear: both"></div>
           </div>
+          <div v-if="step == 2 && Shipping_res != null">
+          <hr />
+            <span
+              style="
+                font-size: 1.2em;
+                padding-left: 10px;
+                color: #323232;
+                font-weight: 600;
+              "
+              >Total</span
+            >
+            <span style="float: right">
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.sar") }} {{ cartTotalPriceSAR+parseFloat(Shipping_res) }}</strong
+                  >
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.usd1") }} {{ cartTotalPrice+parseFloat(Shipping_res_us)  }}</strong
+                  >
+                </template>
+              </span>
+            </span>
+            <div style="clear: both"></div>
+          </div>
+          
         </div>
       </div>
     </div>
 
-    <div class="row" v-else>
+    <div class="row" dir="ltr" v-else>
       <div class="col-md-5 sm_discount mt-4" style="background-color: #fafafa">
         <div
           class="clickdown"
@@ -674,7 +860,6 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="display: contents">
               <div class="moda-body">
-                
                 <form
                   :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
@@ -685,7 +870,7 @@
           </div>
         </div>
         <v-form class="form" @submit.prevent="send">
-          <v-container>
+          <v-container v-if="step == 1">
             <div class="alert text-center mb-3">
               <h5 class="red--text" v-if="errors.items">
                 {{ $t("message.noitem") }}
@@ -797,6 +982,49 @@
               >
                 بيانات الشحن
               </h4>
+              <v-col cols="12" sm="12" style="padding: 0px 12px">
+                <label style="float: right">الدولة</label>
+                <div style="clear: both"></div>
+                <v-select
+                  v-model="form.country"
+                  :items="countries"
+                  outlined
+                  dir="rtl"
+                  style="border: none; text-align: right"
+                ></v-select>
+                <span class="red--text" v-if="errors.country">{{
+                  errors.country[0]
+                }}</span>
+              </v-col>
+              <v-col cols="8" md="8" style="padding: 0px 12px">
+                <label style="float: right">المدينة</label>
+                <div style="clear: both"></div>
+                <!-- v-select -->
+                <v-select
+                  v-model="form.city"
+                  :items="cities"
+                  outlined
+                  dir="rtl"
+                  style="border: none; text-align: right"
+                ></v-select>
+                <span class="red--text" v-if="errors.city">{{
+                  errors.city[0]
+                }}</span>
+              </v-col>
+              <v-col cols="4" sm="4" style="padding: 0px 12px">
+                <label style="float: right">رمز البريد</label>
+                <div style="clear: both"></div>
+                <v-text-field
+                  v-model="form.postcode"
+                  outlined
+                  style="border: none"
+                  dir="rtl"
+                ></v-text-field>
+                <span class="red--text" v-if="errors.postcode">{{
+                  errors.postcode[0]
+                }}</span>
+              </v-col>
+
               <v-col cols="12" md="12" style="padding: 0px 12px">
                 <label style="float: right">العنوان</label>
                 <div style="clear: both"></div>
@@ -824,20 +1052,6 @@
                 }}</span>
               </v-col>
 
-              <v-col cols="12" sm="12" style="padding: 0px 12px">
-                <label style="float: right">الدولة</label>
-                <div style="clear: both"></div>
-                <v-select
-                  v-model="form.country"
-                  :items="countries"
-                  outlined
-                  dir="rtl"
-                  style="border: none; text-align: right"
-                ></v-select>
-                <span class="red--text" v-if="errors.country">{{
-                  errors.country[0]
-                }}</span>
-              </v-col>
               <!-- <v-col class="d-flex" cols="12" sm="4">
                 <v-select
                   v-model="form.goverment"
@@ -848,35 +1062,51 @@
                   outlined
                 ></v-select>
               </v-col>-->
-              <v-col cols="4" sm="4" style="padding: 0px 12px">
-                <label style="float: right">رمز البريد</label>
-                <div style="clear: both"></div>
-                <v-text-field
-                  v-model="form.postcode"
-                  outlined
-                  style="border: none"
-                  dir="rtl"
-                ></v-text-field>
-                <span class="red--text" v-if="errors.postcode">{{
-                  errors.postcode[0]
-                }}</span>
-              </v-col>
-              <v-col cols="8" md="8" style="padding: 0px 12px">
-                <label style="float: right">المدينة</label>
-                <div style="clear: both"></div>
-                <!-- v-select -->
-                <v-select
-                  v-model="form.city"
-                  :items="cities"
-                  outlined
-                  dir="rtl"
-                  style="border: none; text-align: right"
-                ></v-select>
-                <span class="red--text" v-if="errors.city">{{
-                  errors.city[0]
-                }}</span>
-              </v-col>
-              <v-col cols="12" md="12" style="padding: 0px 12px">
+
+              
+            </v-row>
+            
+            <v-btn
+              color="#197bbd"
+              style="
+                float: right;
+                margin: 20px 0;
+                height: 10px;
+                font-weight: 100;
+                text-transform: none;
+              "
+              class="check_btn"
+              :disabled ="FormNotFinished()"
+              @click.prevent="next()"
+            >
+              التالي
+            </v-btn>
+            <div style="clear: both"></div>
+          </v-container>
+           <v-container v-if="step == 2">
+            <div class="content-box">
+              <div class="content-box__row content-box__row--no-border">
+                  <h2>بيانات العميل</h2>
+              </div>
+              <div class="content-box__row">
+                    <div class="section__content">
+                        <div class="section__content__column section__content__column--half">
+                          <div class="text-container">
+                              <h3 class="heading-3">معلومات التواصل</h3>
+
+                              <p><bdo dir="ltr">{{this.form.email}}</bdo></p>
+                                  <h3 class="heading-3">بيانات الشحن</h3>
+                                  <address class="address">{{this.form.fname}} {{this.form.lname}}<br />{{this.form.city}}<br />{{this.form.address}} {{this.form.postcode}}<br />{{this.form.country}}<br />‎{{this.form.phone}}</address>
+
+                        
+                          </div>
+                        </div>
+
+                    </div>
+              </div>
+            </div>
+            <v-row>
+              <!-- <v-col cols="12" md="12" style="padding: 0px 12px">
                 <label style="width: 100%; text-align: right"
                   >طريقة الدفع</label
                 >
@@ -887,13 +1117,95 @@
                   dir="rtl"
                   style="border: none; text-align: right"
                 ></v-select>
-              </v-col>
+              </v-col> -->
+               <div class="logo_payment visa col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                    
+                  "
+                >
+                  <img
+                    src="/images/visa.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'VISA'"
+                  />
+                </v-btn>
+              </div>
+               <div class="logo_payment master col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                    
+                  "
+                >
+                  <img
+                    src="/images/master.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'MASTER'"
+                  />
+                </v-btn>
+              </div>
+               <div class="logo_payment mada col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                   
+                  "
+                >
+                  <img
+                    src="/images/mada.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'MADA'"
+                  />
+                </v-btn>
+              </div>
+              <div class="logo_payment apple col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="border: none !important; background: none"
+                >
+                  <img
+                    src="/images/applepay.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'APPLE'"
+                  />
+                </v-btn>
+              </div>
+              <div class="logo_payment stc col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="
+                    border: none !important;
+                    background: none;
+                   
+                  "
+                >
+                  <img
+                    src="/images/stcpay.jpeg"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'STC_PAY'"
+                  />
+                </v-btn>
+              </div>
+             
             </v-row>
             <v-btn
               color="#197bbd"
               style="
                 float: right;
-                margin: 20px 0;
+                
                 height: 10px;
                 font-weight: 100;
               "
@@ -901,7 +1213,21 @@
               type="submit"
               >متابعة الشراء</v-btn
             >
-            <div style="clear: both"></div>
+            <v-btn
+              color="#197bbd"
+              style="
+                float: right;
+                margin: 20px 0;
+                height: 10px;
+                font-weight: 100;
+                text-transform: none;
+                margin-right: 20px;
+              "
+              class="check_btn"
+              @click.prevent="prev()"
+            >
+              الرجوع
+            </v-btn>
           </v-container>
         </v-form>
       </div>
@@ -995,8 +1321,28 @@
             </div>
           </div>
 
+          <div style="padding: 10px" v-if="step == 2 && Shipping_res != null">
+            <span style="float: right; font-size: 1.3em">حساب التوصيل</span>
+            <span>
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em">{{
+                    Shipping_res
+                  }}</strong>
+                  {{ $t("currency.sar") }}
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em">{{
+                    Shipping_res_us
+                  }}</strong>
+                  {{ $t("currency.usd1") }}
+                </template>
+              </span>
+            </span>
+            <div style="clear: both"></div>
+          </div>
           <div style="padding: 10px">
-            <span style="float: right; font-size: 1.3em">الحساب الإجمالى</span>
+            <span style="float: right; font-size: 1.3em">الحساب نصف الإجمالي</span>
             <span>
               <span style="color: #737171; padding-right: 10px">
                 <template v-if="currency == 'sar'">
@@ -1015,17 +1361,40 @@
             </span>
             <div style="clear: both"></div>
           </div>
+          
+          <div style="padding: 10px" v-if="step == 2 && Shipping_res != null">
+          <hr />
+            <span style="float: right; font-size: 1.3em">الحساب الإجمالي</span>
+            <span>
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em">{{
+                    cartTotalPriceSAR+parseFloat(Shipping_res)
+                  }}</strong>
+                  {{ $t("currency.sar") }}
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em">{{
+                    cartTotalPrice+parseFloat(Shipping_res_us)
+                  }}</strong>
+                  {{ $t("currency.usd1") }}
+                </template>
+              </span>
+            </span>
+            <div style="clear: both"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </template>
  <script>
-let mobileCodes = require("../../data/mobilecode").default;
-// mobileCodes.unshift("Mobile Code");
-let countries = require("../../data/countries.json");
-let countriesNames = Object.keys(countries);
-export default {
+  let mobileCodes = require("../../data/mobilecode").default;
+  // mobileCodes.unshift("Mobile Code");
+  let countries = require("../../data/countries.json");
+  let codes = require("../../data/code.json");
+  let countriesNames = Object.keys(countries);
+  export default {
   computed: {
     larg(el, price, avilable) {
       this.sizeTarget = "Large - 70x93.5cm (28x37)";
@@ -1053,15 +1422,41 @@ export default {
     currentCountry() {
       return this.form.country;
     },
+    callShippmentCalc(){
+        return this.form.city;
+    }
   },
   watch: {
+       callShippmentCalc(city){
+           if(city != null){
+          axios
+            .get("/aramix/sample.php?length="+this.cart.length+"&city="+this.form.city+"&countryCode="+this.countryCode+"&currency="+this.currency)
+            .then((result) => {
+                if (result.data) {
+                    this.Shipping_res = result.data.TotalAmount.Value;
+                    this.Shipping_res_us = (result.data.TotalAmount.Value / 3.75).toFixed(2);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+      }
+       },
     currentCountry(newCountry, oldCountry) {
+      for (var i = 0; i < codes.length; i++) {
+        if (codes[i].name == newCountry) {
+          this.countryCode = codes[i].code;
+        }
+      }
       this.cities = countries[newCountry];
     },
   },
   data() {
     return {
       errors: {},
+      step: 1,
+      Shipping_res:null,
+      Shipping_res_us:null,
       form: {
         email: null,
         lname: null,
@@ -1091,10 +1486,12 @@ export default {
       message: "",
       formview: "",
       discount_section: false,
-      paymentMethods: ["VISA", "MASTER", "MADA"],
+      paymentMethods: ["VISA", "MASTER", "MADA", "APPLE", "STC_PAY"],
+      countryCode: "SA",
     };
   },
   mounted() {
+
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
@@ -1103,7 +1500,6 @@ export default {
   },
   created() {
     this.cartTotalPrice;
-    //  {"paletteid":"3","palettesize":"medium","quantity":5}
     this.cart.forEach((element) => {
       this.form.items.push({
         paletteid: element.product.id,
@@ -1111,8 +1507,32 @@ export default {
         quantity: element.quantity,
       });
     });
+
   },
   methods: {
+    FormNotFinished(){
+        if (this.form.email && 
+            this.form.lname && 
+            this.form.address && 
+            this.form.fname && 
+            this.form.city && 
+            this.form.phone &&
+            this.form.phone &&
+            this.form.phonecode &&
+            this.form.country && 
+            this.form.goverment &&
+            this.form.postcode && 
+            this.cart.length >= 1){
+                return false;
+        }
+        return true;
+    },
+    prev() {
+      this.step--;
+    },
+    next() {
+      this.step++;
+    },
     apply_discount() {
       //console.log(this.discount);
       axios
@@ -1158,11 +1578,13 @@ export default {
           );
           document.head.appendChild(tag);
           this.errors = "";
-          this.$store.dispatch("clearCartItems");
-          
+          // this.$store.dispatch("clearCartItems");
         })
 
-        .catch((error) => (this.errors = error.response.data.errors));
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+          this.step--;
+        });
     },
   },
 };
@@ -1211,6 +1633,13 @@ export default {
   color: #323232;
   font-size: 1em;
   font-weight: 600;
+}
+@media (min-width:1000px){
+  .content-box{
+  width: 50%;
+  margin: 0px 50%;
+  margin-bottom:20px;
+}
 }
 @media (min-width: 767px) and (max-width: 991px) {
   .discount_section {
@@ -1288,10 +1717,85 @@ export default {
 .v-text-field > .v-input__control > .v-input__slot > .v-text-field__slot input {
   text-align: start !important;
 }
+@media all{
+
+.text-container>*+*{margin-top:.5714285714em;}
+.text-container *+.heading-3{margin-top:1.4285714286em;}
+h2{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;font-size:1.2857142857em;line-height:1.3em;}
+.main h2{color:#333;}
+.content-box h2{color:#333;}
+.heading-3,h3{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;font-size:1em;font-weight:500;line-height:1.3em;}
+.main .heading-3,.main h3{color:#333;}
+.content-box .heading-3,.content-box h3{color:#333;}
+p{line-height:1.5em;}
+.emphasis{font-weight:500;}
+.main .emphasis{color:#333;}
+.content-box .emphasis{color:#333;}
+.address{font-style:normal;line-height:1.5em;}
+.section__content{zoom:1;}
+.section__content:after,.section__content:before{content:"";display:table;}
+.section__content:after{clear:both;}
+.section__content__column{-webkit-box-sizing:border-box;box-sizing:border-box;margin-top:2em;}
+.section__content__column:first-of-type{margin-top:0;}
+@media (min-width:750px){
+.section__content__column{margin-top:0;float:left;}
+}
+@media (min-width:750px){
+.section__content__column--half{padding:0 .75em;width:50%;}
+.section__content__column--half:first-child{padding-left:0;}
+.section__content__column--half:last-child{padding-right:0;}
+}
+.content-box{background:#fff;background-clip:padding-box;border:1px solid #d9d9d9;border-radius:5px;color:#545454;}
+.main .content-box{border-color:#d9d9d9;}
+.content-box{margin-top:1em;}
+.content-box__row{padding:1.1428571429em;position:relative;zoom:1;}
+.content-box__row~.content-box__row{border-top:1px solid #d9d9d9;}
+.content-box__row:after,.content-box__row:before{content:"";display:table;}
+.content-box__row:after{clear:both;}
+.display-table .content-box__row{display:table;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;}
+.content-box__row:first-child{border-top-left-radius:4px;border-top-right-radius:4px;}
+.content-box__row:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;}
+.content-box__row--no-border{padding-bottom:0;}
+.content-box__row--no-border+.content-box__row{border-top:none;}
+.payment-icon{display:inline-block;width:38px;height:24px;-webkit-transition:opacity .5s cubic-bezier(.3, 0, 0, 1);transition:opacity .5s cubic-bezier(.3, 0, 0, 1);-webkit-backface-visibility:hidden;}
+.payment-icon--visa{background-image:url(//cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg),none;}
+.payment-icon{border-radius:.2142857143em;background-size:cover;background-repeat:no-repeat;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;width:2.7142857143em;height:1.7142857143em;}
+.payment-method-list__item-icon{vertical-align:middle;margin:-.1em .25em 0 0;}
+.visually-hidden{border:0;clip:rect(0,0,0,0);clip:rect(0 0 0 0);width:2px;height:2px;margin:-2px;overflow:hidden;padding:0;position:absolute;white-space:nowrap;}
+}
+
+html{
+ overflow-x: hidden !important;
+}
+.logo_payment img{
+  background:whitesmoke;
+  height: 30px;
+  object-fit: cover;
+ 
+}
+.logo_payment{
+  margin: 10px !important;
+}
+.stc .v-btn{
+  background: #4f008d !important;
+}
+.apple *{
+  background:black !important;
+}
+.apple img,.mada img,.master img{
+  object-fit: contain;
+}
+.master * {
+  background:#64625e !important;
+}
+.visa *{
+  background: #0353a5 !important; 
+}
 </style>
 
 <style>
 .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
   background: transparent !important;
 }
+
 </style>

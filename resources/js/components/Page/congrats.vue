@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row" style="margin-top:50px">
+    <div class="row" style="margin-top: 50px">
       <div class="col-lg-4 col-md-12 col-sm-12 hidem">
         <h2>Congratulations!</h2>
         <hr />
@@ -10,8 +10,13 @@
         </p>
       </div>
       <div class="col-lg-4 col-md-12 col-sm-12" style="text-align: center">
-        <img src="/images/LogoSymbolBlackPNG.png" alt="" width="200px" style="margin-top: -50px;"/>
-        <p class="no-margin-bottom"> معا, نمكن التعبير الابداعي</p>
+        <img
+          src="/images/Logo_grey.png"
+          alt=""
+          width="200px"
+          style="margin-top: -50px"
+        />
+        <p class="no-margin-bottom">معا, نمكن التعبير الابداعي</p>
         <p class="no-margin-bottom">Together, we empower creative expression</p>
       </div>
       <div class="col-lg-4 col-md-12 col-sm-12 hided" style="text-align: right">
@@ -39,11 +44,13 @@
         </p>
       </div>
     </div>
-    <div class="row" >
-        <div class="col" style="display: flex !important;
-justify-content: center !important;">
-            <img src="/images/tutorial.jpg" alt="" class="tutorial">
-        </div>
+    <div class="row">
+      <div
+        class="col"
+        style="display: flex !important; justify-content: center !important"
+      >
+        <img src="/images/tutorial.jpg" alt="" class="tutorial" />
+      </div>
     </div>
   </div>
 </template>
@@ -54,19 +61,19 @@ export default {};
 
 <style scoped>
 @media (max-width: 700px) {
-    .tutorial{
-        width:100%;
-    }
-    .hidem{
-        display: none;
-    }
+  .tutorial {
+    width: 100%;
+  }
+  .hidem {
+    display: none;
+  }
 }
 @media (min-width: 700px) {
-     .hided{
-        display: none;
-    }
+  .hided {
+    display: none;
+  }
 }
-.no-margin-bottom{
-    margin-bottom:0px;
+.no-margin-bottom {
+  margin-bottom: 0px;
 }
 </style>

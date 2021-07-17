@@ -489,7 +489,7 @@
             <div class="text-center">
               <button
                 @click="addtocart(minPalettesActive.id,minPalettesActive.M_price, avilableTarget , sizeTarget)"
-                v-if="minPalettesActive.M_avalible>0" 
+                v-if="minPalettesActive.M_avalible>0"
                 class="btn add-button addToCart"
                 :disabled="checkifincart(minPalettesActive.id) ? true : false"
               >
@@ -761,7 +761,7 @@ data() {
   };
 },
   mounted() {
-   
+
     let images = document.getElementById("images");
     let scrolled = document.getElementById("scrolled");
     let navbar = document.getElementById("navbar");
@@ -778,7 +778,7 @@ data() {
       addToCartSm.style.backgroundColor = "#fff";
       carsoulExample.style.marginBottom = "";
     }
-     
+
     //content scroll
     let scroll = function() {
       if (window.innerWidth > 768) {
@@ -908,6 +908,7 @@ data() {
       axios
         .get("/api/palettes")
         .then(response => {
+
           this.artists = response.data.artists;
           //   this.artist_text = response.data.artists[0].Plates_description;
           this.first = response.data.artists[0].id;
@@ -980,7 +981,7 @@ data() {
         })
         .catch(error => console.log(error));
     }
-    
+
   },
 
 
@@ -1355,6 +1356,8 @@ data() {
         .get("/api/viewMinPalettes?id=" + palleteID)
         .then(response => {
           this.minPalettes = response.data.minPalettes;
+          this.minPalettesActive = response.data.palettes[0];
+          
           // console.log(palleteID );
         })
         .catch(error => console.log(error.response.data));
@@ -1624,6 +1627,7 @@ data() {
 .infor {
   top: -12px;
   left: -20px;
+  /* padding-top:10px; */
   position: relative;
   transform: scale(0.8);
 }

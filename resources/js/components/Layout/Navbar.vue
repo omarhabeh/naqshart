@@ -1,4 +1,5 @@
 <template>
+
   <nav
     :class="'navbar navbar-expand-md '+ navbar +' px-3 sticky-top'"
     style="direction: ltr;"
@@ -27,7 +28,7 @@
         id="navbar-nav"
         v-if=" $i18n.locale == 'en'"
       >
-        <li class="nav-item home" style="width:50px">
+        <li class="nav-item home" >
           <router-link to="/">
             <a class="nav-link">
               {{ $t("message.home") }}
@@ -40,7 +41,7 @@
             <a class="nav-link">{{ $t("message.shopart") }}</a>
           </router-link>
         </li>
-        <li class="nav-item about" style="width:50px">
+        <li class="nav-item about" >
           <router-link to="/about">
             <a class="nav-link">{{ $t("message.about") }}</a>
           </router-link>
@@ -543,6 +544,10 @@ export default {
 </script>
 
 <style>
+html{
+  overflow:inherit !important;
+  overflow-x: hidden !important;
+}
 .modal-timer {
   padding: 5%;
   border-bottom: 1px solid #dee2e6;

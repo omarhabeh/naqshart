@@ -2,37 +2,55 @@
   <div class="mt-5">
     <div class="container-fluid">
       <h2 class="home-products-slider__title section-title">
-        <span>{{ $t("message.newrelease") }}</span>
+        <span style="font-size: 25px">{{ $t("message.newrelease") }}</span>
         <span class="sTitle">{{ $t("message.newreleaseheader") }}</span>
       </h2>
       <div class="swiper-container mt-5">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="data in sliderPalettes" :key="data.id">
+          <div
+            class="swiper-slide"
+            v-for="data in sliderPalettes"
+            :key="data.id"
+          >
             <div class="product-grid-item">
               <div class="product-grid-item__image">
                 <router-link
-                  :to="{ path: '/shop', query: { mydata: data.id }}"
+                  :to="{ path: '/shop', query: { mydata: data.id } }"
                   class="product-grid-item__imagewrapper"
                   data-product-handle="son-this-is-the-universe"
                   data-product-quantity="48"
                 >
-                 <span style="padding:0 10px;" class="tag">{{data.tag}}</span>
+                  <span style="padding: 0 10px" class="tag">{{
+                    data.tag
+                  }}</span>
                   <img
                     class="front"
-                    :src="data.artistMinPalettes.img?data.artistMinPalettes.img:'ffff'"
-                    style="height:100%"
+                    :src="
+                      data.artistMinPalettes.img
+                        ? data.artistMinPalettes.img
+                        : 'ffff'
+                    "
+                    style="height: 100%"
                   />
                   <img
                     class="back"
-                    :src="data.extraimg?data.extraimg.img:'https://previews.123rf.com/images/eyematrix/eyematrix1712/eyematrix171200014/91720468-used-artists-paint-brushes-different-colors-on-palette-background.jpg'"
-                    style="height:100%"
+                    :src="
+                      data.extraimg
+                        ? data.extraimg.img
+                        : 'https://previews.123rf.com/images/eyematrix/eyematrix1712/eyematrix171200014/91720468-used-artists-paint-brushes-different-colors-on-palette-background.jpg'
+                    "
+                    style="height: 100%"
                   />
                 </router-link>
                 <div class="product-grid-item__variants">
                   <span>Size</span>
                   <div class="product-grid-item__variants--content">
-                    <a href="#" data-cart-add="32583351238759" class="soldout">L</a>
-                    <a href="#" data-cart-add="32583351337063" class="soldout">M</a>
+                    <a href="#" data-cart-add="32583351238759" class="soldout"
+                      >L</a
+                    >
+                    <a href="#" data-cart-add="32583351337063" class="soldout"
+                      >M</a
+                    >
                     <a href="#" data-cart-add="32583351402599" class>S</a>
                   </div>
                 </div>
@@ -46,31 +64,37 @@
               <div class="product-grid-item__info">
                 <div class="product-grid-item__title">
                   <h3 class="product-grid-item__name">
-                     
                     <a
                       data-product-handle="son-this-is-the-universe"
                       data-product-quantity="48"
-                    >{{data.name}}</a>
+                      >{{ data.name }}</a
+                    >
                   </h3>
                   <span
                     class="product-grid-item__price"
                     v-if="currency == 'sar'"
-                  >{{data.M_price_sar}} {{ $t("currency.sar") }}</span>
-                  <span
-                    class="product-grid-item__price"
-                    v-else
-                  >{{ $t("currency.usd1") }} {{data.M_price}}</span>
+                    >{{ data.M_price_sar }} {{ $t("currency.sar") }}</span
+                  >
+                  <span class="product-grid-item__price" v-else
+                    >{{ $t("currency.usd1") }} {{ data.M_price }}</span
+                  >
                 </div>
                 <span class="product-grid-item__qty">
-                  <span class="prints-times text-success">{{data.palette_copies}} /</span>
-                  <span>{{data.avalible_copies}}&nbsp;{{$t("message.left") }}</span>
+                  <span class="prints-times text-success"
+                    >{{ data.palette_copies }} /</span
+                  >
+                  <span
+                    >{{ data.avalible_copies }}&nbsp;{{
+                      $t("message.left")
+                    }}</span
+                  >
                 </span>
               </div>
             </div>
           </div>
         </div>
         <!-- Add Pagination -->
-        <div class="swiper-scrollbar" style="display:block!important;"></div>
+        <div class="swiper-scrollbar" style="display: block !important"></div>
       </div>
     </div>
   </div>
@@ -80,23 +104,23 @@
 export default {
   data() {
     return {
-      sliderPalettes: []
+      sliderPalettes: [],
       //   image_hover: ""
     };
   },
   computed: {
     currency() {
       return this.$store.getters.currency;
-    }
+    },
   },
   created() {
     axios
       .get("/api/palettes")
-      .then(response => {
+      .then((response) => {
         // this.artists = response.data.artists;
         this.sliderPalettes = response.data.palettesSlider;
       })
-      .catch(error => console.log(error.response.data));
+      .catch((error) => console.log(error.response.data));
   },
   mounted() {
     var swiper = new Swiper(".swiper-container", {
@@ -111,27 +135,27 @@ export default {
       //   },
 
       on: {
-        resize: function() {
+        resize: function () {
           for (let index = 0; index < this.slides.length; index++) {
             let element = this.slides[index];
             element.style.height = element.style.width;
           }
           //   console.log(this.slides[0].style.width);
           //   console.log(this.width);
-        }
+        },
       },
       breakpoints: {
         // when window width is >= 320px
         280: {
           slidesPerView: 1,
-          spaceBetween: 10
+          spaceBetween: 10,
         },
         320: {
           slidesPerView: 1,
-          spaceBetween: 10
+          spaceBetween: 10,
         },
         760: {
-          slidesPerView: 2
+          slidesPerView: 2,
         },
         // when window width is >= 640px
         // 991: {
@@ -140,37 +164,37 @@ export default {
         //   spaceBetween: 45
         // }
         1020: {
-          slidesPerView: 3
-        }
+          slidesPerView: 3,
+        },
       },
       observer: true,
       observerParents: true,
       scrollbar: {
         el: ".swiper-scrollbar",
-        dragSize: "auto"
+        dragSize: "auto",
         // hide: true
-      }
+      },
     });
     let self = this;
-    setTimeout(function() {
+    setTimeout(function () {
       swiper.updateSize();
       swiper.update();
     }, 3000);
 
     // swiper.scrollbar.updateSize("auto");
-  }
+  },
 };
 </script>
 
 <style scoped>
-.tag{
-    position: absolute;
-    z-index: 9999;
-    left: 0;
-    background: black;
-    color: white;
-    border-radius: 0px !important;
-    top: 40px !important;
+.tag {
+  position: absolute;
+  z-index: 9999;
+  left: 0;
+  background: black;
+  color: white;
+  border-radius: 0px !important;
+  top: 40px !important;
 }
 .swiper-container {
   margin-bottom: 50px;

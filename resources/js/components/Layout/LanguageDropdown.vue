@@ -22,6 +22,7 @@ export default {
         if (self.$i18n.locale == "en") {
           self.$i18n.locale = "ar";
           if (self.$route.name == "about") self.$vuetify.rtl = true;
+          else if (self.$route.name == "payment") self.$vuetify.rtl = false;
           else self.$vuetify.rtl = false;
         } else {
           self.$i18n.locale = "en";
@@ -34,6 +35,7 @@ export default {
     $route(newRoute, oldRoute) {
       if (this.$i18n.locale == "ar") {
         if (newRoute.name != "shop") this.$vuetify.rtl = true;
+        else if (self.$route.name == "payment") self.$vuetify.rtl = false;
         else this.$vuetify.rtl = false;
       }
     }

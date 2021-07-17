@@ -20,8 +20,8 @@
 
 
 
-      
-  
+
+
 <!--[if lt IE 9]>
 <link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/30004362/assets/76713951280/checkout_stylesheet/v2-ltr-edge-c3b6d318409215f8f96ba35f2a7373c0-176600/oldie" />
 <![endif]-->
@@ -89,8 +89,8 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
 
     <header class="banner" data-header role="banner">
       <div class="wrap">
-          
-  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--medium" src="/images/LogoSymbolBlackPNG.png" /></a>
+
+  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--large" src="/images/logo_new.png" /></a>
 
 <h1 class="visually-hidden">
   Thank you for your purchase!
@@ -120,7 +120,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
         <dl class="order-summary-toggle__total-recap total-recap" data-order-summary-section="toggle-total-recap">
           <dt class="visually-hidden"><span>Sale price</span></dt>
           <dd>
-            <span class="order-summary__emphasis total-recap__final-price skeleton-while-loading" data-checkout-payment-due-target="7230">$72.30</span>
+            <span class="order-summary__emphasis total-recap__final-price skeleton-while-loading" data-checkout-payment-due-target="7230">{{$data->currency}}{{$data->amount}}</span>
             </dd>
         </dl>
   </button>
@@ -132,17 +132,17 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
       <div class="wrap">
         <div class="main">
           <header class="main__header" role="banner">
-              
-  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--large" src="/images/LogoSymbolBlackPNG.png" /></a>
+
+  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--large" src="/images/logo_new.png" /></a>
 
 <h1 class="visually-hidden">
   Thank you for your purchase!
 </h1>
 
 
-            
 
-            
+
+
 
           </header>
           <main class="main__content" role="main">
@@ -169,8 +169,8 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
     <div class="section">
       <div class="section__content">
 
-        
-        
+
+
         <div class="content-box">
   <div class="content-box__row content-box__row--no-border">
     <h2>Customer information</h2>
@@ -198,12 +198,12 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
                 <li class="payment-method-list__item">
                     @if ($order->payment_method == "VISA")
                     <i class="payment-icon payment-icon--visa payment-method-list__item-icon">
-                       
+
                     @endif
                     @if ($order->payment_method == "MASTER")
                     <i class="payment-icon payment-icon--master payment-method-list__item-icon">
                     @endif
-    
+
       <span class="visually-hidden">{{$order->payment_method}}</span>
 </i>    <span class="payment-method-list__item__info">ending with {{$data->card->last4Digits}}</span>
     <span class="payment-method-list__item__amount emphasis"> - {{$data->currency}} {{$data->amount}}</span>
@@ -227,7 +227,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
         <svg class="icon-svg icon-svg--size-18 btn__spinner icon-svg--spinner-button" aria-hidden="true" focusable="false"> <use xlink:href="#spinner-button" /> </svg>
       </a>
     <p class="step__footer__info">
-      Need help? <a data-contact-us-link="true" href="mailto:info@naqshart.com">Contact us</a>
+      Need help? <a data-contact-us-link="true" href="mailto:hello@naqshart.com">Contact us</a>
     </p>
   </div>
 </div>
@@ -267,16 +267,16 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
         <a aria-haspopup="dialog" data-modal="policy-terms-of-service" data-title-text="Terms of service" data-close-text="Close" data-iframe="true" href="/30004362/policies/terms-of-service.html?locale=en">Terms of service</a>
       </li>
   </ul>
-  
-  
+
+
 
 
           </footer>
         </div>
         <aside class="sidebar" role="complementary">
           <div class="sidebar__header">
-              
-  <a class="logo logo--left" href="/"><img alt="Ecstase" class="logo__image logo__image--medium" src="/images/LogoSymbolBlackPNG.png" /></a>
+
+  <a class="logo logo--left" href="/"><img alt="Ecstase" class="logo__image logo__image--large" src="/images/logo_new.png" /></a>
 
 <h1 class="visually-hidden">
   Thank you for your purchase!
@@ -363,7 +363,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
 
 
 
-      
+
 
     </tbody>
   <tfoot class="total-line-table__footer">
@@ -507,15 +507,15 @@ for (var attr in meta) {
           var blobData = new window.Blob([payload], {
             type: 'text/plain'
           });
-    
+
           if (window.navigator.sendBeacon(endpointUrl, blobData)) {
             return true;
           } // sendBeacon was not successful
-    
-        } // XHR beacon   
-    
+
+        } // XHR beacon
+
         var xhr = new XMLHttpRequest();
-    
+
         try {
           xhr.open('POST', endpointUrl);
           xhr.setRequestHeader('Content-Type', 'text/plain');
@@ -523,7 +523,7 @@ for (var attr in meta) {
         } catch (e) {
           console.log(e);
         }
-    
+
         return false;
       },
       isIos12: function isIos12() {
@@ -557,7 +557,7 @@ for (var attr in meta) {
     loaded = true;
 
     window.ShopifyAnalytics.lib = window.trekkie;
-    
+
       ga('require', 'linker');
       function addListener(element, type, callback) {
         if (element.addEventListener) {
@@ -591,7 +591,7 @@ for (var attr in meta) {
           }
         }
       });
-    
+
 
     var originalDocumentWrite = document.write;
     document.write = customDocumentWrite;
@@ -742,30 +742,30 @@ for (var attr in meta) {
           });
         }
       })();
-    
 
-    
+
+
         window.ShopifyAnalytics.lib.page(
           "Orders - Thank You",
           {},
           "65175f8de66a997c3c294058659a9f8246c4b90ed5a1c865a88e35e962c8b665"
         );
-      
+
 
     var match = window.location.pathname.match(/checkouts\/(.+)\/(thank_you|post_purchase)/)
     var token = match? match[1]: undefined;
     if (!hasLoggedConversion(token)) {
       setCookieIfConversion(token);
-      
+
     }
   });
 
-  
+
       var eventsListenerScript = document.createElement('script');
       eventsListenerScript.async = true;
       eventsListenerScript.src = "//cdn.shopify.com/shopifycloud/shopify/assets/shop_events_listener-714e2e017903fad17d4471cb27d1f2c8a83b5a7a276f92420f7e5e40dbc9136e.js";
       document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
-    
+
 })();</script>
   </body>
 </html>

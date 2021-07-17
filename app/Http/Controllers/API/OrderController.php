@@ -21,6 +21,8 @@ class OrderController extends Controller
         'VISA' => '8ac9a4c877676c8e017767baf9e6042f',
         'MASTER' => '8ac9a4c877676c8e017767baf9e6042f',
         'MADA' => '8ac9a4c877676c8e017767bc0ecd043f',
+        'APPLE'=>'8ac7a4c97802e26b01781175350307a4',
+        'STC_PAY' => '8ac7a4ca76890c29017689e9c445025e',
 
     ];
     /**
@@ -119,7 +121,7 @@ class OrderController extends Controller
         $request['paymentstatus'] = 'pending';
         $request['totalprice'] = $totalprice['totalprice'];
         $request['discount'] = $totalprice['discount_amount'];
-            
+
         $checkoutid =  $this->get_checkout_id(number_format($request['totalprice'], 2), $this->methods[$request->paymentMethod], $request);
         if ($checkoutid) {
             $request['paymentid'] = $checkoutid->id;
@@ -253,7 +255,7 @@ class OrderController extends Controller
                 return curl_error($ch);
             }
             curl_close($ch);
-           
+
             if ($responseData)
                 $responseData =  json_decode($responseData);
             if ($responseData->result->description == 'successfully created checkout')

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if=" message.length >0 " class="alert alert-info text-center">
-      <h1>{{message}}</h1>
+    <div v-if="message.length > 0" class="alert alert-info text-center">
+      <h1>{{ message }}</h1>
     </div>
     <v-form @submit.prevent="send" class="form" v-if="$i18n.locale == 'en'">
       <v-container>
@@ -13,9 +13,11 @@
               required
               clearable
               outlined
-              style="border:none"
+              style="border: none"
             ></v-text-field>
-            <span class="red--text" v-if="errors.name">{{errors.name[0]}}</span>
+            <span class="red--text" v-if="errors.name">{{
+              errors.name[0]
+            }}</span>
           </v-col>
 
           <v-col cols="12" md="6">
@@ -25,9 +27,11 @@
               required
               clearable
               outlined
-              style="border:none"
+              style="border: none"
             ></v-text-field>
-            <span class="red--text" v-if="errors.email">{{errors.email[0]}}</span>
+            <span class="red--text" v-if="errors.email">{{
+              errors.email[0]
+            }}</span>
           </v-col>
           <v-col cols="12" md="12">
             <v-text-field
@@ -36,9 +40,11 @@
               required
               clearable
               outlined
-              style="border:none"
+              style="border: none"
             ></v-text-field>
-            <span class="red--text" v-if="errors.phone">{{errors.phone[0]}}</span>
+            <span class="red--text" v-if="errors.phone">{{
+              errors.phone[0]
+            }}</span>
           </v-col>
           <v-col cols="12" md="12">
             <v-text-field
@@ -47,12 +53,20 @@
               required
               clearable
               outlined
-              style="border:none"
+              style="border: none"
             ></v-text-field>
-            <span class="red--text" v-if="errors.socialLink">{{errors.socialLink[0]}}</span>
+            <span class="red--text" v-if="errors.socialLink">{{
+              errors.socialLink[0]
+            }}</span>
           </v-col>
         </v-row>
-        <v-btn color="#252524" class="ml-2 mb-6" style="color:#fff;float:left" type="submit">Send</v-btn>
+        <v-btn
+          color="#252524"
+          class="ml-2 mb-6"
+          style="color: #fff; float: left"
+          type="submit"
+          >Send</v-btn
+        >
       </v-container>
     </v-form>
     <v-form @submit.prevent="send" class="form" v-else>
@@ -65,10 +79,12 @@
               required
               clearable
               outlined
-              style="border:none"
+              style="border: none"
               dir="rtl"
             ></v-text-field>
-            <span class="red--text" v-if="errors.name">{{errors.name[0]}}</span>
+            <span class="red--text" v-if="errors.name">{{
+              errors.name[0]
+            }}</span>
           </v-col>
 
           <v-col cols="12" md="6">
@@ -78,10 +94,12 @@
               clearable
               required
               outlined
-              style="border:none"
+              style="border: none"
               dir="rtl"
             ></v-text-field>
-            <span class="red--text" v-if="errors.email">{{errors.email[0]}}</span>
+            <span class="red--text" v-if="errors.email">{{
+              errors.email[0]
+            }}</span>
           </v-col>
           <v-col cols="12" md="12">
             <v-text-field
@@ -90,10 +108,12 @@
               required
               clearable
               outlined
-              style="border:none"
+              style="border: none"
               dir="rtl"
             ></v-text-field>
-            <span class="red--text" v-if="errors.phone">{{errors.phone[0]}}</span>
+            <span class="red--text" v-if="errors.phone">{{
+              errors.phone[0]
+            }}</span>
           </v-col>
           <v-col cols="12" md="12">
             <v-text-field
@@ -102,19 +122,22 @@
               required
               clearable
               outlined
-              style="border:none"
+              style="border: none"
               dir="rtl"
             ></v-text-field>
-            <span class="red--text" v-if="errors.socialLink">{{errors.socialLink[0]}}</span>
+            <span class="red--text" v-if="errors.socialLink">{{
+              errors.socialLink[0]
+            }}</span>
           </v-col>
         </v-row>
         <v-btn
           color="#252524"
           class="mr-2 mb-6"
-          style="color:#fff;float:right"
+          style="color: #fff; float: right"
           type="submit"
-        >انضم إلينا</v-btn>
-        <div style="clear:both"></div>
+          >انضم إلينا</v-btn
+        >
+        <div style="clear: both"></div>
       </v-container>
     </v-form>
   </div>
@@ -126,7 +149,7 @@ export default {
     form: { phone: "", name: "", email: "", socialLink: "" },
     errors: {},
     message: "",
-    loading: false
+    loading: false,
   }),
   mounted() {
     $(".modal-mask").css("display", "block");
@@ -135,7 +158,7 @@ export default {
     send() {
       axios
         .post("/api/artist-request", this.form)
-        .then(res => {
+        .then((res) => {
           this.message = "Successful";
           this.form.phone = "";
           this.form.name = "";
@@ -143,9 +166,9 @@ export default {
           this.form.socialLink = "";
           this.errors = "";
         })
-        .catch(error => (this.errors = error.response.data.errors));
-    }
-  }
+        .catch((error) => (this.errors = error.response.data.errors));
+    },
+  },
 };
 </script>
 

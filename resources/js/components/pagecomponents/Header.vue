@@ -5,38 +5,51 @@
       <div
         class="col-md-12 hero-container hide-d"
         id="hero-container_2"
-        :style="'background:url(' + data.imageM + ')'"></div>
-        <div
-          class="col-md-12 hero-container hide-m"
-          id="hero-container_1"
-          :style="'background:url(' + data.image + ')'"
-        ></div>
-          <div class="hero-content">
-              <img src="/images/LogoSymbolBlackPNG.png" style="width:200px" alt="">
-            <p v-if="$i18n.locale == 'en'" class="hero-subtitle">
-              {{ data.word1_en }}
-            </p>
-            <p v-else class="hero-subtitle">{{ data.word1_ar }}</p>
-            
-            <div class="hero-counter">
-              <!-- style="margin-top: 2px !important;" -->
-              <span class="hero-counter__live">{{ $t("message.live") }}</span>
-              <img
-                class="hero-counter__eye ml-2 mr-1"
-                src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/eye-24-512.png"
-                width="15px"
-                height="15px"
-                style="margin-top: 2px !important"
-              />
-              <span id="hero-counter">{{ numbers }}</span>
-              {{ $t("message.shoppers") }}
-            </div>
-            <router-link to="/shop">
-              <a class="hero-btn btn">{{ $t("message.shopnow") }}</a>
-            </router-link>
-          </div>
+        :style="'background:url(' + data.imageM + ')'"
+      ></div>
+      <div
+        class="col-md-12 hero-container hide-m"
+        id="hero-container_1"
+        :style="'background:url(' + data.image + ')'"
+      ></div>
+      <div class="hero-content">
+        <img
+          src="/images/LogoSymbolBlackPNG.png"
+          style="width: 200px;display: initial;"
+          alt=""
+          class="hide-m"
+        />
+        <div class="hide-d">
+          <p v-if="$i18n.locale == 'en'" class="hero-title">
+            {{ data.word2_en }}
+          </p>
+          <p v-else class="hero-title">{{ data.word2_ar }}</p>
         </div>
+        <p v-if="$i18n.locale == 'en'" class="hero-subtitle">
+          {{ data.word1_en }}
+        </p>
+        <p v-else class="hero-subtitle">{{ data.word1_ar }}</p>
+
+        <div class="hero-counter">
+          <!-- style="margin-top: 2px !important;" -->
+          <span class="hero-counter__live">{{ $t("message.live") }}</span>
+          <img
+            class="hero-counter__eye ml-2 mr-1"
+            src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/eye-24-512.png"
+            width="15px"
+            height="15px"
+            style="margin-top: 2px !important"
+          />
+          <span id="hero-counter">{{ numbers }}</span>
+          {{ $t("message.shoppers") }}
+        </div>
+        <router-link to="/shop">
+          <a v-if="$i18n.locale == 'en'" class="hero-btn btn">Visit Gallery</a>
+          <a v-else class="hero-btn btn">دخول المعرض</a>
+        </router-link>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -78,6 +91,7 @@ export default {
         if (result.data.count) {
           let rand = Math.floor(Math.random() * (49 - 42 + 1)) + 42;
           this.numbers = result.data.count + rand;
+          //actual visitors + 50 rang(-3,+3)
         }
       })
       .catch((err) => {
@@ -94,6 +108,9 @@ export default {
 }
 
 @media (max-width: 991px) {
+  .hero-btn {
+    padding: 5px 65px;
+  }
   .hero .hero-title {
     font-size: 60px;
     padding: 0 10px;
@@ -104,11 +121,20 @@ export default {
   .hide-m {
     display: none;
   }
-
+  .hero-classic {
+    margin-top: 52px !important;
+  }
+  #hero-container_2 {
+    background-size: contain !important;
+    height: 0px !important;
+  }
+  .hero-content {
+    margin-top: -70px;
+  }
 }
-.hero-subtitle{
-    margin:0px;
-    margin-top:-20px;
+.hero-subtitle {
+  margin: 0px;
+  margin-top: -20px;
 }
 .hero-container {
   padding-top: 34vh;
@@ -151,7 +177,6 @@ export default {
 @media (max-width: 400px) {
   .hero-container {
     height: 60vh;
-
   }
   /* .hero-classic .hero-content {
     top: 165px !important;
@@ -162,5 +187,8 @@ export default {
 }
 a:not([href]):hover {
   color: white !important;
+}
+html{
+  overflow-x: hidden !important;
 }
 </style>

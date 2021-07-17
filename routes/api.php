@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
-
+use SoapClient as soap;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,8 +36,6 @@ Route::group(['middleware' => ['visitor-counter']], function () {
     Route::get('artist/{id?}', 'PaletteAPIController@artist');
     Route::get('palette/{id}', 'PaletteAPIController@getPalette');
     Route::get('all-palettes', 'PaletteAPIController@allPalettes');
-
-
     Route::get('/view', 'PaletteAPIController@Palettes');
     Route::get('/viewMinPalettes', 'PaletteAPIController@viewMinPalettes');
     Route::get('review', 'PaletteAPIController@getReviews');

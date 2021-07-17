@@ -35,24 +35,24 @@ class OrderController extends Controller
         $delivering = Order::where('paymentstatus','delivering')->get()->count();
         $proccessing = Order::where('paymentstatus','Processing')->get()->count();
         $pending = Order::where('paymentstatus','pending')->get()->count();
-   
+
         return view('orders.index')
             ->with('appliedartists', $appliedartists)->with('failed',$failed)->with('refunded',$refunded)
             ->with('completed',$completed)->with('delivering',$delivering)->with('proccessing',$proccessing)->with('type',$type)->with('pending',$pending);
     }
     public function daily(){
         $data = Order::select([
-            Order::raw('count(id) as `count`'), 
+            Order::raw('count(id) as `count`'),
             Order::raw('DATE(created_at) as day'),
-            Order::raw('count(paymentstatus) as `failed`'), 
+            Order::raw('count(paymentstatus) as `failed`'),
           ])->groupBy('day')
-     
+
           ->where('created_at', '>=', Carbon::now()->subWeeks(1))
           ->get();
-      
+
           $failed = Order::select([
             Order::raw('DATE(created_at) as day'),
-            Order::raw('count(paymentstatus) as `status`'), 
+            Order::raw('count(paymentstatus) as `status`'),
           ])->groupBy('day')
           ->where('created_at', '>=', Carbon::now()->subWeeks(1))
           ->where('paymentstatus','=', 'failed')
@@ -60,13 +60,14 @@ class OrderController extends Controller
 
           $completed = Order::select([
             Order::raw('DATE(created_at) as day'),
-            Order::raw('count(paymentstatus) as `status`'), 
+            Order::raw('count(paymentstatus) as `status`'),
           ])->groupBy('day')
           ->where('created_at', '>=', Carbon::now()->subWeeks(1))
           ->where('paymentstatus','=', 'completed')
           ->get();
-   
-        return view('orders.daily')->with('data',$data)->with('completed',$completed)->with('failed',$failed)->with('pending',$pending);
+
+  
+        return view('orders.daily')->with('data',$data)->with('completed',$completed)->with('failed',$failed);
     }
     public function orderindex($id = null)
     {
@@ -91,7 +92,7 @@ class OrderController extends Controller
     {
         //
     }
-    
+
         /*** complete the order */
     public function complete(Request $request, Order $order)
     {
