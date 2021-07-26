@@ -11,16 +11,20 @@ import Refund from "../components/Page/Refund";
 import Payment from "../components/Page/Payment";
 import JoinUs from "../components/Page/JoinUs";
 import Congrats from "../components/Page/Congrats";
+import PageNotFound from "../components/Page/PageNotFound";
+
 Vue.use(VueRouter);
 const routes = [{
         path: "/",
         name: "home",
-        component: Home
+        component: Home,
+
     },
     {
         path: "/invitations",
         name: "invitations",
-        component: Invitation
+        component: Invitation,
+        
     },
     {
         path: "/shop",
@@ -56,6 +60,7 @@ const routes = [{
         path: "/congrats",
         component: Congrats
     },
+    { path: "*", component: PageNotFound }
 ];
 // import $ from "jquery";
 const router = new VueRouter({

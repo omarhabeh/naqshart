@@ -168,6 +168,20 @@ export default {
         })
         .catch((error) => (this.errors = error.response.data.errors));
     },
+      metaInfo(){
+      return{
+          title:`Join Us | Naqsh Art`,
+          meta:[
+             {
+                  name:'description',
+                  content:'Our mission is to empower creative expression by supporting artists and marketing their original works, and presenting their works with artistic quality to art lovers from all over the world.'
+             },
+             { property: 'og:site_name', content: 'Naqsh art'},
+                {property: 'og:type', content: 'website'},
+                {name: 'robots', content: 'index,follow'},
+               ]
+      }
+  },
   },
 };
 </script>

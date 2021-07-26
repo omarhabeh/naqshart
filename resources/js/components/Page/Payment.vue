@@ -1,5 +1,4 @@
 <template>
-
   <section
     style="margin-top: 3%; transition-duration: 5s; transition: all 2s linear"
   >
@@ -210,6 +209,7 @@
                   v-model="form.email"
                   outlined
                   style="border: none"
+                  :rules="emailRules"
                 ></v-text-field>
 
                 <span class="red--text" v-if="errors.email">{{
@@ -229,7 +229,11 @@
                   v-model="form.fname"
                   outlined
                   style="border: none"
+                  :rules="nameRules"
                 ></v-text-field>
+                <div class="invalid-feedback">
+                    <span class="red--text" v-if="nameRules">This field is required</span>
+                </div>
                 <span class="red--text" v-if="errors.fname">{{
                   errors.fname[0]
                 }}</span>
@@ -241,6 +245,7 @@
                   v-model="form.lname"
                   outlined
                   style="border: none"
+                    :rules="nameRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.lname">{{
                   errors.lname[0]
@@ -255,6 +260,7 @@
                   placeholder="Country code"
                   outlined
                   style="border: none"
+                  :rules="nameRules"
                 ></v-select>
                 <span class="red--text" v-if="errors.phonecode">{{
                   errors.phonecode[0]
@@ -266,6 +272,7 @@
                   v-model="form.phone"
                   outlined
                   style="border: none"
+                  :rules="nameRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.phone">{{
                   errors.phone[0]
@@ -287,6 +294,7 @@
                   :items="countries"
                   outlined
                   style="border: none"
+                  :rules="nameRules"
                 ></v-select>
                 <span class="red--text" v-if="errors.country">{{
                   errors.country[0]
@@ -298,6 +306,7 @@
                 <v-select
                   v-model="form.city"
                   :items="cities"
+                  :rules="nameRules"
                   outlined
                   dir="rtl"
                   style="border: none; text-align: right"
@@ -312,6 +321,7 @@
                   v-model="form.postcode"
                   outlined
                   style="border: none"
+                  :rules="nameRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.postcode">{{
                   errors.postcode[0]
@@ -323,6 +333,7 @@
                   v-model="form.address"
                   outlined
                   style="border: none"
+                  :rules="nameRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.address">{{
                   errors.address[0]
@@ -351,32 +362,42 @@
                 text-transform: none;
               "
               class="check_btn"
-              :disabled ="FormNotFinished()"
+              :disabled="FormNotFinished()"
               @click.prevent="next()"
             >
               Next
             </v-btn>
           </v-container>
           <v-container v-if="step == 2">
-          <div class="content-box">
+            <div class="content-box">
               <div class="content-box__row content-box__row--no-border">
-                  <h2>Customer information</h2>
+                <h2>Customer information</h2>
               </div>
               <div class="content-box__row">
-                    <div class="section__content">
-                        <div class="section__content__column section__content__column--half">
-                          <div class="text-container">
-                              <h3 class="heading-3">Contact information</h3>
+                <div class="section__content">
+                  <div
+                    class="
+                      section__content__column section__content__column--half
+                    "
+                  >
+                    <div class="text-container">
+                      <h3 class="heading-3">Contact information</h3>
 
-                              <p><bdo dir="ltr">{{this.form.email}}</bdo></p>
-                                  <h3 class="heading-3">Shipping address</h3>
-                                  <address class="address">{{this.form.fname}} {{this.form.lname}}<br />{{this.form.city}}<br />{{this.form.address}} {{this.form.postcode}}<br />{{this.form.country}}<br />‎{{this.form.phone}}</address>
-
-                        
-                          </div>
-                        </div>
-
+                      <p>
+                        <bdo dir="ltr">{{ this.form.email }}</bdo>
+                      </p>
+                      <h3 class="heading-3">Shipping address</h3>
+                      <address class="address">
+                        {{ this.form.fname }} {{ this.form.lname }}<br />{{
+                          this.form.city
+                        }}<br />{{ this.form.address }} {{ this.form.postcode
+                        }}<br />{{ this.form.country }}<br />‎{{
+                          this.form.phone
+                        }}
+                      </address>
                     </div>
+                  </div>
+                </div>
               </div>
             </div>
             <v-row>
@@ -390,14 +411,10 @@
                   style="border: none; text-align: right"
                 ></v-select>
               </v-col> -->
-               <div class="logo_payment visa col-lg-2 col-md-6">
+              <div class="logo_payment visa col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                    
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/visa.png"
@@ -407,14 +424,10 @@
                   />
                 </v-btn>
               </div>
-               <div class="logo_payment master col-lg-2 col-md-6">
+              <div class="logo_payment master col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                    
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/master.png"
@@ -424,14 +437,10 @@
                   />
                 </v-btn>
               </div>
-               <div class="logo_payment mada col-lg-2 col-md-6">
+              <div class="logo_payment mada col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                   
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/mada.png"
@@ -457,11 +466,7 @@
               <div class="logo_payment stc col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                   
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/stcpay.jpeg"
@@ -472,7 +477,7 @@
                 </v-btn>
               </div>
             </v-row>
-            <v-btn
+            <!-- <v-btn
               color="#197bbd"
               style="
                 float: right;
@@ -484,7 +489,7 @@
               class="check_btn"
               type="submit"
               >Continue to payment</v-btn
-            >
+            > -->
             <v-btn
               color="#197bbd"
               style="
@@ -500,6 +505,11 @@
             >
               Previous
             </v-btn>
+            <img
+              src="/images/tenor.gif"
+              v-show="loading"
+              style="width: 82px; float: right"
+            />
           </v-container>
         </v-form>
       </div>
@@ -538,6 +548,7 @@
                     outlined
                     filled
                     style="border: none"
+
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="3">
@@ -648,7 +659,7 @@
             <div style="clear: both"></div>
           </div>
           <div v-if="step == 2 && Shipping_res != null">
-          <hr />
+            <hr />
             <span
               style="
                 font-size: 1.2em;
@@ -662,19 +673,20 @@
               <span style="color: #737171; padding-right: 10px">
                 <template v-if="currency == 'sar'">
                   <strong style="color: #323232; font-size: 1.5em"
-                    >{{ $t("currency.sar") }} {{ cartTotalPriceSAR+parseFloat(Shipping_res) }}</strong
+                    >{{ $t("currency.sar") }}
+                    {{ cartTotalPriceSAR + parseFloat(Shipping_res) }}</strong
                   >
                 </template>
                 <template v-else>
                   <strong style="color: #323232; font-size: 1.5em"
-                    >{{ $t("currency.usd1") }} {{ cartTotalPrice+parseFloat(Shipping_res_us)  }}</strong
+                    >{{ $t("currency.usd1") }}
+                    {{ cartTotalPrice + parseFloat(Shipping_res_us) }}</strong
                   >
                 </template>
               </span>
             </span>
             <div style="clear: both"></div>
           </div>
-          
         </div>
       </div>
     </div>
@@ -737,6 +749,7 @@
             class="border-bottom p-2 img"
             v-for="item in cart"
             :key="item.product.id"
+
           >
             <div class="d-inline-block position-relative">
               <span class="quantity">{{ item.quantity }}</span>
@@ -904,6 +917,7 @@
                   outlined
                   style="border: none"
                   dir="rtl"
+                    :rules="emailRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.email">{{
                   errors.email[0]
@@ -924,6 +938,7 @@
                   outlined
                   style="border: none"
                   dir="rtl"
+                  :rules="nameRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.lname">{{
                   errors.lname[0]
@@ -937,6 +952,7 @@
                   outlined
                   style="border: none"
                   dir="rtl"
+                  :rules="nameRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.fname">{{
                   errors.fname[0]
@@ -952,6 +968,7 @@
                   style="border: none"
                   placeholder="كود الدولة"
                   dir="rtl"
+                  :rules="nameRules"
                 ></v-select>
                 <span class="red--text" v-if="errors.phonecode">{{
                   errors.phonecode[0]
@@ -965,6 +982,7 @@
                   outlined
                   style="border: none"
                   dir="rtl"
+                  :rules="nameRules"
                 ></v-text-field>
                 <span class="red--text" v-if="errors.phone">{{
                   errors.phone[0]
@@ -990,6 +1008,7 @@
                   :items="countries"
                   outlined
                   dir="rtl"
+                  :rules="nameRules"
                   style="border: none; text-align: right"
                 ></v-select>
                 <span class="red--text" v-if="errors.country">{{
@@ -1004,6 +1023,7 @@
                   v-model="form.city"
                   :items="cities"
                   outlined
+                  :rules="nameRules"
                   dir="rtl"
                   style="border: none; text-align: right"
                 ></v-select>
@@ -1017,6 +1037,7 @@
                 <v-text-field
                   v-model="form.postcode"
                   outlined
+                  :rules="nameRules"
                   style="border: none"
                   dir="rtl"
                 ></v-text-field>
@@ -1031,6 +1052,7 @@
                 <v-text-field
                   v-model="form.address"
                   outlined
+                  :rules="nameRules"
                   style="border: none"
                   dir="rtl"
                 ></v-text-field>
@@ -1062,10 +1084,8 @@
                   outlined
                 ></v-select>
               </v-col>-->
-
-              
             </v-row>
-            
+
             <v-btn
               color="#197bbd"
               style="
@@ -1076,33 +1096,43 @@
                 text-transform: none;
               "
               class="check_btn"
-              :disabled ="FormNotFinished()"
+              :disabled="FormNotFinished()"
               @click.prevent="next()"
             >
               التالي
             </v-btn>
             <div style="clear: both"></div>
           </v-container>
-           <v-container v-if="step == 2">
+          <v-container v-if="step == 2">
             <div class="content-box">
               <div class="content-box__row content-box__row--no-border">
-                  <h2>بيانات العميل</h2>
+                <h2>بيانات العميل</h2>
               </div>
               <div class="content-box__row">
-                    <div class="section__content">
-                        <div class="section__content__column section__content__column--half">
-                          <div class="text-container">
-                              <h3 class="heading-3">معلومات التواصل</h3>
+                <div class="section__content">
+                  <div
+                    class="
+                      section__content__column section__content__column--half
+                    "
+                  >
+                    <div class="text-container">
+                      <h3 class="heading-3">معلومات التواصل</h3>
 
-                              <p><bdo dir="ltr">{{this.form.email}}</bdo></p>
-                                  <h3 class="heading-3">بيانات الشحن</h3>
-                                  <address class="address">{{this.form.fname}} {{this.form.lname}}<br />{{this.form.city}}<br />{{this.form.address}} {{this.form.postcode}}<br />{{this.form.country}}<br />‎{{this.form.phone}}</address>
-
-                        
-                          </div>
-                        </div>
-
+                      <p>
+                        <bdo dir="ltr">{{ this.form.email }}</bdo>
+                      </p>
+                      <h3 class="heading-3">بيانات الشحن</h3>
+                      <address class="address">
+                        {{ this.form.fname }} {{ this.form.lname }}<br />{{
+                          this.form.city
+                        }}<br />{{ this.form.address }} {{ this.form.postcode
+                        }}<br />{{ this.form.country }}<br />‎{{
+                          this.form.phone
+                        }}
+                      </address>
                     </div>
+                  </div>
+                </div>
               </div>
             </div>
             <v-row>
@@ -1118,14 +1148,10 @@
                   style="border: none; text-align: right"
                 ></v-select>
               </v-col> -->
-               <div class="logo_payment visa col-lg-2 col-md-6">
+              <div class="logo_payment visa col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                    
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/visa.png"
@@ -1135,14 +1161,10 @@
                   />
                 </v-btn>
               </div>
-               <div class="logo_payment master col-lg-2 col-md-6">
+              <div class="logo_payment master col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                    
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/master.png"
@@ -1152,14 +1174,10 @@
                   />
                 </v-btn>
               </div>
-               <div class="logo_payment mada col-lg-2 col-md-6">
+              <div class="logo_payment mada col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                   
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/mada.png"
@@ -1185,11 +1203,7 @@
               <div class="logo_payment stc col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
-                  style="
-                    border: none !important;
-                    background: none;
-                   
-                  "
+                  style="border: none !important; background: none"
                 >
                   <img
                     src="/images/stcpay.jpeg"
@@ -1199,20 +1213,19 @@
                   />
                 </v-btn>
               </div>
-             
             </v-row>
-            <v-btn
+            <!-- <v-btn
               color="#197bbd"
               style="
                 float: right;
-                
+
                 height: 10px;
                 font-weight: 100;
               "
               class="check_btn"
               type="submit"
               >متابعة الشراء</v-btn
-            >
+            > -->
             <v-btn
               color="#197bbd"
               style="
@@ -1226,8 +1239,13 @@
               class="check_btn"
               @click.prevent="prev()"
             >
-              الرجوع
+              <span class="back">الرجوع</span>
             </v-btn>
+            <img
+              src="/images/tenor.gif"
+              class="loader"
+              style="width: 82px; float: right"
+            />
           </v-container>
         </v-form>
       </div>
@@ -1270,6 +1288,7 @@
                     style="border: none"
                   ></v-text-field>
                 </v-col>
+
                 <v-col cols="12" sm="3">
                   <v-btn
                     @click="apply_discount()"
@@ -1342,7 +1361,8 @@
             <div style="clear: both"></div>
           </div>
           <div style="padding: 10px">
-            <span style="float: right; font-size: 1.3em">الحساب نصف الإجمالي</span>
+            <span style="float: right; font-size: 1.3em"
+              >الحساب نصف الإجمالي</span >
             <span>
               <span style="color: #737171; padding-right: 10px">
                 <template v-if="currency == 'sar'">
@@ -1361,21 +1381,21 @@
             </span>
             <div style="clear: both"></div>
           </div>
-          
+
           <div style="padding: 10px" v-if="step == 2 && Shipping_res != null">
-          <hr />
+            <hr />
             <span style="float: right; font-size: 1.3em">الحساب الإجمالي</span>
             <span>
               <span style="color: #737171; padding-right: 10px">
                 <template v-if="currency == 'sar'">
                   <strong style="color: #323232; font-size: 1.5em">{{
-                    cartTotalPriceSAR+parseFloat(Shipping_res)
+                    cartTotalPriceSAR + parseFloat(Shipping_res)
                   }}</strong>
                   {{ $t("currency.sar") }}
                 </template>
                 <template v-else>
                   <strong style="color: #323232; font-size: 1.5em">{{
-                    cartTotalPrice+parseFloat(Shipping_res_us)
+                    cartTotalPrice + parseFloat(Shipping_res_us)
                   }}</strong>
                   {{ $t("currency.usd1") }}
                 </template>
@@ -1389,12 +1409,13 @@
   </section>
 </template>
  <script>
-  let mobileCodes = require("../../data/mobilecode").default;
-  // mobileCodes.unshift("Mobile Code");
-  let countries = require("../../data/countries.json");
-  let codes = require("../../data/code.json");
-  let countriesNames = Object.keys(countries);
-  export default {
+let mobileCodes = require("../../data/mobilecode").default;
+// mobileCodes.unshift("Mobile Code");
+let countries = require("../../data/countries.json");
+let codes = require("../../data/code.json");
+let countriesNames = Object.keys(countries);
+
+export default {
   computed: {
     larg(el, price, avilable) {
       this.sizeTarget = "Large - 70x93.5cm (28x37)";
@@ -1422,26 +1443,47 @@
     currentCountry() {
       return this.form.country;
     },
-    callShippmentCalc(){
-        return this.form.city;
-    }
+    callShippmentCalc() {
+      return this.form.city;
+    },
+    formEmail() {
+      return this.form.email;
+    },
   },
   watch: {
-       callShippmentCalc(city){
-           if(city != null){
-          axios
-            .get("/aramix/sample.php?length="+this.cart.length+"&city="+this.form.city+"&countryCode="+this.countryCode+"&currency="+this.currency)
-            .then((result) => {
-                if (result.data) {
-                    this.Shipping_res = result.data.TotalAmount.Value;
-                    this.Shipping_res_us = (result.data.TotalAmount.Value / 3.75).toFixed(2);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    formEmail(value) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+        this.errors.email = "";
+      } else {
+        this.errors.email = ["The email must be a valid email address."];
       }
-       },
+    },
+    callShippmentCalc(city) {
+      if (city != null) {
+        axios
+          .get(
+            "/aramix/sample.php?length=" +
+              this.cart.length +
+              "&city=" +
+              this.form.city +
+              "&countryCode=" +
+              this.countryCode +
+              "&currency=" +
+              this.currency
+          )
+          .then((result) => {
+            if (result.data) {
+              this.Shipping_res = result.data.TotalAmount.Value;
+              this.Shipping_res_us = (
+                result.data.TotalAmount.Value / 3.75
+              ).toFixed(2);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
     currentCountry(newCountry, oldCountry) {
       for (var i = 0; i < codes.length; i++) {
         if (codes[i].name == newCountry) {
@@ -1454,9 +1496,10 @@
   data() {
     return {
       errors: {},
+      loading: false,
       step: 1,
-      Shipping_res:null,
-      Shipping_res_us:null,
+      Shipping_res: null,
+      Shipping_res_us: null,
       form: {
         email: null,
         lname: null,
@@ -1481,7 +1524,10 @@
       mobileCode: mobileCodes,
       countries: countriesNames,
       cities: [],
-      nameRules: [(v) => !!v || "Name is required"],
+      nameRules: [(v) => !!v || "Field is required"],
+       emailRules: [
+        v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ],
       checkbox: false,
       message: "",
       formview: "",
@@ -1491,7 +1537,6 @@
     };
   },
   mounted() {
-
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
@@ -1507,25 +1552,26 @@
         quantity: element.quantity,
       });
     });
-
   },
   methods: {
-    FormNotFinished(){
-        if (this.form.email && 
-            this.form.lname && 
-            this.form.address && 
-            this.form.fname && 
-            this.form.city && 
-            this.form.phone &&
-            this.form.phone &&
-            this.form.phonecode &&
-            this.form.country && 
-            this.form.goverment &&
-            this.form.postcode && 
-            this.cart.length >= 1){
-                return false;
-        }
-        return true;
+    FormNotFinished() {
+      if (
+        this.form.email &&
+        this.form.lname &&
+        this.form.address &&
+        this.form.fname &&
+        this.form.city &&
+        this.form.phone &&
+        this.form.phone &&
+        this.form.phonecode &&
+        this.form.country &&
+        this.form.goverment &&
+        this.form.postcode &&
+        this.cart.length >= 1
+      ) {
+        return false;
+      }
+      return true;
     },
     prev() {
       this.step--;
@@ -1560,10 +1606,22 @@
     clearCartItems() {
       this.$store.dispatch("clearCartItems");
     },
-
+  metaInfo(){
+      return{
+          title:`Checkout | Naqsh Art`,
+          meta:[
+             {
+                  name:'description',
+                  content:'Our mission is to empower creative expression by supporting artists and marketing their original works, and presenting their works with artistic quality to art lovers from all over the world.'
+             },
+             { property: 'og:site_name', content: 'Naqsh art'},
+                {property: 'og:type', content: 'website'},
+                {name: 'robots', content: 'index,follow'},
+               ]
+      }
+  },
     send() {
-      // console.log(this.cart());
-      // this.form.items=[    {paletteid:22,palettesize:"small",quantity:22}, {paletteid:2,palettesize:"small",quantity:22}]
+      this.loading = true;
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
@@ -1578,13 +1636,15 @@
           );
           document.head.appendChild(tag);
           this.errors = "";
-          // this.$store.dispatch("clearCartItems");
+          this.$store.dispatch("clearCartItems");
         })
 
         .catch((error) => {
           this.errors = error.response.data.errors;
+          console.log(error.response.data.errors);
           this.step--;
         });
+      this.loading = false;
     },
   },
 };
@@ -1634,12 +1694,12 @@
   font-size: 1em;
   font-weight: 600;
 }
-@media (min-width:1000px){
-  .content-box{
-  width: 50%;
-  margin: 0px 50%;
-  margin-bottom:20px;
-}
+@media (min-width: 1000px) {
+  .content-box {
+    width: 50%;
+    margin: 0px 50%;
+    margin-bottom: 20px;
+  }
 }
 @media (min-width: 767px) and (max-width: 991px) {
   .discount_section {
@@ -1717,79 +1777,211 @@
 .v-text-field > .v-input__control > .v-input__slot > .v-text-field__slot input {
   text-align: start !important;
 }
-@media all{
+@media all {
+  .text-container > * + * {
+    margin-top: 0.5714285714em;
+  }
+  .text-container * + .heading-3 {
+    margin-top: 1.4285714286em;
+  }
+  h2 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", sans-serif;
+    font-size: 1.2857142857em;
+    line-height: 1.3em;
+  }
+  .main h2 {
+    color: #333;
+  }
+  .content-box h2 {
+    color: #333;
+  }
+  .heading-3,
+  h3 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.3em;
+  }
+  .main .heading-3,
+  .main h3 {
+    color: #333;
+  }
+  .content-box .heading-3,
+  .content-box h3 {
+    color: #333;
+  }
+  p {
+    line-height: 1.5em;
+  }
+  .emphasis {
+    font-weight: 500;
+  }
+  .main .emphasis {
+    color: #333;
+  }
+  .content-box .emphasis {
+    color: #333;
+  }
+  .address {
+    font-style: normal;
+    line-height: 1.5em;
+  }
+  .section__content {
+    zoom: 1;
+  }
+  .section__content:after,
+  .section__content:before {
+    content: "";
+    display: table;
+  }
+  .section__content:after {
+    clear: both;
+  }
+  .section__content__column {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 2em;
+  }
+  .section__content__column:first-of-type {
+    margin-top: 0;
+  }
+  @media (min-width: 750px) {
+    .section__content__column {
+      margin-top: 0;
+      float: left;
+    }
+  }
+  @media (min-width: 750px) {
+    .section__content__column--half {
+      padding: 0 0.75em;
+      width: 50%;
+    }
+    .section__content__column--half:first-child {
+      padding-left: 0;
+    }
+    .section__content__column--half:last-child {
+      padding-right: 0;
+    }
+  }
+  .content-box {
+    background: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    color: #545454;
+  }
+  .main .content-box {
+    border-color: #d9d9d9;
+  }
+  .content-box {
+    margin-top: 1em;
+  }
+  .content-box__row {
+    padding: 1.1428571429em;
+    position: relative;
+    zoom: 1;
+  }
+  .content-box__row ~ .content-box__row {
+    border-top: 1px solid #d9d9d9;
+  }
+  .content-box__row:after,
+  .content-box__row:before {
+    content: "";
+    display: table;
+  }
+  .content-box__row:after {
+    clear: both;
+  }
+  .display-table .content-box__row {
+    display: table;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .content-box__row:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  .content-box__row:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .content-box__row--no-border {
+    padding-bottom: 0;
+  }
+  .content-box__row--no-border + .content-box__row {
+    border-top: none;
+  }
+  .payment-icon {
+    display: inline-block;
+    width: 38px;
+    height: 24px;
+    -webkit-transition: opacity 0.5s cubic-bezier(0.3, 0, 0, 1);
+    transition: opacity 0.5s cubic-bezier(0.3, 0, 0, 1);
+    -webkit-backface-visibility: hidden;
+  }
+  .payment-icon--visa {
+    background-image: url(//cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg),
+      none;
+  }
+  .payment-icon {
+    border-radius: 0.2142857143em;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 2.7142857143em;
+    height: 1.7142857143em;
+  }
+  .payment-method-list__item-icon {
+    vertical-align: middle;
+    margin: -0.1em 0.25em 0 0;
+  }
+  .visually-hidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    clip: rect(0 0 0 0);
+    width: 2px;
+    height: 2px;
+    margin: -2px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+  }
+}
 
-.text-container>*+*{margin-top:.5714285714em;}
-.text-container *+.heading-3{margin-top:1.4285714286em;}
-h2{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;font-size:1.2857142857em;line-height:1.3em;}
-.main h2{color:#333;}
-.content-box h2{color:#333;}
-.heading-3,h3{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;font-size:1em;font-weight:500;line-height:1.3em;}
-.main .heading-3,.main h3{color:#333;}
-.content-box .heading-3,.content-box h3{color:#333;}
-p{line-height:1.5em;}
-.emphasis{font-weight:500;}
-.main .emphasis{color:#333;}
-.content-box .emphasis{color:#333;}
-.address{font-style:normal;line-height:1.5em;}
-.section__content{zoom:1;}
-.section__content:after,.section__content:before{content:"";display:table;}
-.section__content:after{clear:both;}
-.section__content__column{-webkit-box-sizing:border-box;box-sizing:border-box;margin-top:2em;}
-.section__content__column:first-of-type{margin-top:0;}
-@media (min-width:750px){
-.section__content__column{margin-top:0;float:left;}
+html {
+  overflow-x: hidden !important;
 }
-@media (min-width:750px){
-.section__content__column--half{padding:0 .75em;width:50%;}
-.section__content__column--half:first-child{padding-left:0;}
-.section__content__column--half:last-child{padding-right:0;}
-}
-.content-box{background:#fff;background-clip:padding-box;border:1px solid #d9d9d9;border-radius:5px;color:#545454;}
-.main .content-box{border-color:#d9d9d9;}
-.content-box{margin-top:1em;}
-.content-box__row{padding:1.1428571429em;position:relative;zoom:1;}
-.content-box__row~.content-box__row{border-top:1px solid #d9d9d9;}
-.content-box__row:after,.content-box__row:before{content:"";display:table;}
-.content-box__row:after{clear:both;}
-.display-table .content-box__row{display:table;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;}
-.content-box__row:first-child{border-top-left-radius:4px;border-top-right-radius:4px;}
-.content-box__row:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;}
-.content-box__row--no-border{padding-bottom:0;}
-.content-box__row--no-border+.content-box__row{border-top:none;}
-.payment-icon{display:inline-block;width:38px;height:24px;-webkit-transition:opacity .5s cubic-bezier(.3, 0, 0, 1);transition:opacity .5s cubic-bezier(.3, 0, 0, 1);-webkit-backface-visibility:hidden;}
-.payment-icon--visa{background-image:url(//cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg),none;}
-.payment-icon{border-radius:.2142857143em;background-size:cover;background-repeat:no-repeat;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;width:2.7142857143em;height:1.7142857143em;}
-.payment-method-list__item-icon{vertical-align:middle;margin:-.1em .25em 0 0;}
-.visually-hidden{border:0;clip:rect(0,0,0,0);clip:rect(0 0 0 0);width:2px;height:2px;margin:-2px;overflow:hidden;padding:0;position:absolute;white-space:nowrap;}
-}
-
-html{
- overflow-x: hidden !important;
-}
-.logo_payment img{
-  background:whitesmoke;
+.logo_payment img {
+  background: whitesmoke;
   height: 30px;
   object-fit: cover;
- 
 }
-.logo_payment{
+.logo_payment {
   margin: 10px !important;
 }
-.stc .v-btn{
+.stc .v-btn {
   background: #4f008d !important;
 }
-.apple *{
-  background:black !important;
+.apple * {
+  background: black !important;
 }
-.apple img,.mada img,.master img{
+.apple img,
+.mada img,
+.master img {
   object-fit: contain;
 }
 .master * {
-  background:#64625e !important;
+  background: #64625e !important;
 }
-.visa *{
-  background: #0353a5 !important; 
+.visa * {
+  background: #0353a5 !important;
 }
 </style>
 
@@ -1797,5 +1989,4 @@ html{
 .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
   background: transparent !important;
 }
-
 </style>

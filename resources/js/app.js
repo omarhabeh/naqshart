@@ -14,7 +14,9 @@ import VueRouter from "vue-router";
 import Vuetify from "vuetify";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import VueResource from "vue-resource"
+import Meta from 'vue-meta'
 Vue.use(VueResource);
+Vue.use(Meta);
 // // import style
 // import 'swiper/css/swiper.css'
 // // If you use Swiper 6.0.0 or higher

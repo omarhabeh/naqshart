@@ -23,6 +23,7 @@
         "maatwebsite/excel": "^3.1",
         "pragmarx/countries": "^0.7.0",
         "pragmarx/tracker": "^4.0",
+        "spatie/laravel-analytics": "^3.11",
         "spatie/laravel-cookie-consent": "2.12.9",
         "torann/geoip": "1.2.1"
     },

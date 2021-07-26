@@ -90,7 +90,21 @@
 export default {
   mounted() {
     $(".modal-mask").css("display", "block");
-  }
+  },
+    metaInfo(){
+      return{
+          title:`Terms | Naqsh Art`,
+          meta:[
+             {
+                  name:'description',
+                  content:'Our mission is to empower creative expression by supporting artists and marketing their original works, and presenting their works with artistic quality to art lovers from all over the world.'
+             },
+             { property: 'og:site_name', content: 'Naqsh art'},
+                {property: 'og:type', content: 'website'},
+                {name: 'robots', content: 'index,follow'},
+               ]
+      }
+  },
 };
 </script>
 

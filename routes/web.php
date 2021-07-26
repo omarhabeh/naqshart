@@ -72,9 +72,6 @@ Route::get('/export_csv_orders', 'OrderController@csv')->name('export_csv_orders
 
 Route::post('like', 'ReviewController@like');
 Route::post('dislike', 'ReviewController@dislike');
-Route::get('test',function(){
-    return view('test');
-});
 
 Route::get('payment/{id?}', function ($id = null) {
     // dd('asd');

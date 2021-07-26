@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main v-if="$i18n.locale == 'en'" class="main">
+    <main class="main">
       <div class="container">
         <div class="row mt-2">
             <div class="col-md-12">
@@ -195,7 +195,20 @@ export default {
             'terms.required': 'المرجو الموافقة على الشروط',
         }),
    }),
-
+  metaInfo(){
+      return{
+          title:`Invitations | Naqsh Art`,
+          meta:[
+             {
+                  name:'description',
+                  content:'Our mission is to empower creative expression by supporting artists and marketing their original works, and presenting their works with artistic quality to art lovers from all over the world.'
+             },
+             { property: 'og:site_name', content: 'Naqsh art'},
+                {property: 'og:type', content: 'website'},
+                {name: 'robots', content: 'index,follow'},
+               ]
+      }
+  },
     methods: {
         submit() {
             // handle errors
@@ -221,7 +234,7 @@ export default {
     },
 
     computed: {
-  	isDisabled: function(){
+  	disabled: function(){
     	return !this.form.terms;
     }
   }

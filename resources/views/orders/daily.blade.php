@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  
+
 <div class="row mt-5">
     <h2>Dashboard Overview</h2>
     <div class="col">
-       
+
         <div class="table-responsive">
             <div class="box box-primary">
                 <div class="box-body">
@@ -29,8 +29,8 @@
                         <td>{{isset($failed[$index]) ? $failed[$index]->status : 0 }}</td>
                      </tr>
                     @endforeach
-                  
-                  
+
+
                 </tbody>
 
             </table>

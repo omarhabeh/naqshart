@@ -27,6 +27,20 @@ import appvideo from "../pagecomponents/HomeVideo";
 import shopvideo from "../pagecomponents/ShopVideo";
 export default {
   components: { appslider, appvideo, appheader, shopvideo },
+  metaInfo(){
+      return{
+          title:`Naqsh | The digital art gallery`,
+          meta:[
+             {
+                  name:'description',
+                  content:'Our mission is to empower creative expression by supporting artists and marketing their original works, and presenting their works with artistic quality to art lovers from all over the world.'
+             },
+            {property: 'og:site_name', content: 'Naqsh'},
+            {property: 'og:type', content: 'website'},
+            {name: 'robots', content: 'index,follow'},
+               ]
+      }
+  },
   //   created() {
   //     setInterval(() => {
   //       $(".spinner-content").fadeOut("3000");

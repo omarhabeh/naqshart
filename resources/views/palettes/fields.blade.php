@@ -213,7 +213,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('content_ar', 'Content(Ar):') !!}
     {!! Form::textarea('content_ar',null, ['class' => 'form-control','required','style'=>'direction: rtl']) !!}
-</div> --}} --}}
+</div> --}} 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

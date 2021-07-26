@@ -20,7 +20,7 @@
       <img :src="cartImage" @click="showsModal()" alt="Shopping Cart" width="33px" />
       <span id="count">{{cartItemCount}}</span>
     </button>
-    
+
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul
@@ -167,7 +167,7 @@
                     v-for="(item,index) in cart "
                     :key="item.id"
                   >
-                    
+
                     <div class="col-md-sm-4 ml-1" >
                       <img :src="item.product.artistMinPalettes.img" />
                     </div>
@@ -236,12 +236,14 @@
 </template>
 
 <script>
+
 import "jquery";
 import $ from "jquery";
 const TIME_LIMIT = 900;
 import LanguageDropdown from "./LanguageDropdown";
 import CurrencyChanger from "./CurrencyChanger";
 export default {
+
   computed: {
     cartTotalPrice() {
       return this.$store.getters.cartTotalPrice;
@@ -449,7 +451,7 @@ export default {
           var footer = document.getElementById("footer");
           var addToCart = document.getElementById("addToCartsm");
           if (window.scrollY > 5000) addToCart.style.display = "none";
-          
+
           else addToCart.style.display = "";
           addToCart.style.zIndex = "9999";
         }, 50);
@@ -918,7 +920,7 @@ svg {
     .cart-empty{
         width:100%;
     }
-    
+
   .lang_sm {
     display: block;
   }
