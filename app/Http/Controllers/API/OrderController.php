@@ -237,7 +237,7 @@ class OrderController extends Controller
             // "&billing.city=$city" .
             // "&billing.postcode=$postcode" .
             // "&billing.country=$countryCode" .
-            // "&currency=SAR" .
+            "&currency=SAR" .
             "&paymentType=DB";
             // ."&testMode=EXTERNAL";
 
