@@ -2,7 +2,7 @@
     <table class="table" id="paletteGif-table">
         <thead>
             <tr>
-                <th>Gif1</th>
+                {{-- <th>Gif1</th> --}}
                 <th>Gif2</th>
                 <th colspan="3">Action</th>
             </tr>
@@ -11,7 +11,7 @@
             @foreach($paletteGifs as $aboutContent)
             <tr>
 
-                <td><img src="{{ $aboutContent->gif1 }}" style="width:120px;height:100px"></td>
+                {{-- <td><img src="{{ $aboutContent->gif1 }}" style="width:120px;height:100px"></td> --}}
                 <td><img src="{{ $aboutContent->gif2 }}" style="width:120px;height:100px"></td>
 
                 <td>

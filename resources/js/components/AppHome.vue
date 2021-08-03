@@ -57,6 +57,9 @@ export default {
   .spinner-content {
   height: 100vh;
 }
+.spinner-content img{
+    margin-top: -30px;
+}
 }
 
 @-webkit-keyframes sk-scaleout {

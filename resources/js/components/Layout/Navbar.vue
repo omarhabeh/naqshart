@@ -38,7 +38,7 @@
         </li>
         <li class="nav-item shop shop_sm">
           <router-link to="/shop?mydata=1">
-            <a class="nav-link">{{ $t("message.shopart") }}</a>
+            <a class="nav-link">Gallery</a>
           </router-link>
         </li>
         <li class="nav-item about" >
@@ -82,7 +82,7 @@
 
         <li class="nav-item shop shop_sm">
           <router-link to="/shop?mydata=1">
-            <a class="nav-link">{{ $t("message.shopart") }}</a>
+            <a class="nav-link">المعرض</a>
           </router-link>
         </li>
         <li class="nav-item home home_sm">
@@ -160,7 +160,7 @@
                   <!--  -->
                 </div>
                 <div class="modal-body">
-                  <p class="cart-empty" v-if="cartItemCount==0">Your cart is empty.</p>
+                  <p class="cart-empty" v-if="cartItemCount==0">{{currentLanguage =='en' ? 'Your cart is empty.':'السلة فارغة'}}</p>
                   <!-- -----------------------------pallalet cart----------------- -->
                   <div
                     class="row p-4 mt-2 border-bottom"
@@ -610,6 +610,7 @@ html{
   flex: 1 1 auto;
   overflow: auto;
   padding: 1rem;
+        margin:10px 0px;
 }
 /* .modal-body{
     position: absolute;
@@ -750,7 +751,6 @@ svg {
 .modal-title,
 .cart-empty {
   text-align: center;
-  letter-spacing: 0.2em;
   font-weight: 300;
   text-transform: uppercase;
 }

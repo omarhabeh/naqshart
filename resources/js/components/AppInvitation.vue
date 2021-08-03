@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-      </div>
+
     <appfooter></appfooter>
   </v-app>
 </template>
@@ -176,6 +176,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.spinner-content img {
+  margin-top: -30px;
 }
 @-webkit-keyframes sk-scaleout {
   0% {

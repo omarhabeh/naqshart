@@ -368,19 +368,47 @@ export default {
         .catch((error) => (this.errors = error.response.data.errors));
     },
   },
-    metaInfo(){
-      return{
-          title:`About us | Naqsh Art`,
-          meta:[
-             {
-                  name:'description',
-                  content:'Our mission is to empower creative expression by supporting artists and marketing their original works, and presenting their works with artistic quality to art lovers from all over the world.'
-             },
-             { property: 'og:site_name', content: 'Naqsh art'},
-                {property: 'og:type', content: 'website'},
-                {name: 'robots', content: 'index,follow'},
-               ]
+  watch: {
+    $route(to, from) {
+      if (this.$route.query.mydata == "artist") {
+        this.artist = true;
+        this.mission = false;
+        this.support = false;
+        this.joinus = false;
+         var el = this.$el.getElementsByClassName("artists ")[0];
+  el.scrollIntoView();
+      } else if (this.$route.query.mydata == "contact") {
+        this.support = true;
+        this.mission = false;
+        this.artist = false;
+        this.joinus = false;
+      } else if (this.$route.query.mydata == "join") {
+        this.mission = false;
+        this.support = false;
+        this.artist = false;
+        this.joinus = true;
+      } else {
+        this.mission = true;
+        this.joinus = false;
+        this.support = false;
+        this.artist = false;
       }
+    },
+  },
+  metaInfo() {
+    return {
+      title: `About us | Naqsh Art`,
+      meta: [
+        {
+          name: "description",
+          content:
+            "Our mission is to empower creative expression by supporting artists and marketing their original works, and presenting their works with artistic quality to art lovers from all over the world.",
+        },
+        { property: "og:site_name", content: "Naqsh art" },
+        { property: "og:type", content: "website" },
+        { name: "robots", content: "index,follow" },
+      ],
+    };
   },
 };
 </script>
@@ -480,7 +508,8 @@ export default {
 }
 @media (max-width: 767px) {
   .mission img {
-    width: 50% !important;
+    width: 100% !important;
+    height: auto;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {

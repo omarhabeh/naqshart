@@ -1,7 +1,7 @@
-<div class="form-group col-sm-12">
+{{-- <div class="form-group col-sm-12">
     {!! Form::label('gif1', 'Gif1:') !!}
     {!! Form::file('gif1') !!}
-</div>
+</div> --}}
 
 
 <div class="form-group col-sm-6">

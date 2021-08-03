@@ -20,8 +20,8 @@
 
 
 
-      
-  
+
+
 <!--[if lt IE 9]>
 <link rel="stylesheet" media="all" href="//cdn.shopify.com/app/services/30004362/assets/76713951280/checkout_stylesheet/v2-ltr-edge-c3b6d318409215f8f96ba35f2a7373c0-176600/oldie" />
 <![endif]-->
@@ -89,7 +89,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
 
     <header class="banner" data-header role="banner">
       <div class="wrap">
-          
+
   <a class="logo logo--left" href="https://ecstase.com/"><img alt="Ecstase" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/3000/4362/files/logo2.png?176600" /></a>
 
 <h1 class="visually-hidden">
@@ -132,7 +132,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
       <div class="wrap">
         <div class="main">
           <header class="main__header" role="banner">
-              
+
   <a class="logo logo--left" href="https://ecstase.com/"><img alt="Ecstase" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/3000/4362/files/logo2.png?176600" /></a>
 
 <h1 class="visually-hidden">
@@ -140,13 +140,12 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
 </h1>
 
 
-            
 
-            
+
+
 
           </header>
           <main class="main__content" role="main">
-            
 
 
 
@@ -163,7 +162,8 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
 
 
 
-  
+
+
 
 
 
@@ -193,7 +193,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
     <div class="section">
       <div class="section__content">
         <div class="content-box">
-  
+
   <div class="content-box__row">
   <h2 class="visually-hidden">Order updates</h2>
   <ol class="os-timeline" role="list">
@@ -252,7 +252,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
           <a aria-describedby="forwarding-new-window-message" target="_blank" href="https://ecstase.com/cart/32636147105895:1">Re-order the same items</a>
         </li>
       </ul>
-    
+
         <div class="tracking-info">
       <div class="tracking-info__number">
         <strong>FedEx tracking number:</strong>
@@ -265,8 +265,8 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
   </div>
 </div>
 
-        
-        
+
+
         <div class="content-box">
             <div class="content-box__row content-box__row--no-border">
                 <h2>Customer information</h2>
@@ -359,15 +359,15 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
         <a aria-haspopup="dialog" data-modal="policy-terms-of-service" data-title-text="Terms of service" data-close-text="Close" data-iframe="true" href="/30004362/policies/terms-of-service.html?locale=en">Terms of service</a>
       </li>
   </ul>
-  
-  
+
+
 
 
           </footer>
         </div>
         <aside class="sidebar" role="complementary">
           <div class="sidebar__header">
-              
+
   <a class="logo logo--left" href="https://ecstase.com/"><img alt="Ecstase" class="logo__image logo__image--medium" src="//cdn.shopify.com/s/files/1/3000/4362/files/logo2.png?176600" /></a>
 
 <h1 class="visually-hidden">
@@ -440,11 +440,11 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
   </thead>
     <tbody class="total-line-table__tbody">
       <tr class="total-line total-line--subtotal">
-  <th class="total-line__name" scope="row">Subtotal</th>
-  <td class="total-line__price">
-    <span class="order-summary__emphasis skeleton-while-loading" data-checkout-subtotal-price-target="6000">
-      $60.00
-    </span>
+        <th class="total-line__name" scope="row">Subtotal</th>
+        <td class="total-line__price">
+            <span class="order-summary__emphasis skeleton-while-loading" data-checkout-subtotal-price-target="6000">
+            $60.00
+            </span>
   </td>
 </tr>
 
@@ -466,7 +466,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
 
 
 
-      
+
 
     </tbody>
   <tfoot class="total-line-table__footer">
@@ -610,15 +610,15 @@ for (var attr in meta) {
           var blobData = new window.Blob([payload], {
             type: 'text/plain'
           });
-    
+
           if (window.navigator.sendBeacon(endpointUrl, blobData)) {
             return true;
           } // sendBeacon was not successful
-    
-        } // XHR beacon   
-    
+
+        } // XHR beacon
+
         var xhr = new XMLHttpRequest();
-    
+
         try {
           xhr.open('POST', endpointUrl);
           xhr.setRequestHeader('Content-Type', 'text/plain');
@@ -626,7 +626,7 @@ for (var attr in meta) {
         } catch (e) {
           console.log(e);
         }
-    
+
         return false;
       },
       isIos12: function isIos12() {
@@ -660,7 +660,7 @@ for (var attr in meta) {
     loaded = true;
 
     window.ShopifyAnalytics.lib = window.trekkie;
-    
+
       ga('require', 'linker');
       function addListener(element, type, callback) {
         if (element.addEventListener) {
@@ -694,7 +694,7 @@ for (var attr in meta) {
           }
         }
       });
-    
+
 
     var originalDocumentWrite = document.write;
     document.write = customDocumentWrite;
@@ -845,30 +845,30 @@ for (var attr in meta) {
           });
         }
       })();
-    
 
-    
+
+
         window.ShopifyAnalytics.lib.page(
           "Orders - Thank You",
           {},
           "65175f8de66a997c3c294058659a9f8246c4b90ed5a1c865a88e35e962c8b665"
         );
-      
+
 
     var match = window.location.pathname.match(/checkouts\/(.+)\/(thank_you|post_purchase)/)
     var token = match? match[1]: undefined;
     if (!hasLoggedConversion(token)) {
       setCookieIfConversion(token);
-      
+
     }
   });
 
-  
+
       var eventsListenerScript = document.createElement('script');
       eventsListenerScript.async = true;
       eventsListenerScript.src = "//cdn.shopify.com/shopifycloud/shopify/assets/shop_events_listener-714e2e017903fad17d4471cb27d1f2c8a83b5a7a276f92420f7e5e40dbc9136e.js";
       document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
-    
+
 })();</script>
   </body>
 </html>

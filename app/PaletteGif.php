@@ -41,7 +41,7 @@ class PaletteGif extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'gif1' => 'string',
+        // 'gif1' => 'string',
         'gif2' => 'string',
         // 'header_gif2' => 'string',
         // 'header_ar_gif2' => 'string',
@@ -60,7 +60,7 @@ class PaletteGif extends Model
      */
     public static $rules = [
 
-        'gif1' => 'required|file',
+        // 'gif1' => 'required|file',
         'gif2' => 'required|file',
         // 'content_gif2' => 'required',
         // 'header_gif2' => 'required',

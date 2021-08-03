@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Log;
+use App\Mail\artistOrderMail;
+use App\Mail\joinusNotification;
+use App\Mail\orderMail;
+use App\Mail\track;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +23,21 @@ use Illuminate\Support\Facades\Log;
 
 
 Auth::routes();
-
+Route::get('/artistemail',function(){
+    return new artistOrderMail('عمر');
+});
+Route::get('/joinemail',function(){
+    return new joinusNotification('عمر');
+});
+Route::get('/orderemail',function(){
+    return new orderMail('Omar','asd','asd');
+});
+Route::get('/trackemail',function(){
+    return new track();
+});
+Route::get('/test',function(){
+    return view('test');
+});
 Route::get('/export_excel/excel', 'InvitationController@excel')->name('export_excel.excel');
 
 Route::view('/', 'userLayout.home');

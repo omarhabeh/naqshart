@@ -58,6 +58,7 @@ class ArtistController extends AppBaseController
         // $artist = $this->artistRepository->create($input);
         $request->validate([
             'name' => 'required|unique:artists|max:255',
+            'namear'=>'required|unique:artists|max:255',
             'cover_img' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
             // 'Plates_description' => 'required',
             // 'artist_img' => 'mimes:jpeg,jpg,png,gif|required|max:10000',

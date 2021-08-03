@@ -20,6 +20,7 @@ class ArtistRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'name',
+        'namear',
         // 'Plates_description',
         // 'email',
         // 'artist_img',
@@ -64,6 +65,7 @@ class ArtistRepository extends BaseRepository
 
 
         $input = $request->all();
+        
         // $input['artist_img'] = $path;
         $input['cover_img'] = $path2;
 

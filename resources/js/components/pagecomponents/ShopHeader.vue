@@ -3,7 +3,7 @@
     <div
       id="carouselExampleCaptions"
       class="carousel slide"
-      style="margin-bottom:5%;"
+      style="margin-bottom: 5%"
       data-interval="false"
       data-wrap="false"
       data-touch="false"
@@ -12,36 +12,40 @@
         <template v-if="!isMobileWindow">
           <li
             data-target="#carouselExampleCaptions"
-            v-for="(artist,index) in artists"
+            v-for="(artist, index) in artists"
             :class="{ 'active active-carsoul': artist.id == artist_active }"
             class="carousel-element"
             :key="artist.id"
             @click="getdata(index)"
             :data-slide-to="index"
-          >{{artist.name}}</li>
+          >
+            {{ currentLanguage == "ar" ? artist.namear : artist.name }}
+          </li>
         </template>
 
         <template v-else>
           <li
-            v-for="(artist,index) in artists"
+            v-for="(artist, index) in artists"
             :class="{ 'active active-carsoul': index == currentArtist }"
             class="carousel-element"
             :key="artist.id"
             @click="getdata(index)"
-          >{{artist.name}}</li>
+          >
+            {{ currentLanguage == "ar" ? artist.namear : artist.name }}
+          </li>
         </template>
       </ol>
       <div class="carousel-inner" v-if="!isMobileWindow">
         <!-- ,'active':isMobileWindow&index==0 -->
         <div
           class="carousel-item"
-          v-for="(artist,index ) in artists"
-          :class="{ 'active':  artist.id === artist_active }"
+          v-for="(artist, index) in artists"
+          :class="{ active: artist.id === artist_active }"
           :key="artist.id"
-          :id="'artist-item-'+artist.id"
+          :id="'artist-item-' + artist.id"
         >
           <img :src="artist.cover_img" class="header header-lg" alt="..." />
-          <img src class="header header-sm" alt="..." :id="'swapper'+index" />
+          <img src class="header header-sm" alt="..." :id="'swapper' + index" />
           <!---------------------------- start regular pallete----------------------- -->
 
           <!-- <swiper class="agile_swap swap_sm" :options="swiperOption"> -->
@@ -49,7 +53,7 @@
             class="agile_swap swap_sm"
             @transitionStart="handleSwap(index)"
             @slideChange="slideChanged()"
-            @sliderMove="userChangingSlide=true"
+            @sliderMove="userChangingSlide = true"
             v-if="isMobileWindow"
             ref="mySwiper"
           >
@@ -57,78 +61,103 @@
             <!-- @reachEnd="reachEnd()" -->
             <swiper-slide
               class="details agile_slide"
-              v-for="(palettesArtist , index) in allPalettes"
+              v-for="(palettesArtist, index) in allPalettes"
               ref="palettesSlider"
-              @click.native="addActive(palettesArtist.id,index,palettesArtist.artist_id)"
+              @click.native="
+                addActive(palettesArtist.id, index, palettesArtist.artist_id)
+              "
               :key="palettesArtist.id"
               @click="ss"
             >
               <input type="hidden" class="palette" :value="palettesArtist.id" />
               <input type="hidden" class="index" :value="index" />
-              <input type="hidden" class="artist_id" :value="palettesArtist.artist_id" />
+              <input
+                type="hidden"
+                class="artist_id"
+                :value="palettesArtist.artist_id"
+              />
 
-              <img :src="palettesArtist.mobile_background" alt class="mobile-background" />
+              <img
+                :src="palettesArtist.mobile_background"
+                alt
+                class="mobile-background"
+              />
               <img :src="palettesArtist.img" alt="..." />
-              <div class="content" :class="{ 'active': index == 0 }">
+              <div class="content" :class="{ active: index == 0 }">
                 <div class="triangle"></div>
                 <h6>
-                  <span class="px-1">{{palettesArtist.name}}</span> |
-                  <span
-                    class="price px-1"
-                    v-if="currency == 'sar'"
-                  >{{palettesArtist.M_price}} {{ $t("currency.sar") }}</span>
-                  <span
-                    class="price px-1"
-                    v-else
-                  >{{ $t("currency.usd1") }} {{palettesArtist.M_price}}</span>
+                  <span class="px-1">{{ palettesArtist.name }}</span> |
+                  <span class="price px-1" v-if="currency == 'sar'"
+                    >{{ palettesArtist.M_price }} {{ $t("currency.sar") }}</span
+                  >
+                  <span class="price px-1" v-else
+                    >{{ $t("currency.usd1") }}
+                    {{ palettesArtist.M_price }}</span
+                  >
                 </h6>
-                <div class="infor" v-if="palettesArtist.M_avalible >0">
+                <div class="infor" v-if="palettesArtist.M_avalible > 0">
                   <span>
-                    <span class="text-success">{{ palettesArtist.M_avalible }}</span>
+                    <span class="text-success">{{
+                      palettesArtist.M_avalible
+                    }}</span>
                     /{{ palettesArtist.M_copies }} {{ $t("message.left") }}
                   </span>
                 </div>
                 <div class="infor" v-else>
-                  <span style="color:red; font-weight:bolder">{{ $t("message.solidout") }}</span>
+                  <span style="color: red; font-weight: bolder">{{
+                    $t("message.solidout")
+                  }}</span>
                 </div>
               </div>
             </swiper-slide>
             <!-- <div class="swiper-pagination" slot="pagination"></div> -->
           </swiper>
           <div class="wrapper swap_lg">
-            <div class="row d-flex justify-content-center" style="width:100%">
+            <div class="row d-flex justify-content-center" style="width: 100%">
               <div
                 class="details col-lg-3 col-sm-3"
-                :class="{ 'active': index == 0 }"
+                :class="{ active: index == 0 }"
                 ref="myActive"
-                v-for="(palettesArtist , index) in artist.artist_palettes"
-                @click="addActive(palettesArtist.id,index,artist.id)"
+                v-for="(palettesArtist, index) in artist.artist_palettes"
+                @click="addActive(palettesArtist.id, index, artist.id)"
                 :key="palettesArtist.id"
               >
                 <div class="details-content">
-                  <img :src="palettesArtist.img" class="details_img" alt="..." />
-                  <div class="content" :class="{ 'active': index == 0 }">
+                  <img
+                    :src="palettesArtist.img"
+                    class="details_img"
+                    alt="..."
+                  />
+                  <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
                     <h6>
-                      <span class="px-1">{{palettesArtist.name}}</span>
+                      <span class="px-1">{{
+                        currentLanguage == "ar"
+                          ? palettesArtist.namear
+                          : palettesArtist.name
+                      }}</span>
                       |
-                      <span
-                        class="price px-1"
-                        v-if="currency == 'sar'"
-                      >{{palettesArtist.M_price_sar}} {{ $t("currency.sar") }}</span>
-                      <span
-                        class="price px-1"
-                        v-else
-                      >{{ $t("currency.usd1") }} {{palettesArtist.M_price}}</span>
+                      <span class="price px-1" v-if="currency == 'sar'"
+                        >{{ palettesArtist.M_price_sar }}
+                        {{ $t("currency.sar") }}</span
+                      >
+                      <span class="price px-1" v-else
+                        >{{ $t("currency.usd1") }}
+                        {{ palettesArtist.M_price }}</span
+                      >
                     </h6>
-                    <div class="infor" v-if="palettesArtist.M_avalible >0">
+                    <div class="infor" v-if="palettesArtist.M_avalible > 0">
                       <span>
-                        <span class="text-success">{{ palettesArtist.M_avalible }}</span>
+                        <span class="text-success">{{
+                          palettesArtist.M_avalible
+                        }}</span>
                         /{{ palettesArtist.M_copies }} {{ $t("message.left") }}
                       </span>
                     </div>
                     <div class="infor" v-else>
-                      <span style="color:red; font-weight:bolder">{{ $t("message.solidout") }}</span>
+                      <span style="color: red; font-weight: bolder">{{
+                        $t("message.solidout")
+                      }}</span>
                     </div>
                     <!-- <button  @click="addToCart(palettesArtist)"  class="form-control btn btn-info border-0">{{ $t("message.cart") }}</button> -->
                   </div>
@@ -138,14 +167,14 @@
           </div>
           <!---------------------------- start carousel pallete----------------------- -->
 
-          <div class="parent swap_sm" style="z-index: 2;">
+          <div class="parent swap_sm" style="z-index: 2">
             <!-- <div>
               <img
                 src="https://cdn.shopify.com/s/files/1/3000/4362/t/109/assets/swipetothenext.png?v=14393615295324639232"
                 alt
               />
             </div>-->
-            <div class="navigate2" v-if="paletteIndex==0">
+            <div class="navigate2" v-if="paletteIndex == 0">
               <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill="#fff"
@@ -155,7 +184,7 @@
               <span></span>
               <span></span>
             </div>
-            <div class="navigate2" v-if="paletteIndex==1">
+            <div class="navigate2" v-if="paletteIndex == 1">
               <span></span>
               <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -165,7 +194,7 @@
               </svg>
               <span></span>
             </div>
-            <div class="navigate2" v-if="paletteIndex==2">
+            <div class="navigate2" v-if="paletteIndex == 2">
               <span></span>
               <span></span>
               <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +210,7 @@
             class="carousel-control-next"
             href="#carouselExampleCaptions"
             role="button"
-            @click="getdata(index+1)"
+            @click="getdata(index + 1)"
             data-slide="next"
           >
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
@@ -191,7 +220,7 @@
             class="carousel-control-prev"
             href="#carouselExampleCaptions"
             role="button"
-            @click="getdata(index-1)"
+            @click="getdata(index - 1)"
             data-slide="prev"
           >
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -202,13 +231,13 @@
       <div class="carousel-inner" v-else>
         <div
           class="carousel-item"
-          v-for="(artist,index ) in artists"
-          :class="{ 'active':  index==0 }"
+          v-for="(artist, index) in artists"
+          :class="{ active: index == 0 }"
           :key="artist.id"
-          :id="'artist-item-'+artist.id"
+          :id="'artist-item-' + artist.id"
         >
           <img :src="artist.cover_img" class="header header-lg" alt="..." />
-          <img src class="header header-sm" alt="..." :id="'swapper'+index" />
+          <img src class="header header-sm" alt="..." :id="'swapper' + index" />
           <!---------------------------- start regular pallete----------------------- -->
 
           <!-- <swiper class="agile_swap swap_sm" :options="swiperOption"> -->
@@ -216,7 +245,7 @@
             class="agile_swap swap_sm"
             @transitionStart="handleSwap(index)"
             @slideChange="slideChanged()"
-            @sliderMove="userChangingSlide=true"
+            @sliderMove="userChangingSlide = true"
             v-if="isMobileWindow"
             ref="mySwiper"
           >
@@ -224,78 +253,99 @@
             <!-- @reachEnd="reachEnd()" -->
             <swiper-slide
               class="details agile_slide"
-              v-for="(palettesArtist , index) in allPalettes"
+              v-for="(palettesArtist, index) in allPalettes"
               ref="palettesSlider"
-              @click.native="addActive(palettesArtist.id,index,palettesArtist.artist_id)"
+              @click.native="
+                addActive(palettesArtist.id, index, palettesArtist.artist_id)
+              "
               :key="palettesArtist.id"
               @click="ss"
             >
               <input type="hidden" class="palette" :value="palettesArtist.id" />
               <input type="hidden" class="index" :value="index" />
-              <input type="hidden" class="artist_id" :value="palettesArtist.artist_id" />
+              <input
+                type="hidden"
+                class="artist_id"
+                :value="palettesArtist.artist_id"
+              />
 
-              <img :src="palettesArtist.mobile_background" alt class="mobile-background" />
+              <img
+                :src="palettesArtist.mobile_background"
+                alt
+                class="mobile-background"
+              />
               <img :src="palettesArtist.img" alt="..." />
-              <div class="content" :class="{ 'active': index == 0 }">
+              <div class="content" :class="{ active: index == 0 }">
                 <div class="triangle"></div>
                 <h6>
-                  <span class="px-1">{{palettesArtist.name}}</span> |
-                  <span
-                    class="price px-1"
-                    v-if="currency == 'sar'"
-                  >{{palettesArtist.M_price}} {{ $t("currency.sar") }}</span>
-                  <span
-                    class="price px-1"
-                    v-else
-                  >{{ $t("currency.usd1") }} {{palettesArtist.M_price}}</span>
+                  <span class="px-1">{{ palettesArtist.name }}</span> |
+                  <span class="price px-1" v-if="currency == 'sar'"
+                    >{{ palettesArtist.M_price }} {{ $t("currency.sar") }}</span
+                  >
+                  <span class="price px-1" v-else
+                    >{{ $t("currency.usd1") }}
+                    {{ palettesArtist.M_price }}</span
+                  >
                 </h6>
-                <div class="infor" v-if="palettesArtist.M_avalible >0">
+                <div class="infor" v-if="palettesArtist.M_avalible > 0">
                   <span>
-                    <span class="text-success">{{ palettesArtist.M_avalible }}</span>
+                    <span class="text-success">{{
+                      palettesArtist.M_avalible
+                    }}</span>
                     /{{ palettesArtist.M_copies }} {{ $t("message.left") }}
                   </span>
                 </div>
                 <div class="infor" v-else>
-                  <span style="color:red; font-weight:bolder">{{ $t("message.solidout") }}</span>
+                  <span style="color: red; font-weight: bolder">{{
+                    $t("message.solidout")
+                  }}</span>
                 </div>
               </div>
             </swiper-slide>
             <!-- <div class="swiper-pagination" slot="pagination"></div> -->
           </swiper>
           <div class="wrapper swap_lg">
-            <div class="row d-flex justify-content-center" style="width:100%">
+            <div class="row d-flex justify-content-center" style="width: 100%">
               <div
                 class="details col-lg-3 col-sm-3"
-                :class="{ 'active': index == 0 }"
+                :class="{ active: index == 0 }"
                 ref="myActive"
-                v-for="(palettesArtist , index) in artist.artist_palettes"
-                @click="addActive(palettesArtist.id,index,artist.id)"
+                v-for="(palettesArtist, index) in artist.artist_palettes"
+                @click="addActive(palettesArtist.id, index, artist.id)"
                 :key="palettesArtist.id"
               >
                 <div class="details-content">
-                  <img :src="palettesArtist.img" class="details_img" alt="..." />
-                  <div class="content" :class="{ 'active': index == 0 }">
+                  <img
+                    :src="palettesArtist.img"
+                    class="details_img"
+                    alt="..."
+                  />
+                  <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
                     <h6>
-                      <span class="px-1">{{palettesArtist.name}}</span>
+                      <span class="px-1">{{ palettesArtist.name }}</span>
                       |
-                      <span
-                        class="price px-1"
-                        v-if="currency == 'sar'"
-                      >{{palettesArtist.M_price_sar}} {{ $t("currency.sar") }}</span>
-                      <span
-                        class="price px-1"
-                        v-else
-                      >{{ $t("currency.usd1") }} {{palettesArtist.M_price}}</span>
+                      <span class="price px-1" v-if="currency == 'sar'"
+                        >{{ palettesArtist.M_price_sar }}
+                        {{ $t("currency.sar") }}</span
+                      >
+                      <span class="price px-1" v-else
+                        >{{ $t("currency.usd1") }}
+                        {{ palettesArtist.M_price }}</span
+                      >
                     </h6>
-                    <div class="infor" v-if="palettesArtist.M_avalible >0">
+                    <div class="infor" v-if="palettesArtist.M_avalible > 0">
                       <span>
-                        <span class="text-success">{{ palettesArtist.M_avalible }}</span>
+                        <span class="text-success">{{
+                          palettesArtist.M_avalible
+                        }}</span>
                         /{{ palettesArtist.M_copies }} {{ $t("message.left") }}
                       </span>
                     </div>
                     <div class="infor" v-else>
-                      <span style="color:red; font-weight:bolder">{{ $t("message.solidout") }}</span>
+                      <span style="color: red; font-weight: bolder">{{
+                        $t("message.solidout")
+                      }}</span>
                     </div>
                     <!-- <button  @click="addToCart(palettesArtist)"  class="form-control btn btn-info border-0">{{ $t("message.cart") }}</button> -->
                   </div>
@@ -305,14 +355,14 @@
           </div>
           <!---------------------------- start carousel pallete----------------------- -->
 
-          <div class="parent swap_sm" style="z-index: 2;">
+          <div class="parent swap_sm" style="z-index: 2">
             <!-- <div>
               <img
                 src="https://cdn.shopify.com/s/files/1/3000/4362/t/109/assets/swipetothenext.png?v=14393615295324639232"
                 alt
               />
             </div>-->
-            <div class="navigate2" v-if="paletteIndex==0">
+            <div class="navigate2" v-if="paletteIndex == 0">
               <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill="#fff"
@@ -322,7 +372,7 @@
               <span></span>
               <span></span>
             </div>
-            <div class="navigate2" v-if="paletteIndex==1">
+            <div class="navigate2" v-if="paletteIndex == 1">
               <span></span>
               <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -332,7 +382,7 @@
               </svg>
               <span></span>
             </div>
-            <div class="navigate2" v-if="paletteIndex==2">
+            <div class="navigate2" v-if="paletteIndex == 2">
               <span></span>
               <span></span>
               <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -348,7 +398,7 @@
             class="carousel-control-next"
             href="#carouselExampleCaptions"
             role="button"
-            @click="getdata(index+1)"
+            @click="getdata(index + 1)"
             data-slide="next"
           >
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
@@ -358,7 +408,7 @@
             class="carousel-control-prev"
             href="#carouselExampleCaptions"
             role="button"
-            @click="getdata(index-1)"
+            @click="getdata(index - 1)"
             data-slide="prev"
           >
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -368,14 +418,38 @@
       </div>
     </div>
     <div class="text-center addToCart-sm" id="addToCartsm">
-       <img :src="secondImage" alt="" style="width: 80px;height: 80px;" v-if="secondImage">
-      <img :src="minPalettesActive.img" alt style="width: 80px;height: 80px;" v-if="!secondImage" />
-      <div style="width:75%; margin-left: 4%;">
+      <img
+        :src="secondImage"
+        alt=""
+        style="width: 80px; height: 80px"
+        v-if="secondImage"
+      />
+      <img
+        :src="minPalettesActive.img"
+        alt
+        style="width: 80px; height: 80px"
+        v-if="!secondImage"
+      />
+      <div style="width: 75%; margin-left: 4%">
         <button
-          @click="addtocart(minPalettesActive.id,minPalettesActive.M_price, avilableTarget , sizeTarget)"
-          v-if="minPalettesActive.M_avalible>0"
+          @click="
+            addtocart(
+              minPalettesActive.id,
+              minPalettesActive.M_price,
+              avilableTarget,
+              sizeTarget
+            )
+          "
+          v-if="minPalettesActive.M_avalible > 0"
           class="btn add-button"
-          style="    line-height: 30px;width:100%;margin-bottom: 3%;font-size:1rem !important;height:9vh;border-radius: 0;"
+          style="
+            line-height: 30px;
+            width: 100%;
+            margin-bottom: 3%;
+            font-size: 1rem !important;
+            height: 9vh;
+            border-radius: 0;
+          "
         >
           <template v-if="currency == 'usd'">
             <!-- <span
@@ -394,20 +468,40 @@
         </button>
         <v-btn
           class="mb-2 size_btn small"
-          style="cursor: not-allowed;background-color:#737373;color:#fff;border:none;line-height: 30px;width:100%;margin-bottom: 3%;font-size:1rem !important;height:7vh;border-radius: 0;padding: 0 !important;"
+          style="
+            cursor: not-allowed;
+            background-color: #737373;
+            color: #fff;
+            border: none;
+            line-height: 30px;
+            width: 100%;
+            margin-bottom: 3%;
+            font-size: 1rem !important;
+            height: 7vh;
+            border-radius: 0;
+            padding: 0 !important;
+          "
           v-else
-        >{{ $t("message.solidout") }}</v-btn>
+          >{{ $t("message.solidout") }}</v-btn
+        >
         <p
-          style="font-size: 14px;
-                          font-style: italic;
-                          width: 100%;
-                          margin: 0px;
-                          text-align: center;"
-        >{{minPalettesActive.name}}</p>
+          style="
+            font-size: 14px;
+            font-style: italic;
+            width: 100%;
+            margin: 0px;
+            text-align: center;
+          "
+        >
+          {{ minPalettesActive.name }}
+        </p>
       </div>
     </div>
     <div class="header_sm mb-2"></div>
-    <div class="container" style="max-width:1260px!important;margin-bottom: 50px;">
+    <div
+      class="container"
+      style="max-width: 1260px !important; margin-bottom: 50px"
+    >
       <div class="row" id="palletes-images-scroll">
         <!-- <div class="d-inline-block palletes-images">
 
@@ -423,7 +517,11 @@
           :key="minPalette.id"
         >
           <!-- :style="'background:url(\''+minPalette.img+'\')'" -->
-          <img :src="minPalette.img" style="height:100%; width:100%; diplay:inline" alt="..." />
+          <img
+            :src="minPalette.img"
+            style="height: 100%; width: 100%; diplay: inline"
+            alt="..."
+          />
         </div>
       </div>
       <div class="row">
@@ -432,37 +530,67 @@
             <!-- <div class="col-md-6 col-sm-12">
               <img :src="minPalettesActive.img" style="height:100%; width:100%" alt="..." />
             </div>-->
-            <div class="col-md-6 col-sm-12" v-for="minPalette in minPalettes" :key="minPalette.id">
-              <img :src="minPalette.img" style="height:100%; width:100%" alt="..." />
+            <div
+              class="col-md-6 col-sm-12"
+              v-for="minPalette in minPalettes"
+              :key="minPalette.id"
+            >
+              <img
+                :src="minPalette.img"
+                style="height: 100%; width: 100%"
+                alt="..."
+              />
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-5 ml-2" id="text-images" style="position:relative">
+        <div
+          class="col-lg-4 col-md-5 ml-2"
+          id="text-images"
+          style="position: relative"
+        >
           <!-- style="margin-top:78px" -->
-          <div class="add-cart" id="scrolled" style="width:34vw;bottom:0vw">
+          <div class="add-cart" id="scrolled" style="width: 34vw; bottom: 0vw">
             <h2 class="font-weight-bold">
-              {{minPalettesActive.name}}
+              {{
+                currentLanguage == "ar"
+                  ? minPalettesActive.namear
+                  : minPalettesActive.name
+              }}
               <template v-if="currency == 'usd'">
-                <span v-if="active_el==1">{{ $t("currency.usd1") }} {{minPalettesActive.S_price}}</span>
+                <span v-if="active_el == 1"
+                  >{{ $t("currency.usd1") }}
+                  {{ minPalettesActive.S_price }}</span
+                >
                 <span
-                  v-if="active_el==2"
-                  style="float: right;font-weight: normal"
-                >{{ $t("currency.usd1") }} {{minPalettesActive.M_price}}</span>
-                <span v-if="active_el==3">{{ $t("currency.usd1") }} {{minPalettesActive.L_price}}</span>
+                  v-if="active_el == 2"
+                  style="float: right; font-weight: normal"
+                  >{{ $t("currency.usd1") }}
+                  {{ minPalettesActive.M_price }}</span
+                >
+                <span v-if="active_el == 3"
+                  >{{ $t("currency.usd1") }}
+                  {{ minPalettesActive.L_price }}</span
+                >
               </template>
               <template v-else>
-                <span v-if="active_el==1">{{minPalettesActive.S_price_sar}} {{ $t("currency.sar") }}</span>
+                <span v-if="active_el == 1"
+                  >{{ minPalettesActive.S_price_sar }}
+                  {{ $t("currency.sar") }}</span
+                >
                 <span
-                  v-if="active_el==2"
-                  style="float: right;font-weight: normal"
-                >{{minPalettesActive.M_price_sar}} {{ $t("currency.sar") }}</span>
-                <span
-                  v-if="active_el==3"
-                >} {{minPalettesActive.L_price_sar}} {{ $t("currency.sar") }}</span>
+                  v-if="active_el == 2"
+                  style="float: right; font-weight: normal"
+                  >{{ minPalettesActive.M_price_sar }}
+                  {{ $t("currency.sar") }}</span
+                >
+                <span v-if="active_el == 3"
+                  >} {{ minPalettesActive.L_price_sar }}
+                  {{ $t("currency.sar") }}</span
+                >
               </template>
             </h2>
             <div class="mb-3 mt-2">
-              <span style="padding:0 10px;">{{minPalettesActive.tag}}</span>
+              <span style="padding: 0 10px">{{ minPalettesActive.tag }}</span>
             </div>
             <div>
               <!-- <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="minPalettesActive.S_avalible>0"  @click="small(1,minPalettesActive.S_price,minPalettesActive.S_avalible,minPalettesActive.id)">S</v-btn>
@@ -484,12 +612,19 @@
               <!-- <h3 class="mt-4 mb-4" v-if="active_el==1"> <strong style="float:right">{{minPalettesActive.S_copies}}/{{minPalettesActive.S_avalible}}  {{ $t("message.left") }}</strong></h3> -->
               <!-- <h3 class="mt-4 mb-4" v-if="active_el==2"><strong style="float:right">{{minPalettesActive.M_copies}}/{{minPalettesActive.M_avalible}}  {{ $t("message.left") }}</strong></h3> -->
               <!-- <h3 class="mt-4 mb-4" v-if="active_el==3">large<strong style="float:right">{{minPalettesActive.L_copies}}/{{minPalettesActive.L_avalible}}  {{ $t("message.left") }}</strong></h3> -->
-              <div style="clear:both"></div>
+              <div style="clear: both"></div>
             </div>
             <div class="text-center">
               <button
-                @click="addtocart(minPalettesActive.id,minPalettesActive.M_price, avilableTarget , sizeTarget)"
-                v-if="minPalettesActive.M_avalible>0"
+                @click="
+                  addtocart(
+                    minPalettesActive.id,
+                    minPalettesActive.M_price,
+                    avilableTarget,
+                    sizeTarget
+                  )
+                "
+                v-if="minPalettesActive.M_avalible > 0"
                 class="btn add-button addToCart"
                 :disabled="checkifincart(minPalettesActive.id) ? true : false"
               >
@@ -511,9 +646,16 @@
               </button>
               <v-btn
                 class="mb-2 size_btn small sold-out"
-                style="cursor: not-allowed;background-color:#737373;color:#fff;border:none; margin-bottom:45px!important "
+                style="
+                  cursor: not-allowed;
+                  background-color: #737373;
+                  color: #fff;
+                  border: none;
+                  margin-bottom: 45px !important;
+                "
                 v-else
-              >{{ $t("message.solidout") }}</v-btn>
+                >{{ $t("message.solidout") }}</v-btn
+              >
             </div>
             <!-- <div class="text-center addToCart-sm" id="addToCartsm">
               <img :src="minPalettesActive.img" alt style="width: 80px;height: 80px;" />
@@ -555,7 +697,10 @@
             </div>-->
             <!-- <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.select_size") }}</v-btn> -->
             <transition>
-              <p :style="'height:'+height" :class="{'text-right':currentLanguage=='ar'}">
+              <p
+                :style="'height:' + height"
+                :class="{ 'text-right': currentLanguage == 'ar' }"
+              >
                 {{ minPalettesActive.descript }}
                 <!-- <span class="font-weight-bold">This is the Classic</span>
                 , designed and manufactured by Ecstase,
@@ -577,17 +722,27 @@
             <div
               class="mt-4 mb-2 d-block"
               style="
-              background: linear-gradient(180deg, rgba(255,255,255,0.7189250700280112) 0%, rgba(255,255,255,1) 66%);
-            position: relative;
-            height: 51px;
-            padding-top: 15px;"
+                background: linear-gradient(
+                  180deg,
+                  rgba(255, 255, 255, 0.7189250700280112) 0%,
+                  rgba(255, 255, 255, 1) 66%
+                );
+                position: relative;
+                height: 51px;
+                padding-top: 15px;
+              "
             >
               <template v-if="minPalettesActive.description">
                 <a
                   class="more text-primary btn btn-block"
-                  v-if="(countWords(minPalettesActive.description)>110||countWords(minPalettesActive.description_ar)>80)&&!show"
+                  v-if="
+                    (countWords(minPalettesActive.description) > 110 ||
+                      countWords(minPalettesActive.description_ar) > 80) &&
+                    !show
+                  "
                   @click="toggleParagraphHeight"
-                >{{ $t("message.readmore") }}</a>
+                  >{{ $t("message.readmore") }}</a
+                >
               </template>
               <!-- <a
                 class="more text-primary btn btn-block"
@@ -602,14 +757,16 @@
                   <i
                     v-if="!size"
                     class="fa fa-chevron-down"
-                    style="float:right"
+                    style="float: right"
                   ></i>
-                  <i v-else class="fa fa-chevron-up" style="float:right"></i>
+                  <i v-else class="fa fa-chevron-up" style="float: right"></i>
                 </h4>
                 <p
                   v-if="size"
-                  :class="{'text-right':currentLanguage=='ar'}"
-                >{{minPalettesActive.sizing}}</p>
+                  :class="{ 'text-right': currentLanguage == 'ar' }"
+                >
+                  {{ minPalettesActive.sizing }}
+                </p>
               </li>
               <li class="list-group-item" @click="details = !details">
                 <h4 class="font-weight-bold">
@@ -617,27 +774,27 @@
                   <i
                     v-if="!details"
                     class="fa fa-chevron-down"
-                    style="float:right"
+                    style="float: right"
                   ></i>
-                  <i v-else class="fa fa-chevron-up" style="float:right"></i>
+                  <i v-else class="fa fa-chevron-up" style="float: right"></i>
                 </h4>
                 <template v-if="details">
                   <!-- <p v-if="currentLanguage=='en'" :class="{'text-right':currentLanguage=='ar'}"> -->
-                  <p :class="{'text-right':currentLanguage=='ar'}">
+                  <p :class="{ 'text-right': currentLanguage == 'ar' }">
                     <strong>{{ $t("message.Print_material") }}</strong>
-                    {{minPalettesActive.print}}
+                    {{ minPalettesActive.print }}
                     <br />
                     <strong>{{ $t("message.Print_ink") }}</strong>
-                    {{minPalettesActive.ink}}
+                    {{ minPalettesActive.ink }}
                     <br />
                     <strong>{{ $t("message.Print_finish") }}</strong>
-                    {{minPalettesActive.finish}}
+                    {{ minPalettesActive.finish }}
                     <br />
                     <strong>{{ $t("message.Frame_material") }}</strong>
-                    {{minPalettesActive.material}}
+                    {{ minPalettesActive.material }}
                     <br />
                     <strong>{{ $t("message.Frame_finish") }}</strong>
-                    {{minPalettesActive.frame}}
+                    {{ minPalettesActive.frame }}
                   </p>
                   <!-- <p v-else style="text-align:right">
                     <span>
@@ -676,14 +833,16 @@
                   <i
                     v-if="!shipping"
                     class="fa fa-chevron-down"
-                    style="float:right"
+                    style="float: right"
                   ></i>
-                  <i v-else class="fa fa-chevron-up" style="float:right"></i>
+                  <i v-else class="fa fa-chevron-up" style="float: right"></i>
                 </h4>
                 <p
                   v-if="shipping"
-                  :class="{'text-right':currentLanguage=='ar'}"
-                >{{minPalettesActive.ship}}</p>
+                  :class="{ 'text-right': currentLanguage == 'ar' }"
+                >
+                  {{ minPalettesActive.ship }}
+                </p>
               </li>
             </ul>
           </div>
@@ -699,7 +858,7 @@
 <script>
 import appvideo from "../pagecomponents/ShopVideo";
 import $ from "jquery";
-$(function() {
+$(function () {
   setInterval(() => {
     $(".spinner-content").fadeOut("10000");
   }, 10000);
@@ -712,17 +871,17 @@ export default {
     appvideo,
     // review,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
   directives: {
-    swiper: directive
+    swiper: directive,
   },
-data() {
-  return {
-      check:0,
+  data() {
+    return {
+      check: 0,
       palettes: [],
       minPalettes: [],
-      secondImage:"",
+      secondImage: "",
       artists: [],
       palettesArtists: [],
       show: false,
@@ -752,16 +911,15 @@ data() {
       palettesSlider: [],
       currentArtist: "",
       paletteIndex: 0,
-      userChangingSlide: false
-    // swiperOption: {
-    //   pagination: {
-    //     el: ".swiper-pagination"
-    //   }
-    // }
-  };
-},
+      userChangingSlide: false,
+      // swiperOption: {
+      //   pagination: {
+      //     el: ".swiper-pagination"
+      //   }
+      // }
+    };
+  },
   mounted() {
-
     let images = document.getElementById("images");
     let scrolled = document.getElementById("scrolled");
     let navbar = document.getElementById("navbar");
@@ -780,7 +938,7 @@ data() {
     }
 
     //content scroll
-    let scroll = function() {
+    let scroll = function () {
       if (window.innerWidth > 768) {
         // console.log(window.scrollY);
         if (window.scrollY > images.offsetHeight) {
@@ -852,31 +1010,31 @@ data() {
       freeMode: true,
       pagination: {
         el: ".swiper-pagination",
-        clickable: true
+        clickable: true,
       },
       on: {
-        resize: function() {
+        resize: function () {
           for (let index = 0; index < this.slides.length; index++) {
             let element = this.slides[index];
             element.style.height = element.style.width;
           }
           //   console.log(this.slides[0].style.width);
           //   console.log(this.width);
-        }
+        },
       },
       breakpoints: {
         // when window width is >= 320px
         280: {
           slidesPerView: 1,
-          spaceBetween: 10
+          spaceBetween: 10,
         },
         320: {
           slidesPerView: 1,
-          spaceBetween: 10
+          spaceBetween: 10,
         },
         760: {
           slidesPerView: 2,
-          spaceBetween: 10
+          spaceBetween: 10,
         },
         // when window width is >= 640px
         // 991: {
@@ -886,41 +1044,40 @@ data() {
         // }
         1020: {
           slidesPerView: 3,
-          spaceBetween: 10
-        }
+          spaceBetween: 10,
+        },
       },
       observer: true,
-      observerParents: true
+      observerParents: true,
     });
     // swiper.update();
     axios
       .get("/api/all-palettes")
-      .then(response => {
+      .then((response) => {
         this.allPalettes = response.data.palettes;
         this.indexes = response.data.indexes;
       })
-      .catch(error => console.log(error));
-    axios.get("/api/content").then(response => {
+      .catch((error) => console.log(error));
+    axios.get("/api/content").then((response) => {
       //   console.log(response);
       this.content = response.data.content;
     });
     if (this.$route.query.mydata) {
       axios
         .get("/api/palettes")
-        .then(response => {
-
+        .then((response) => {
           this.artists = response.data.artists;
           //   this.artist_text = response.data.artists[0].Plates_description;
           this.first = response.data.artists[0].id;
           let palleteID = this.$route.query.mydata;
           let instance = this;
-          setTimeout(function() {
+          setTimeout(function () {
             instance.goToSlideByID(palleteID);
           }, 100);
 
           axios
             .get("/api/view?id=" + this.$route.query.mydata)
-            .then(response => {
+            .then((response) => {
               (this.minPalettesActive = response.data.palettesActive),
                 (this.palettesArtists = response.data.palettesArtists);
               this.artist_active = response.data.palettesActive.artist_id;
@@ -935,36 +1092,35 @@ data() {
               else this.height = "auto";
             })
 
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
 
       //this.addActive(this.$route.query.mydata)
       axios
         .get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
-        .then(response => {
+        .then((response) => {
           this.minPalettes = response.data.minPalettes;
           this.secondImage = this.minPalettes[0].img;
-
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
       axios
         .get("/api/artist?id=" + this.$route.query.mydata)
-        .then(response => {
+        .then((response) => {
           this.artist_active = response.data.artist[0].id;
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     } else {
       axios
         .get("/api/palettes")
-        .then(response => {
+        .then((response) => {
           this.artists = response.data.artists;
           this.first = response.data.artists[0].id;
           this.artist_active = this.first;
           //   this.artist_text = response.data.artists[0].Plates_description;
           axios
             .get("/api/view?id=" + this.first)
-            .then(response => {
+            .then((response) => {
               this.palettes = response.data.palettes;
               (this.minPalettesActive = response.data.palettes[0]),
                 (this.palettesArtists = response.data.palettesArtists);
@@ -972,22 +1128,22 @@ data() {
               this.firstpalettesArtists = response.data.palettesArtists[0].id;
               axios
                 .get("/api/viewMinPalettes?id=" + this.firstpalettesArtists)
-                .then(response => {
+                .then((response) => {
                   this.minPalettes = response.data.minPalettes;
                 })
-                .catch(error => console.log(error));
+                .catch((error) => console.log(error));
             })
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     }
-
   },
-
 
   computed: {
     cart() {
-      return this.$store.state.products.filter(product => product.quantity > 0);
+      return this.$store.state.products.filter(
+        (product) => product.quantity > 0
+      );
     },
     currency() {
       return this.$store.getters.currency;
@@ -1006,21 +1162,20 @@ data() {
     },
     swiper() {
       return this.$refs.mySwiper[0].$swiper;
-    }
+    },
   },
   methods: {
-    checkifincart(id){
-      var s = this.$store.state.cart.find(item => {
+    checkifincart(id) {
+      var s = this.$store.state.cart.find((item) => {
         if (item.product.id == id) {
-            return item.product.id;
+          return item.product.id;
         }
-        });
-        if(s){
-            return true;
-        }
-        else{
-            return false;
-        }
+      });
+      if (s) {
+        return true;
+      } else {
+        return false;
+      }
     },
     goToSlide(artistIndex) {
       this.swiper.slideTo(this.indexes[artistIndex]);
@@ -1029,7 +1184,7 @@ data() {
       if (this.userChangingSlide) {
         console.log("slide changed");
         let self = this;
-        setTimeout(function() {
+        setTimeout(function () {
           let paletteID = $(
             ".carousel-inner .active .swiper-slide-active .palette"
           ).val();
@@ -1039,10 +1194,12 @@ data() {
           let artistID = $(
             ".carousel-inner .active .swiper-slide-active .artist_id"
           ).val();
-          let artist = self.artists.filter(artist => artist.id == artistID)[0];
+          let artist = self.artists.filter(
+            (artist) => artist.id == artistID
+          )[0];
 
           self.paletteIndex = artist.artist_palettes.findIndex(
-            palette => palette.id == paletteID
+            (palette) => palette.id == paletteID
           );
           self.addActive(paletteID, index, false, artistID);
 
@@ -1083,8 +1240,9 @@ data() {
       //   var el = $(".swiper-wrapper")
       //     .eq(swapperId)
       //     .css("transform");
-      var el = document.getElementsByClassName("swiper-wrapper")[swapperId]
-        .style.transform;
+      var el =
+        document.getElementsByClassName("swiper-wrapper")[swapperId].style
+          .transform;
       var pos = el.substring(el.indexOf("(") + 1, el.indexOf("px"));
       //   console.log(pos);
       //   var translate = (pos / 414) * 33;
@@ -1113,10 +1271,10 @@ data() {
       }
     },
     addToCart(product) {
-        this.check = 1;
+      this.check = 1;
       this.$store.dispatch("addProductToCart", {
         product,
-        quantity: 1
+        quantity: 1,
       });
     },
     updateCart(product, updateType) {
@@ -1159,7 +1317,7 @@ data() {
       axios
         .get("/api/view?id=" + id)
 
-        .then(response => {
+        .then((response) => {
           this.palettes = response.data.palettes;
           this.artist_text = response.data.artist[0];
           this.minPalettesActive = response.data.palettes[0];
@@ -1177,12 +1335,12 @@ data() {
 
           axios
             .get("/api/viewMinPalettes?id=" + this.firstminPalettes)
-            .then(response => {
+            .then((response) => {
               this.minPalettes = response.data.minPalettes;
             })
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     },
     small(el, price, avilable, cardId) {
       this.sizeTarget = "small";
@@ -1199,7 +1357,7 @@ data() {
       // $(".details .content").css({marginTop:"27px"})
 
       $(".details.active .details_img").css({
-        transform: "scale(.7)"
+        transform: "scale(.7)",
       });
       $(".details.active .content").css({ marginTop: "-27px" });
     },
@@ -1230,28 +1388,22 @@ data() {
       this.sizeCm = "70x93.5cm (28x37)";
 
       $(".details.active .details_img").css({
-        transform: "scale(1)"
+        transform: "scale(1)",
       });
       $(".details.active .content").css({ marginTop: "27px" });
     },
     addActive($minPalette_id, index, move = true, artistID) {
       // console.log(  this.$refs.myActive)
       let myActive = this.$refs.myActive[index];
-      $(myActive)
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
+      $(myActive).addClass("active").siblings().removeClass("active");
 
-      $(".details").on("click", function() {
-        $(this)
-          .addClass("active")
-          .siblings()
-          .removeClass("active");
+      $(".details").on("click", function () {
+        $(this).addClass("active").siblings().removeClass("active");
       });
       if (move) {
         $("html,body").animate(
           {
-            scrollTop: "450px"
+            scrollTop: "450px",
           },
           500
         );
@@ -1263,16 +1415,12 @@ data() {
           this.moveIndicators(index, false);
         }
       }
-      // }
-      //   } else {
-      //     this.moveIndicators(index,false);
-      //     // this.goToSlide(index);
-      //   }
       axios
         .get("/api/viewMinPalettes?id=" + $minPalette_id)
-        .then(response => {
+        .then((response) => {
           this.minPalettes = response.data.minPalettes;
           this.minPalettesActive = response.data.palettes[0];
+          this.secondImage = this.minPalettes[0].img;
           this.changeContent(this.currentLanguage);
           this.show = false;
           if (
@@ -1283,7 +1431,7 @@ data() {
           else this.height = "auto";
           //   this.toggleParagraphHeight();
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     },
     addtocart($id, price, avilableTarget, sizeTarget, sizeCm) {
       $(".modal-mask").css("left", 0);
@@ -1294,7 +1442,7 @@ data() {
       }, 800);
       axios
         .post("/api/addtocart?id=" + $id)
-        .then(res => {
+        .then((res) => {
           // console.log(res.data.paletteCart)
           // $('#count')[0].innerText++
           let product = res.data.paletteCart;
@@ -1323,10 +1471,10 @@ data() {
             price: price,
             avilableTarget,
             sizeTarget,
-            sizeCm
+            sizeCm,
           });
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     },
     goToSlideByID(palleteID) {
       let palleteIndex, pallete;
@@ -1342,38 +1490,39 @@ data() {
       this.swiper.slideTo(palleteIndex);
 
       this.addActive(palleteID, palleteIndex, true, artistID);
-      let artist = this.artists.filter(artist => artist.id == artistID)[0];
+      let artist = this.artists.filter((artist) => artist.id == artistID)[0];
 
       this.paletteIndex = artist.artist_palettes.findIndex(
-        palette => palette.id == palleteID
+        (palette) => palette.id == palleteID
       );
-    }
+    },
   }, //method
   watch: {
     $route(to, from) {
       let palleteID = this.$route.query.mydata;
       axios
         .get("/api/viewMinPalettes?id=" + palleteID)
-        .then(response => {
+        .then((response) => {
           this.minPalettes = response.data.minPalettes;
           this.minPalettesActive = response.data.palettes[0];
-          
+
           // console.log(palleteID );
         })
-        .catch(error => console.log(error.response.data));
+        .catch((error) => console.log(error.response.data));
       axios
         .get("/api/artist?id=" + palleteID)
-        .then(response => {
+        .then((response) => {
           this.artist_active = response.data.artist[0].id;
         })
-        .catch(error => console.log(error.response.data));
+        .catch((error) => console.log(error.response.data));
+
       this.goToSlideByID(palleteID);
     },
 
     currentLanguage(newLang, oldLang) {
       this.changeContent(newLang);
-    }
-  }
+    },
+  },
 };
 </script>
 

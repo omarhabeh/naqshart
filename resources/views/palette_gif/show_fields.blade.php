@@ -1,8 +1,8 @@
 <!-- Body Image Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('gif1', 'Gif1:') !!}
     <img src="{{ env('APP_URL').$paletteGif->gif1 }}" style="width:200px;height:200px">
-</div>
+</div> --}}
 <div class="form-group">
     {!! Form::label('header_ar_gif1', 'Gif1 Header (Ar):') !!}
     <p>{{ $paletteGif->header_ar_gif1 }}</p>

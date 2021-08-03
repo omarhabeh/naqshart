@@ -21,10 +21,10 @@ const routes = [{
 
     },
     {
-        path: "/invitations",
+        path: "/invitation",
         name: "invitations",
         component: Invitation,
-        
+
     },
     {
         path: "/shop",

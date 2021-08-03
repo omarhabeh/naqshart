@@ -25,6 +25,7 @@ class Artist extends Model
 
     public $fillable = [
         'name',
+        'namear',
         // 'Plates_description',
         // 'email',
         // 'artist_img',
@@ -39,6 +40,7 @@ class Artist extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
+        'namear'=> 'string',
         // 'Plates_description' => 'string',
         // 'email' => 'string',
         // 'artist_img' => 'string',
@@ -51,6 +53,7 @@ class Artist extends Model
      * @var array
      */
     public static $rules = [
+        'name' => 'required',
         'name' => 'required'
     ];
     public function palettes()

@@ -13,18 +13,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderResquest;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\instock;
-
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\orderMail;
+use App\Mail\artistOrderMail;
 class OrderController extends Controller
 {
     private $methods = [
         'VISA' => '8ac9a4c877676c8e017767baf9e6042f',
         'MASTER' => '8ac9a4c877676c8e017767baf9e6042f',
         'MADA' => '8ac9a4c877676c8e017767bc0ecd043f',
-        'APPLE'=>'8ac7a4c97802e26b01781175350307a4',
-        'STC_PAY' => '8ac7a4ca76890c29017689e9c445025e',
+        'APPLEPAY'=>'8ac7a4c97802e26b01781175350307a4',
+        'STC_PAY' => '8ac9a4c877676c8e017767baf9e6042f',
 
     ];
+    public $shippment_price = 0;
     /**
      * Display a listing of the resource.
      *
@@ -45,14 +47,14 @@ class OrderController extends Controller
     {
         $entityID = $this->methods[$method];
         $order = Order::find($order);
-        $url = "https://oppwa.com/";
+        $url = "https://test.oppwa.com/";
         $url .= $request->resourcePath;
         $url .= "?entityId=$entityID";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjOWE0Yzg3NzY3NmM4ZTAxNzc2N2JhNzAyOTA0Mjh8TUpnNVFBUWozeQ=='
+            'Authorization:Bearer OGFjN2E0Y2E3Njg5MGMyOTAxNzY4OWU5ODE4YjAyNWF8aFh0M2JoR3pSOA=='
         ));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
@@ -72,6 +74,7 @@ class OrderController extends Controller
             $key['medium'] = 'M_avalible';
             $key['large'] = 'L_avalible';
             $palettes = collect();
+            $pallete_price = 0;
             foreach ($order->items as  $item) {
                 $palette  =  Palette::find($item->palatte_id);
                 $palettes->push($palette);
@@ -80,10 +83,15 @@ class OrderController extends Controller
                 $sub = $quantity_left - $item->quantity;
                 $subcopies = $palette->avalible_copies -  $item->quantity;
                 $palette->update([$key[$item->size] => $sub, 'avalible_copies' => $subcopies]);
+                Mail::to($palette->artistemail)->send(new artistOrderMail($palette));
+                $pallete_price += $item->price;
             }
+            Mail::to($order->email)->send(new orderMail($responseData,$order,$palettes,$pallete_price));
+            Mail::to('hello@naqshart.com')->send(new orderMail($responseData,$order,$palettes,$pallete_price));
             $order->update(['paymentstatus' => 'Processing']);
             // return view('orders.successpayment', compact('order'));
-            return view('checkout.success', ['data' => $responseData, 'order'=>$order,'palettes'=>$palettes]);
+
+            return view('checkout.success', ['data' => $responseData, 'order'=>$order,'palettes'=>$palettes,'shipment'=>$this->shippment_price]);
         } else {
             $order->update(['paymentstatus' => 'Failed']);
             if (isset($responseData->result->description)) {
@@ -106,22 +114,13 @@ class OrderController extends Controller
      */
     public function store(OrderResquest $request)
     {
-
-        // $validator = Validator::make($request->all(), [
-
-        //     ]);
-        // app()->setLocale('ar');
+        $this->shippment_price  = $request->shippment_res;
         $locale = app()->getLocale();
-        // if ( $validator->errors()->count()>0)
-        // {
-        //     return response()->json(['status'=>false,'errors'=>$validator->errors()->all(),__('orderrequest.failed')]);
-        //     // discount_percentage
-        // }
         $totalprice = $this->totalprice($request->items, $request->promocode);
         $request['paymentstatus'] = 'pending';
-        $request['totalprice'] = $totalprice['totalprice'];
+        $request['totalprice'] = $totalprice['totalprice'] + $this->shippment_price;
         $request['discount'] = $totalprice['discount_amount'];
-
+        $request['shippment'] = $request->shippment_res;
         $checkoutid =  $this->get_checkout_id(number_format($request['totalprice'], 2), $this->methods[$request->paymentMethod], $request);
         if ($checkoutid) {
             $request['paymentid'] = $checkoutid->id;
@@ -225,27 +224,30 @@ class OrderController extends Controller
             $postcode = $orderData['postcode'];
             $country = $orderData['country'];
             $countryCode = $this->getCountryCode($country);
-            $url = "https://oppwa.com/v1/checkouts";
+            $shippment = $orderData['shippment'];
+            $url = "https://test.oppwa.com/v1/checkouts";
             $data = "entityId=$entityID" .
             "&amount=$price" .
-            "&merchantTransactionId=$rand" .
-            "&customer.email=$email" .
-            "&customer.givenName=$firstName" .
-            "&customer.surname=$lastName" .
-            "&billing.street1=$address" .
-            "&billing.state=$city" .
-            "&billing.city=$city" .
-            "&billing.postcode=$postcode" .
-            "&billing.country=$countryCode" .
-            "&currency=SAR" .
+            // "&merchantTransactionId=$rand" .
+            // "&customer.email=$email" .
+            // "&customer.givenName=$firstName" .
+            // "&customer.surname=$lastName" .
+            // "&billing.street1=$address" .
+            // "&billing.state=$city" .
+            // "&billing.city=$city" .
+            // "&billing.postcode=$postcode" .
+            // "&billing.country=$countryCode" .
+            // "&currency=SAR" .
             "&paymentType=DB";
             // ."&testMode=EXTERNAL";
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Authorization:Bearer OGFjOWE0Yzg3NzY3NmM4ZTAxNzc2N2JhNzAyOTA0Mjh8TUpnNVFBUWozeQ=='
+                'Authorization:Bearer OGFjN2E0Y2E3Njg5MGMyOTAxNzY4OWU5ODE4YjAyNWF8aFh0M2JoR3pSOA=='
             ));
+
+
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Appliedartist;
 use App\Models\joinus_Text;
 use Illuminate\Support\Facades\Validator;
-
+use App\Mail\joinusNotification;
+use Illuminate\Support\Facades\Mail;
 class JoinUsController extends Controller
 {
         /**
@@ -22,20 +23,10 @@ class JoinUsController extends Controller
     }
     public function crete_request(RequestsCreateArtistRequest $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'email' => 'required|email:rfc,dns',
-        //     'name' => 'required|string|max:100',
-        //     'phone' => ['required', 'regex:/^\+(?:[0-9] ?){6,14}[0-9]$/'],
-        //     'socialLink' => 'required'
-        //     ]);
-        //         if($validator->errors()->count() > 0)
-        //         {
-        //             return response()->json(['status'=>false,'errors'=>$validator->errors()->all()]);
-        //         }
-
           $applied =  Appliedartist::create($request->only(['name','email','phone','socialLink']));
           if($applied)
           {
+            Mail::to($request->email)->send(new joinusNotification($request->name));
             return response()->json(['status'=>true,'data'=>$applied]);
 
           }else{

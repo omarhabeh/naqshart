@@ -369,7 +369,7 @@
             </v-btn>
           </v-container>
           <v-container v-if="step == 2">
-            <div class="content-box">
+            <div class="content-box cbox1">
               <div class="content-box__row content-box__row--no-border">
                 <h2>Customer information</h2>
               </div>
@@ -400,17 +400,39 @@
                 </div>
               </div>
             </div>
-            <v-row>
-              <!-- <v-col cols="10" md="12" style="padding: 0px 12px">
-                <label>Payment Method</label>
-                <v-select
-                  v-model="form.paymentMethod"
-                  :items="paymentMethods"
-                  outlined
-                  dir="rtl"
-                  style="border: none; text-align: right"
-                ></v-select>
-              </v-col> -->
+            <div class="content-box cbox2">
+              <div class="content-box__row content-box__row--no-border">
+                <h3 class="heading-3">Please choose the payment method</h3>
+              </div>
+              <div class="content-box__row">
+                <div class="section__content">
+                             <v-row>
+              <div class="logo_payment mada col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="border: none !important; background: none"
+                >
+                  <img
+                    src="/images/mada.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'MADA'"
+                  />
+                </v-btn>
+              </div>
+              <div class="logo_payment stc col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="border: none !important; background: none"
+                >
+                  <img
+                    src="/images/stcpay.jpeg"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'STC_PAY'"
+                  />
+                </v-btn>
+              </div>
               <div class="logo_payment visa col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
@@ -437,19 +459,7 @@
                   />
                 </v-btn>
               </div>
-              <div class="logo_payment mada col-lg-2 col-md-6">
-                <v-btn
-                  type="sumbit"
-                  style="border: none !important; background: none"
-                >
-                  <img
-                    src="/images/mada.png"
-                    alt=""
-                    style="width: 100px"
-                    @click="form.paymentMethod = 'MADA'"
-                  />
-                </v-btn>
-              </div>
+
               <div class="logo_payment apple col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
@@ -459,24 +469,16 @@
                     src="/images/applepay.png"
                     alt=""
                     style="width: 100px"
-                    @click="form.paymentMethod = 'APPLE'"
+                    @click="form.paymentMethod = 'APPLEPAY'"
                   />
                 </v-btn>
               </div>
-              <div class="logo_payment stc col-lg-2 col-md-6">
-                <v-btn
-                  type="sumbit"
-                  style="border: none !important; background: none"
-                >
-                  <img
-                    src="/images/stcpay.jpeg"
-                    alt=""
-                    style="width: 100px"
-                    @click="form.paymentMethod = 'STC_PAY'"
-                  />
-                </v-btn>
-              </div>
+
             </v-row>
+                </div>
+              </div>
+            </div>
+
             <!-- <v-btn
               color="#197bbd"
               style="
@@ -505,11 +507,11 @@
             >
               Previous
             </v-btn>
-            <img
+            <!-- <img
               src="/images/tenor.gif"
               v-show="loading"
               style="width: 82px; float: right"
-            />
+            /> -->
           </v-container>
         </v-form>
       </div>
@@ -1104,7 +1106,7 @@
             <div style="clear: both"></div>
           </v-container>
           <v-container v-if="step == 2">
-            <div class="content-box">
+            <div class="content-box cbox1">
               <div class="content-box__row content-box__row--no-border">
                 <h2>بيانات العميل</h2>
               </div>
@@ -1135,19 +1137,39 @@
                 </div>
               </div>
             </div>
-            <v-row>
-              <!-- <v-col cols="12" md="12" style="padding: 0px 12px">
-                <label style="width: 100%; text-align: right"
-                  >طريقة الدفع</label
+          <div class="content-box cbox2">
+              <div class="content-box__row content-box__row--no-border">
+                <h3 class="heading-3">الرجاء اختيار طريقة الدفع</h3>
+              </div>
+              <div class="content-box__row">
+                <div class="section__content">
+                             <v-row>
+              <div class="logo_payment mada col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="border: none !important; background: none"
                 >
-                <v-select
-                  v-model="form.paymentMethod"
-                  :items="paymentMethods"
-                  outlined
-                  dir="rtl"
-                  style="border: none; text-align: right"
-                ></v-select>
-              </v-col> -->
+                  <img
+                    src="/images/mada.png"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'MADA'"
+                  />
+                </v-btn>
+              </div>
+              <div class="logo_payment stc col-lg-2 col-md-6">
+                <v-btn
+                  type="sumbit"
+                  style="border: none !important; background: none"
+                >
+                  <img
+                    src="/images/stcpay.jpeg"
+                    alt=""
+                    style="width: 100px"
+                    @click="form.paymentMethod = 'STC_PAY'"
+                  />
+                </v-btn>
+              </div>
               <div class="logo_payment visa col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
@@ -1174,19 +1196,7 @@
                   />
                 </v-btn>
               </div>
-              <div class="logo_payment mada col-lg-2 col-md-6">
-                <v-btn
-                  type="sumbit"
-                  style="border: none !important; background: none"
-                >
-                  <img
-                    src="/images/mada.png"
-                    alt=""
-                    style="width: 100px"
-                    @click="form.paymentMethod = 'MADA'"
-                  />
-                </v-btn>
-              </div>
+
               <div class="logo_payment apple col-lg-2 col-md-6">
                 <v-btn
                   type="sumbit"
@@ -1196,36 +1206,15 @@
                     src="/images/applepay.png"
                     alt=""
                     style="width: 100px"
-                    @click="form.paymentMethod = 'APPLE'"
+                    @click="form.paymentMethod = 'APPLEPAY'"
                   />
                 </v-btn>
               </div>
-              <div class="logo_payment stc col-lg-2 col-md-6">
-                <v-btn
-                  type="sumbit"
-                  style="border: none !important; background: none"
-                >
-                  <img
-                    src="/images/stcpay.jpeg"
-                    alt=""
-                    style="width: 100px"
-                    @click="form.paymentMethod = 'STC_PAY'"
-                  />
-                </v-btn>
-              </div>
-            </v-row>
-            <!-- <v-btn
-              color="#197bbd"
-              style="
-                float: right;
 
-                height: 10px;
-                font-weight: 100;
-              "
-              class="check_btn"
-              type="submit"
-              >متابعة الشراء</v-btn
-            > -->
+            </v-row>
+                </div>
+              </div>
+            </div>
             <v-btn
               color="#197bbd"
               style="
@@ -1241,11 +1230,11 @@
             >
               <span class="back">الرجوع</span>
             </v-btn>
-            <img
+            <!-- <img
               src="/images/tenor.gif"
               class="loader"
               style="width: 82px; float: right"
-            />
+            /> -->
           </v-container>
         </v-form>
       </div>
@@ -1474,6 +1463,7 @@ export default {
           .then((result) => {
             if (result.data) {
               this.Shipping_res = result.data.TotalAmount.Value;
+                this.form.shippment_res = this.shippment_res;
               this.Shipping_res_us = (
                 result.data.TotalAmount.Value / 3.75
               ).toFixed(2);
@@ -1515,6 +1505,7 @@ export default {
         items: [],
         promocode: "",
         paymentMethod: "VISA",
+        shippment_res:0,
       },
       discount: "",
       discount_value: 0,
@@ -1532,7 +1523,7 @@ export default {
       message: "",
       formview: "",
       discount_section: false,
-      paymentMethods: ["VISA", "MASTER", "MADA", "APPLE", "STC_PAY"],
+      paymentMethods: ["VISA", "MASTER", "MADA", "APPLEPAY", "STC_PAY"],
       countryCode: "SA",
     };
   },
@@ -1604,6 +1595,8 @@ export default {
       this.$store.dispatch("deleteCartItem", product);
     },
     clearCartItems() {
+        this.shippment_res = 0;
+        this.Shipping_res_us = 0;
       this.$store.dispatch("clearCartItems");
     },
   metaInfo(){
@@ -1622,8 +1615,9 @@ export default {
   },
     send() {
       this.loading = true;
+      this.form.shippment_res = parseFloat(this.Shipping_res);
       axios
-        .post("/api/add-order", this.form)
+        .post("/api/add-order",this.form)
         .then((data) => {
           $("#exampleModalCenter").modal("show");
           this.formview = data.data.orderid;
@@ -1631,7 +1625,7 @@ export default {
           let tag = document.createElement("script");
           tag.setAttribute(
             "src",
-            "https://oppwa.com/v1/paymentWidgets.js?checkoutId=" +
+            "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=" +
               data.data.checkid
           );
           document.head.appendChild(tag);
@@ -1651,6 +1645,7 @@ export default {
 </script>
 
 <style scoped>
+
 .form {
   width: 87%;
   margin: auto;
@@ -1697,11 +1692,39 @@ export default {
 @media (min-width: 1000px) {
   .content-box {
     width: 50%;
-    margin: 0px 50%;
     margin-bottom: 20px;
   }
 }
+@media (min-width: 1380px) {
+  .logo_payment button{
+      width:100% !important;
+  }
+  .logo_payment{
+      flex: 0 0 50% !important;
+  }
+  .apple{
+   
+      flex: 0 0 100% !important;
+  
+  }
+}
+@media (min-width: 997px) and (max-width:1335px) {
+    .logo_payment {
+    max-width: 50% !important;
+    width: 100% !important;
+    }
+    .logo_payment button {
+    width: 100% !important;
+    }
+}
 @media (min-width: 767px) and (max-width: 991px) {
+    .logo_payment{
+        flex: 0 0 25%;
+max-width: 100% !important;
+    }
+    .apple{
+        flex:0 !important;
+    }
   .discount_section {
     width: 100%;
   }
@@ -1717,12 +1740,40 @@ export default {
   display: none;
 }
 @media (max-width: 767px) {
+    .visa img, .mada img {
+    width:70px !important;
+}
+.stc img {
+    width:80px !important;
+}
+.apple img{
+    width:50px !important;
+}
+    .form{
+        padding-left: 0px;
+    }
   .lg_discount {
     display: none;
   }
   .sm_discount {
     display: block;
-    margin-top: 10% !important;
+    margin-top: 15% !important;
+  }
+  .logo_payment{
+    margin: 0px !important;
+    margin-bottom: 0px;
+    display: grid;
+    width: 50%;
+    margin-bottom: -13px !important;
+    padding:5px !important;
+  }
+  .check_btn{
+      margin:0px !important;
+      margin-top: 35px !important;
+      margin-bottom: 20px;
+  }
+  .apple{
+      margin-bottom:10px !important;
   }
 }
 .quantity {
@@ -1765,6 +1816,16 @@ export default {
   height: auto;
 }
 @media (max-width: 767px) {
+     .apple{
+          display: block !important;
+          width:100% !important;
+      }
+      .apple *{
+          width:100% !important;
+      }
+      .check_btn{
+          margin-bottom: 20px !important;
+      }
   .theme--light.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
     background-color: #f5f5f5;
     margin-top: 14px;
@@ -1850,12 +1911,39 @@ export default {
     margin-top: 0;
   }
   @media (min-width: 750px) {
+      .logo_payment {
+  margin: 10px !important;
+}
     .section__content__column {
       margin-top: 0;
       float: left;
     }
+    .cbox2 .section__content{
+
+    }
   }
   @media (min-width: 750px) {
+    .cbox2{
+        float: right;
+    width: 58%;
+    }
+    .cbox1{
+        float: left;
+    width: 40%;
+    }
+    .logo_payment{
+        max-width: 50%;
+        margin: 0px !important;
+    }
+    .apple{
+        display: inline-block;
+        width: 100%;
+        max-width: 100% !important;
+        flex :1;
+    }
+    .apple *{
+        width:100%;
+    }
     .section__content__column--half {
       padding: 0 0.75em;
       width: 50%;
@@ -1963,9 +2051,7 @@ html {
   height: 30px;
   object-fit: cover;
 }
-.logo_payment {
-  margin: 10px !important;
-}
+
 .stc .v-btn {
   background: #4f008d !important;
 }
@@ -1983,6 +2069,7 @@ html {
 .visa * {
   background: #0353a5 !important;
 }
+
 </style>
 
 <style>

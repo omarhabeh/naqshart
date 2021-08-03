@@ -3,6 +3,10 @@
     {!! Form::label('name', 'Name:') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'Name in arabic:') !!}
+    {!! Form::text('namear', null, ['class' => 'form-control']) !!}
+</div>
 
 <!-- Plates Description Field -->
 {{-- <div class="form-group col-sm-6">

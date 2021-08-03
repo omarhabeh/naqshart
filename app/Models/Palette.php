@@ -42,7 +42,9 @@ class Palette extends Model
 
     public $fillable = [
         'name',
+        'namear',
         'img',
+        'artistemail',
         // 'img2',
         'palette_copies',
         'avalible_copies',
@@ -93,6 +95,7 @@ class Palette extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
+        'namear' => 'string',
         'img' => 'string',
         // 'img2' => 'string',
         'palette_copies' => 'integer',

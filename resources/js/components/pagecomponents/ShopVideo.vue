@@ -1,25 +1,8 @@
 <template>
   <section class="container">
-    <header class="mb-4 mt-5 mb-5" v-if="gifs!=null&&gifs.gif1">
-      <!-- <div class="overlay"></div> -->
-      <!-- <div class="container" style="max-width:960px;"> -->
+    <!-- <header class="mb-4 mt-5 mb-5" v-if="gifs!=null&&gifs.gif1">
       <img :src="gifs.gif1" id="gif1" v-if="gifs!=null" />
-      <!-- <video
-        playsinline="playsinline"
-        :src="gifs.gif1"
-        autoplay="autoplay"
-        muted="muted"
-        loop="loop"
-        id="gif1"
-        v-if="gifs!=null"
-      >
-
-      </video>-->
-      <!-- <source :src="gif1" type="video/mp4" /> -->
-      <!-- <source :src="gif1" type="video/webm" /> -->
-      <!-- <source :src="gif1" type="video/mpeg" /> -->
-      <!-- </div> -->
-    </header>
+    </header> -->
     <div class="product-detail-text" v-if="gifs!=null&&gifs.gif1">
       <h3 class="title" v-if="currentLanguage=='en'">{{gifs.header_gif1}}</h3>
       <h3 class="title" v-else>{{gifs.header_ar_gif1}}</h3>

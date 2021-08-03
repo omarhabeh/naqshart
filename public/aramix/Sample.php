@@ -5,7 +5,7 @@
 
 	$params = array(
 		'ClientInfo'  			=> array(
-									'AccountCountryCode'	=> strtoupper($_GET['currency']),
+									'AccountCountryCode'	=> 'SA',
 									'AccountEntity'		 	=> 'RUH',
 									'AccountNumber'		 	=> '60520854',
 									'AccountPin'		 	=> '664165',

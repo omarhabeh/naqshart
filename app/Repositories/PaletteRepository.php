@@ -20,8 +20,10 @@ class PaletteRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'name',
+        'namear',
         'img',
         // 'img2',
+        'artistemail',
         'palette_copies',
         'avalible_copies',
         'S_copies',

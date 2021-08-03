@@ -3,6 +3,14 @@
     {!! Form::label('name', 'Name:') !!}
     {!! Form::text('name', null, ['class' => 'form-control','required']) !!}
 </div>
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'Name in arabic:') !!}
+    {!! Form::text('namear', null, ['class' => 'form-control','required']) !!}
+</div>
+<div class="form-group col-sm-6">
+    {!! Form::label('Artist email', 'artist email:') !!}
+    {!! Form::text('artistemail', null, ['class' => 'form-control','required']) !!}
+</div>
 
 <!-- Tag Field -->
 <div class="form-group col-sm-6">
@@ -213,7 +221,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('content_ar', 'Content(Ar):') !!}
     {!! Form::textarea('content_ar',null, ['class' => 'form-control','required','style'=>'direction: rtl']) !!}
-</div> --}} 
+</div> --}}
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

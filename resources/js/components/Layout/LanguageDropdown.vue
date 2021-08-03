@@ -1,6 +1,4 @@
 <template>
-  <!-- <div class="text-center" style="padding-left: 15% !important;"> -->
-  <!-- <div class="text-center" :style="'padding-left:'+padding+' !important;'"> -->
   <div class="text-center">
     <span @click="setLocale" v-if="$i18n.locale == 'en'">العربية</span>
     <span @click="setLocale" class="en" v-else>English</span>

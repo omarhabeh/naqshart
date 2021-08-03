@@ -306,11 +306,11 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
         <tr class="product" data-product-id="4643313582183" data-variant-id="32636147105895" data-product-type="Walltones" data-customer-ready-visible>
           <td class="product__image">
             <div class="product-thumbnail ">
-  <div class="product-thumbnail__wrapper">
-    <img alt="Sphere - 30x40cm (12x16&quot;)" class="product-thumbnail__image" src="/{{$item->images[0]->img}}" />
-  </div>
-    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
-</div>
+                <div class="product-thumbnail__wrapper">
+                    <img alt="Sphere - 30x40cm (12x16&quot;)" class="product-thumbnail__image" src="/{{$item->images[0]->img}}" />
+                </div>
+                    <span class="product-thumbnail__quantity" aria-hidden="true">1</span>
+                </div>
 
           </td>
           <th class="product__description" scope="row">
@@ -348,24 +348,6 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
       <th scope="col"><span class="visually-hidden">Price</span></th>
     </tr>
   </thead>
-    <tbody class="total-line-table__tbody">
-      {{-- <tr class="total-line total-line--subtotal">
-  <th class="total-line__name" scope="row">Subtotal</th>
-  <td class="total-line__price">
-    <span class="order-summary__emphasis skeleton-while-loading" data-checkout-subtotal-price-target="6000">
-        {{$item->price}} SAR
-    </span>
-  </td>
-</tr> --}}
-
-
-
-
-
-
-
-
-    </tbody>
   <tfoot class="total-line-table__footer">
     <tr class="total-line">
       <th class="total-line__name payment-due-label" scope="row">

@@ -67,7 +67,7 @@
                     <a
                       data-product-handle="son-this-is-the-universe"
                       data-product-quantity="48"
-                      >{{ data.name }}</a
+                      >{{ currentLanguage=='ar' ? data.namear : data.name }}</a
                     >
                   </h3>
                   <span
@@ -111,6 +111,9 @@ export default {
   computed: {
     currency() {
       return this.$store.getters.currency;
+    },
+      currentLanguage() {
+      return this.$i18n.locale;
     },
   },
   created() {
@@ -194,7 +197,8 @@ export default {
   background: black;
   color: white;
   border-radius: 0px !important;
-  top: 40px !important;
+  top: 20px !important;
+  font-size: 15px;
 }
 .swiper-container {
   margin-bottom: 50px;

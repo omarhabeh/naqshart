@@ -62,6 +62,7 @@ class PaletteController extends AppBaseController
         // print_ink	print_finish	frame_material	frame_finish	artist_id
         $request->validate([
             'name' => 'required',
+            'namear' => 'required',
             'palette_copies' => 'required',
             'avalible_copies' => 'required',
             'S_copies' => 'required',

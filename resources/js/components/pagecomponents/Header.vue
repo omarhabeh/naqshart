@@ -119,7 +119,7 @@ export default {
     display: block;
   }
   .hide-m {
-    display: none;
+    display: none !important;
   }
   .hero-classic {
     margin-top: 52px !important;
@@ -147,7 +147,7 @@ export default {
     height: 75vh;
   }
   .hide-d {
-    display: none;
+    display: none !important;
   }
   .hide-m {
     display: block;
