@@ -49,7 +49,7 @@ class OrderController extends Controller
         $order = Order::find($order);
         $url = "https://test.oppwa.com/";
         $url .= $request->resourcePath;
-        $url .= "?entityId=8ac7a4c97802e26b01781175350307a4";
+        $url .= "?entityId=8ac7a4ca76890c29017689e9c445025e";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -226,7 +226,7 @@ class OrderController extends Controller
             $countryCode = $this->getCountryCode($country);
             $shippment = $orderData['shippment'];
             $url = "https://test.oppwa.com/v1/checkouts";
-            $data = "entityId=8ac7a4c97802e26b01781175350307a4" .
+            $data = "entityId=8ac7a4ca76890c29017689e9c445025e" .
             "&amount=$price" .
             // "&merchantTransactionId=$rand" .
             // "&customer.email=$email" .

@@ -18,6 +18,9 @@
     window.shopAppProperties = {"is_shop_pay_order":false,"user_has_shop":null,"user_has_pay":null}
   </script>
 
+<script type="text/javascript">
+    localStorage.clear();
+</script>
 
 
 
