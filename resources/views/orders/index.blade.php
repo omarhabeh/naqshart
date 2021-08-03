@@ -137,25 +137,34 @@
                             {{-- <td>{{ $appliedartist->payment_transaction }}</td> --}}
                             <td>{{ $appliedartist->created_at }}</td>
                             <td>
+                                
                                 {!! Form::open(['route' => ['orders.refund', $appliedartist->id], 'method' =>
                                 'put']) !!}
                                 <div class='btn-group'>
                                     <a style="" href="{{ route('appliedorder.show', [$appliedartist->id]) }}"
                                         class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                                        @if ($appliedartist->paymentstatus == 'Processing')
                                     {!! Form::button('<i class="glyphicon glyphicon-share-alt"></i>', ['type' =>
                                     'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you
                                     sure to refund ?')"]) !!}
+                                      @endif
                                 </div>
                                 {!! Form::close() !!}
+                              
                                 {{-- <a style=" margin-left: 15px;" href="{{ route('appliedorder.show', [$appliedartist->id]) }}"
                                 class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a> --}}
                                 {!! Form::open(['route' => ['orders.complete', $appliedartist->id], 'method' =>
                                 'put']) !!}
-                                <div class='btn-group'>
+                                @if ($appliedartist->paymentstatus == 'Processing')
+                                {{-- <div class='btn-group'>
                                     {!! Form::button('<i class="glyphicon glyphicon-saved"></i>', ['type' =>
                                     'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you
                                     sure to complete the order ?')"]) !!}
+                                </div> --}}
+                                <div class='btn-group'>
+                                    <button class="btn btn-danger btn-xs" onclick="return clicked({!!$appliedartist->id!!})"><i class="glyphicon glyphicon-saved"></i></button>
                                 </div>
+                                @endif
                                 {!! Form::close() !!}
 
                             </td>
@@ -174,6 +183,21 @@
 
     </div>
 </div>
+<script>
+    function clicked(id){
+        var res = prompt('Please enter aramex tracking code');
+        $.ajax({
+        url: "/aramexcode/"+id+"/"+res,
+        type: 'GET',
+        success: function(res) {
+            console.log(res);
+            alert('successfully sent email and complete order!');
+            return true;
+        }
+    });
+        return true;
+    }
+</script>
 @endsection
 @section('css')
     <style>

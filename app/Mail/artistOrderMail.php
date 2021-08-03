@@ -28,6 +28,6 @@ class artistOrderMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.artistOrderMail');
+        return $this->markdown('emails.artistOrderMail')->subject('!تم طلب إحدى أعمالك الفنية');
     }
 }

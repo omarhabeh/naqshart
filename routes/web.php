@@ -9,7 +9,10 @@ use App\Mail\artistOrderMail;
 use App\Mail\joinusNotification;
 use App\Mail\orderMail;
 use App\Mail\track;
-
+use App\Order;
+use App\OrderPalette;
+use App\Models\Palette;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,23 +26,23 @@ use App\Mail\track;
 
 
 Auth::routes();
-Route::get('/artistemail',function(){
-    return new artistOrderMail('عمر');
-});
-Route::get('/joinemail',function(){
-    return new joinusNotification('عمر');
-});
-Route::get('/orderemail',function(){
-    return new orderMail('Omar','asd','asd');
-});
 Route::get('/trackemail',function(){
-    return new track();
+    $order = Order::find(211);
+    $palettes = OrderPalette::where('order_id',211)->get()->first();
+    $palette = Palette::find($palettes->palatte_id);
+    Mail::to($order->email)->send(new track($order,'assaas',$palette));
 });
 Route::get('/test',function(){
     return view('test');
 });
 Route::get('/export_excel/excel', 'InvitationController@excel')->name('export_excel.excel');
-
+Route::get('/aramexcode/{id}/{code}',function($id,$code){
+    $order = Order::find($id);
+    $palettes = OrderPalette::where('order_id',$id)->get()->first();
+    $palette = Palette::find($palettes->palatte_id);
+    Mail::to($order->email)->send(new track($order,$code,$palette));
+    return response()->json([$palette,$order,$palettes]);
+});
 Route::view('/', 'userLayout.home');
 Route::group(['middleware' => 'isadmin'], function () {
     Route::get('/invitations-show', 'InvitationController@index');

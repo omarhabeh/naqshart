@@ -74,7 +74,6 @@ h1{
 
 [logo]: {{asset('/images/Logo_new.png')}} "Logo"
 <small style="width: 25%;
-float: right;
 margin-top: -60px;">Order #{{$order->id}}</small>
 
 <h1 style="color: black"> Thank you for your order! </h1>

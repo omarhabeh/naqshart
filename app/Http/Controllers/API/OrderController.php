@@ -49,7 +49,7 @@ class OrderController extends Controller
         $order = Order::find($order);
         $url = "https://test.oppwa.com/";
         $url .= $request->resourcePath;
-        $url .= "?entityId=8ac7a4ca76890c29017689e9c445025e";
+        $url .= "?entityId=8ac7a4c97802e26b01781175350307a4";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -226,17 +226,17 @@ class OrderController extends Controller
             $countryCode = $this->getCountryCode($country);
             $shippment = $orderData['shippment'];
             $url = "https://test.oppwa.com/v1/checkouts";
-            $data = "entityId=8ac7a4ca76890c29017689e9c445025e" .
+            $data = "entityId=8ac7a4c97802e26b01781175350307a4" .
             "&amount=$price" .
-            // "&merchantTransactionId=$rand" .
-            // "&customer.email=$email" .
-            // "&customer.givenName=$firstName" .
-            // "&customer.surname=$lastName" .
-            // "&billing.street1=$address" .
-            // "&billing.state=$city" .
-            // "&billing.city=$city" .
-            // "&billing.postcode=$postcode" .
-            // "&billing.country=$countryCode" .
+            "&merchantTransactionId=$rand" .
+            "&customer.email=$email" .
+            "&customer.givenName=$firstName" .
+            "&customer.surname=$lastName" .
+            "&billing.street1=$address" .
+            "&billing.state=$city" .
+            "&billing.city=$city" .
+            "&billing.postcode=$postcode" .
+            "&billing.country=$countryCode" .
             "&currency=SAR" .
             "&paymentType=DB";
             // ."&testMode=EXTERNAL";

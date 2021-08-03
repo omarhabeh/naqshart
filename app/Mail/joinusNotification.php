@@ -28,6 +28,6 @@ class joinusNotification extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.joinusNotification')->subject('Join us!');
+        return $this->markdown('emails.joinusNotification')->subject('!تم استلام طلب الانضمام');
     }
 }
