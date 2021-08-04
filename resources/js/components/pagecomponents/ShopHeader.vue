@@ -130,7 +130,7 @@
                   />
                   <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
-                    <h6>
+                    <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
                       <span class="px-1">{{currentLanguage == "ar"? palettesArtist.namear: palettesArtist.name}}</span>
                       |
                       <span class="price px-1 2" v-if="currency == 'sar'"
@@ -273,7 +273,7 @@
               <img :src="palettesArtist.img" alt="..." />
               <div class="content" :class="{ active: index == 0 }">
                 <div class="triangle"></div>
-                <h6>
+                <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
                   <span class="px-1">{{
                         currentLanguage == "ar"
                           ? palettesArtist.namear
@@ -322,7 +322,7 @@
                   />
                   <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
-                    <h6>
+                    <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
                       <span class="px-1">{{
                         currentLanguage == "ar"
                           ? palettesArtist.namear
