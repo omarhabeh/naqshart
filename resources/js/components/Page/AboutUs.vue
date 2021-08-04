@@ -5,7 +5,7 @@
       <img src="/images/Animatedlogogifspeed.gif" width="200px" />
     </div>
 
-    <div class="mission myhome">
+    <div class="mission myhome" id="mission">
       <h3 class="title" @click="mission = !mission" v-if="!mission">
         <span>{{ $t("message.ourmission") }}</span>
         <span class="plus" v-if="mission == false">+</span>
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="artists mt-2">
+    <div class="artists mt-2" id="artists">
       <h3 class="title" @click="artist = !artist" v-if="!artist">
         <span>{{ $t("message.artists") }}</span>
         <span class="plus" v-if="artist == false">+</span>
@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="support mt-2">
+    <div class="support mt-2" id="support">
       <h3 class="title" @click="support = !support" v-if="!support">
         <span>{{ $t("message.support") }}</span>
         <span class="plus" v-if="support == false">+</span>
@@ -249,7 +249,7 @@
         </div>
       </div>
     </div>
-    <div class="joinus mt-2 mb-2">
+    <div class="joinus mt-2 mb-2" id="joinus">
       <h3 class="title" @click="joinus = !joinus" v-if="!joinus">
         <span>{{ $t("message.SUBSCRIBE") }}</span>
         <span class="plus" v-if="joinus == false">+</span>
@@ -316,14 +316,36 @@ export default {
     if (this.$route.query.mydata == "artist") {
       this.artist = true;
       this.mission = false;
+       var el = this.$el.getElementsByClassName("artists ")[0];
+  el.scrollIntoView();
     } else if (this.$route.query.mydata == "contact") {
       this.support = true;
       this.mission = false;
-    } else if (this.$route.query.mydata == "join") {
+       var el = this.$el.getElementsByClassName("support ")[0];
+  el.scrollIntoView();
+    } 
+    else if (this.$route.query.mydata == "join") {
       this.mission = false;
       this.joinus = true;
-      1;
+       var el = this.$el.getElementsByClassName("joinus")[0];
+  el.scrollIntoView();
     }
+    else if (this.$route.query.mydata == "mission") {
+      this.mission = true;
+      this.joinus = false;
+      this.support = false;
+        this.artists = false;
+        var el = this.$el.getElementByID("mission");
+  el.scrollIntoView();
+      
+    }
+    else{
+        this.mission=true;
+        this.joinus = false;
+        this.support = false;
+        this.artists = false;
+        var el = this.$el.getElementByID("mission ");
+  el.scrollIntoView();}
     axios
       .get("/api/get-about-content")
       .then((response) => {
@@ -382,16 +404,32 @@ export default {
         this.mission = false;
         this.artist = false;
         this.joinus = false;
-      } else if (this.$route.query.mydata == "join") {
+        var el = this.$el.getElementsByClassName("support")[0];
+  el.scrollIntoView();
+      } 
+      else if (this.$route.query.mydata == "join") {
         this.mission = false;
         this.support = false;
         this.artist = false;
         this.joinus = true;
-      } else {
+        var el = this.$el.getElementsByClassName("joinus")[0];
+  el.scrollIntoView();
+      } 
+      else if (this.$route.query.mydata == "mission") {
         this.mission = true;
         this.joinus = false;
         this.support = false;
         this.artist = false;
+        var el = this.$el.getElementByID("mission");
+  el.scrollIntoView();
+      } 
+      else {
+        this.mission = true;
+        this.joinus = false;
+        this.support = false;
+        this.artist = false;
+        var el = this.$el.getElementByID("mission");
+  el.scrollIntoView();
       }
     },
   },

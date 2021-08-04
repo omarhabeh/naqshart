@@ -85,8 +85,8 @@
               <img :src="palettesArtist.img" alt="..." />
               <div class="content" :class="{ active: index == 0 }">
                 <div class="triangle"></div>
-                <h6>
-                  <span class="px-1">{{ palettesArtist.name }}</span> |
+                <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
+                  <span class="px-1">{{ currentLanguage == "ar" ? palettesArtist.namear : palettesArtist.name }}</span> |
                   <span class="price px-1" v-if="currency == 'sar'"
                     >{{ palettesArtist.M_price }} {{ $t("currency.sar") }}</span
                   >
@@ -131,13 +131,9 @@
                   <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
                     <h6>
-                      <span class="px-1">{{
-                        currentLanguage == "ar"
-                          ? palettesArtist.namear
-                          : palettesArtist.name
-                      }}</span>
+                      <span class="px-1">{{currentLanguage == "ar"? palettesArtist.namear: palettesArtist.name}}</span>
                       |
-                      <span class="price px-1" v-if="currency == 'sar'"
+                      <span class="price px-1 2" v-if="currency == 'sar'"
                         >{{ palettesArtist.M_price_sar }}
                         {{ $t("currency.sar") }}</span
                       >
@@ -278,9 +274,13 @@
               <div class="content" :class="{ active: index == 0 }">
                 <div class="triangle"></div>
                 <h6>
-                  <span class="px-1">{{ palettesArtist.name }}</span> |
-                  <span class="price px-1" v-if="currency == 'sar'"
-                    >{{ palettesArtist.M_price }} {{ $t("currency.sar") }}</span
+                  <span class="px-1">{{
+                        currentLanguage == "ar"
+                          ? palettesArtist.namear
+                          : palettesArtist.name
+                      }}</span> |
+                  <span class="price px-1 3" v-if="currency == 'sar'"
+                    >{{  minPalettesActive.M_price_sar }} {{ $t("currency.sar") }}</span
                   >
                   <span class="price px-1" v-else
                     >{{ $t("currency.usd1") }}
@@ -323,9 +323,13 @@
                   <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
                     <h6>
-                      <span class="px-1">{{ palettesArtist.name }}</span>
+                      <span class="px-1">{{
+                        currentLanguage == "ar"
+                          ? palettesArtist.namear
+                          : palettesArtist.name
+                      }}</span>
                       |
-                      <span class="price px-1" v-if="currency == 'sar'"
+                      <span class="price px-1 4" v-if="currency == 'sar'"
                         >{{ palettesArtist.M_price_sar }}
                         {{ $t("currency.sar") }}</span
                       >
@@ -493,7 +497,7 @@
             text-align: center;
           "
         >
-          {{ minPalettesActive.name }}
+          {{currentLanguage == "ar"? minPalettesActive.namear: minPalettesActive.name}}
         </p>
       </div>
     </div>
@@ -551,11 +555,7 @@
           <!-- style="margin-top:78px" -->
           <div class="add-cart" id="scrolled" style="width: 34vw; bottom: 0vw">
             <h2 class="font-weight-bold">
-              {{
-                currentLanguage == "ar"
-                  ? minPalettesActive.namear
-                  : minPalettesActive.name
-              }}
+              {{currentLanguage == "ar"? minPalettesActive.namear: minPalettesActive.name}}
               <template v-if="currency == 'usd'">
                 <span v-if="active_el == 1"
                   >{{ $t("currency.usd1") }}

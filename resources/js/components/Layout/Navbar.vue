@@ -335,8 +335,10 @@ export default {
       let navabr = document.getElementById("navbar");
       if (this.$route.name == "shop" && newWidth < 768) {
         navbar.style.backgroundColor = "transparent";
+        
       } else {
         navbar.style.backgroundColor = "#fff";
+        
       }
     },
     timer(newTimer, oldTimeer) {
@@ -546,6 +548,10 @@ export default {
 </script>
 
 <style>
+count{
+    background: white;
+    color:black;
+}
 html{
   overflow:inherit !important;
   overflow-x: hidden !important;
@@ -820,7 +826,7 @@ svg {
   .nav_sm_btn {
     position: absolute;
     right: 1%;
-    top: -4px;
+    top: -8px;
   }
   .navbar-nav .nav-about {
     display: block;
@@ -1031,7 +1037,7 @@ svg {
   height: 2px;
   opacity: 1;
   border-radius: 1px;
-  background-color: #000;
+  background-color: white;
 }
 .navbar-toggler span:first-child {
   top: 0;

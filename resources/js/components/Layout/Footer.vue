@@ -40,17 +40,17 @@
               <!-- <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">{{ $t("message.carreerfooter") }}</a>
               </li>-->
-              <router-link to="/about">
+              
                 <li class="footer-menu-item">
-                  <a class="footer-menu-item-link">{{ $t("message.aboutusfooter") }}</a>
+                  <a class="footer-menu-item-link" href="/about#mission">{{ $t("message.aboutusfooter") }}</a>
                 </li>
-              </router-link>
-              <router-link :to="{ path: '/about', query: { mydata: 'artist'}}">
+              
+              <router-link :to="{ path: '/about#artist', query: { mydata: 'artist'}}">
                 <li class="footer-menu-item">
                   <a class="footer-menu-item-link">{{ $t("message.artistfooter") }}</a>
                 </li>
               </router-link>
-              <router-link :to="{ path: '/about', query: { mydata: 'contact'}}">
+              <router-link :to="{ path: '#contact/about', query: { mydata: 'contact'}}">
                 <li class="footer-menu-item">
                   <a class="footer-menu-item-link">{{ $t("message.contactfooter") }}</a>
                 </li>

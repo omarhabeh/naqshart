@@ -186,6 +186,9 @@
 <script>
     function clicked(id){
         var res = prompt('Please enter aramex tracking code');
+        if (res === null) {
+        return false; 
+    }
         $.ajax({
         url: "/aramexcode/"+id+"/"+res,
         type: 'GET',
@@ -195,7 +198,7 @@
             return true;
         }
     });
-        return true;
+        return false;
     }
 </script>
 @endsection
