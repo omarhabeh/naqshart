@@ -19,10 +19,12 @@ use App\Mail\artistOrderMail;
 class OrderController extends Controller
 {
     private $methods = [
-        'VISA' => '8ac9a4c877676c8e017767baf9e6042f',
+        // test visa : 8ac7a4ca76890c29017689e9c445025e
+        // prod visa : 8ac9a4c877676c8e017767baf9e6042f
+        'VISA' => '8ac7a4ca76890c29017689e9c445025e',
         'MASTER' => '8ac9a4c877676c8e017767baf9e6042f',
         'MADA' => '8ac9a4c877676c8e017767bc0ecd043f',
-        'APPLEPAY '=>'8ac7a4c97802e26b01781175350307a4',
+        'APPLEPAY'=>'8ac7a4c97802e26b01781175350307a4',
         'STC_PAY' => '8ac9a4c877676c8e017767baf9e6042f',
     ];
     public $shippment_price = 0;
