@@ -1628,7 +1628,7 @@ export default {
           let tag = document.createElement("script");
           tag.setAttribute(
             "src",
-            "https://oppwa.com/v1/paymentWidgets.js?checkoutId=" +
+            "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=" +
               data.data.checkid
           );
           document.head.appendChild(tag);
