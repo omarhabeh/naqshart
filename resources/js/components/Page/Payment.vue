@@ -1506,6 +1506,16 @@ export default {
         paymentMethod:"APPLEPAY",
         shippment_res: 0,
       },
+      wpwlOptions : {
+        paymentTarget:"_top",
+        applePay: {
+            displayName: "MyStore",
+            total: { label: "COMPANY, INC." },
+            merchantCapabilities: ["supports3DS"],
+            supportedNetworks: ["masterCard", "visa", "mada"],
+            supportedCountries: ["SA"]
+        }
+        },
       discount: "",
       discount_value: 0,
       discount_value_sar: 0,
