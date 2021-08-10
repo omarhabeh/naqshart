@@ -166,15 +166,14 @@
             <div class="modal-content" style="display: contents">
               <div class="moda-body">
                 <form
-                  :action="`/api/payment/${id}/${form.paymentMethod}`"
+                  :action="`/api/payment/${id}/APPLEPAY`"
                   class="paymentWidgets"
-                  data-brands="APPLEPAY"
+                  :data-brands="form.paymentMethod"
                 ></form>
               </div>
             </div>
           </div>
-        </div> 
-        
+        </div>
         <v-form
           class="form"
           @submit.prevent="send"
@@ -476,7 +475,6 @@
                         />
                       </v-btn>
                     </div>
-                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>
@@ -877,9 +875,9 @@
             <div class="modal-content" style="display: contents">
               <div class="moda-body">
                 <form
-                  :action="'/api/payment/' + id + '/' + form.paymentMethod"
+                  :action="'/api/payment/' + id + '/APPLEPAY'"
                   class="paymentWidgets"
-                data-brands="APPLEPAY"
+                  :data-brands="form.paymentMethod"
                 ></form>
               </div>
             </div>
@@ -1532,23 +1530,16 @@ export default {
     };
   },
   mounted() {
-      var wpwlOptions = {
-  applePay: {
-    displayName: "Naqshart",
-    total: { label: "COMPANY, INC." }
-  }
-}
-
-    // var wpwlOptions = {
-    //     paymentTarget:"_top",
-    //     applePay: {
-    //         displayName: "MyStore",
-    //         total: { label: "COMPANY, INC." },
-    //         merchantCapabilities: ["supports3DS"],
-    //         supportedNetworks: ["masterCard", "visa", "mada"],
-    //         supportedCountries: ["SA"]
-    //     }
-    // }
+    var wpwlOptions = {
+        paymentTarget:"_top",
+        applePay: {
+            displayName: "MyStore",
+            total: { label: "COMPANY, INC." },
+            merchantCapabilities: ["supports3DS"],
+            supportedNetworks: ["masterCard", "visa", "mada"],
+            supportedCountries: ["SA"]
+        }
+    }
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
@@ -1638,9 +1629,12 @@ export default {
     send() {
       this.loading = true;
       this.form.shippment_res = parseFloat(this.Shipping_res);
+      console.log(this.form.paymentMethod);
+      console.log('asd');
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
+            
           $("#exampleModalCenter").modal("show");
           this.formview = data.data.orderid;
           this.id = data.data.orderid;
