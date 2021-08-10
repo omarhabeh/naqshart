@@ -174,7 +174,7 @@
             </div>
           </div>
         </div> 
-        <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
+        
         <v-form
           class="form"
           @submit.prevent="send"
@@ -476,6 +476,7 @@
                         />
                       </v-btn>
                     </div>
+                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>
