@@ -168,7 +168,7 @@
                 <form
                   :action="`/api/payment/${id}/${form.paymentMethod}`"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                  data-brands="APPLEPAY"
                 ></form>
               </div>
             </div>
@@ -877,7 +877,7 @@
                 <form
                   :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                data-brands="APPLEPAY"
                 ></form>
               </div>
             </div>
@@ -1530,16 +1530,16 @@ export default {
     };
   },
   mounted() {
-    // var wpwlOptions = {
-    //     paymentTarget:"_top",
-    //     applePay: {
-    //         displayName: "MyStore",
-    //         total: { label: "COMPANY, INC." },
-    //         merchantCapabilities: ["supports3DS"],
-    //         supportedNetworks: ["masterCard", "visa", "mada"],
-    //         supportedCountries: ["SA"]
-    //     }
-    // }
+    var wpwlOptions = {
+        paymentTarget:"_top",
+        applePay: {
+            displayName: "MyStore",
+            total: { label: "COMPANY, INC." },
+            merchantCapabilities: ["supports3DS"],
+            supportedNetworks: ["masterCard", "visa", "mada"],
+            supportedCountries: ["SA"]
+        }
+    }
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
