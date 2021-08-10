@@ -173,7 +173,8 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> 
+        <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
         <v-form
           class="form"
           @submit.prevent="send"
@@ -1530,6 +1531,13 @@ export default {
     };
   },
   mounted() {
+      var wpwlOptions = {
+  applePay: {
+    displayName: "Naqshart",
+    total: { label: "COMPANY, INC." }
+  }
+}
+
     // var wpwlOptions = {
     //     paymentTarget:"_top",
     //     applePay: {
