@@ -2,7 +2,7 @@
 <style>
     @font-face {
     font-family: "tajawal-regular";
-    src: url("/fonts/Tajawal-Regular.ttf");
+    src: 'https://naqshart.com/fonts/Tajawal-Regular.ttf';
     font-style: normal;
     font-weight: 500;
     font-size: 17px;

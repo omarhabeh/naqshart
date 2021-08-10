@@ -46,7 +46,7 @@ class OrderController extends Controller
      */
     public function create($order = null, $method = null, Request $request)
     {
-        $entityID = $this->methods[$method];
+        $entityID = '8ac7a4c97802e26b01781175350307a4';
         $order = Order::find($order);
         $url = "https://test.oppwa.com/";
         $url .= $request->resourcePath;
@@ -82,7 +82,7 @@ class OrderController extends Controller
                 $palette_arr = $palette->toArray();
                 $quantity_left =  $palette_arr[$key[$item->size]];
                 $sub = $quantity_left - $item->quantity;
-                $subcopies = $palette->avalible_copies -  $item->quantity;
+                $subcopies = $palette->avalible_copies - $item->quantity;
                 $palette->update([$key[$item->size] => $sub, 'avalible_copies' => $subcopies]);
                 Mail::to($palette->artistemail)->send(new artistOrderMail($palette));
                 $pallete_price += $item->price;
@@ -227,7 +227,7 @@ class OrderController extends Controller
             $countryCode = $this->getCountryCode($country);
             $shippment = $orderData['shippment'];
             $url = "https://test.oppwa.com/v1/checkouts";
-            $data = "entityId=$entityID" .
+            $data = "entityId=8ac7a4c97802e26b01781175350307a4" .
             "&amount=$price" .
             "&merchantTransactionId=$rand" .
             "&customer.email=$email" .

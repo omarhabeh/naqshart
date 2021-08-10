@@ -1503,7 +1503,7 @@ export default {
         postcode: null,
         items: [],
         promocode: "",
-        paymentMethod:"APPLEPAY",
+        paymentMethod:"VISA",
         shippment_res: 0,
       },
       discount: "",
@@ -1530,16 +1530,16 @@ export default {
     };
   },
   mounted() {
-    var wpwlOptions = {
-        paymentTarget:"_top",
-        applePay: {
-            displayName: "MyStore",
-            total: { label: "COMPANY, INC." },
-            merchantCapabilities: ["supports3DS"],
-            supportedNetworks: ["masterCard", "visa", "mada"],
-            supportedCountries: ["SA"]
-        }
-    }
+    // var wpwlOptions = {
+    //     paymentTarget:"_top",
+    //     applePay: {
+    //         displayName: "MyStore",
+    //         total: { label: "COMPANY, INC." },
+    //         merchantCapabilities: ["supports3DS"],
+    //         supportedNetworks: ["masterCard", "visa", "mada"],
+    //         supportedCountries: ["SA"]
+    //     }
+    // }
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
