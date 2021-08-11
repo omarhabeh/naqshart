@@ -1,11 +1,15 @@
 <template>
-
   <nav
-    :class="'navbar navbar-expand-md '+ navbar +' px-3 sticky-top'"
-    style="direction: ltr;"
+    :class="'navbar navbar-expand-md ' + navbar + ' px-3 sticky-top'"
+    style="direction: ltr"
     id="navbar"
   >
-    <button class="navbar-toggler" id="navbar-toggler" type="button" @click="expanding()">
+    <button
+      class="navbar-toggler"
+      id="navbar-toggler"
+      type="button"
+      @click="expanding()"
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -17,18 +21,22 @@
       <img class="logo-ecs" :src="logoImage" width="32px" alt />
     </a>
     <button class="nav-btns nav_sm_btn" @click="showsModal()">
-      <img :src="cartImage" @click="showsModal()" alt="Shopping Cart" width="33px" />
-      <span id="count">{{cartItemCount}}</span>
+      <img
+        :src="cartImage"
+        @click="showsModal()"
+        alt="Shopping Cart"
+        width="33px"
+      />
+      <span id="count">{{ cartItemCount }}</span>
     </button>
-
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul
         class="navbar-nav mx-auto mt-2 mt-lg-0 text-center"
         id="navbar-nav"
-        v-if=" $i18n.locale == 'en'"
+        v-if="$i18n.locale == 'en'"
       >
-        <li class="nav-item home" >
+        <li class="nav-item home">
           <router-link to="/">
             <a class="nav-link">
               {{ $t("message.home") }}
@@ -41,16 +49,22 @@
             <a class="nav-link">Gallery</a>
           </router-link>
         </li>
-        <li class="nav-item about" >
+        <li class="nav-item about">
           <router-link to="/about">
             <a class="nav-link">{{ $t("message.about") }}</a>
           </router-link>
         </li>
         <li class="lang_sm about">
-          <LanguageDropdown class="nav-link" style="display: flex;"></LanguageDropdown>
+          <LanguageDropdown
+            class="nav-link"
+            style="display: flex"
+          ></LanguageDropdown>
         </li>
         <li class="lang_sm about">
-          <CurrencyChanger class="nav-link" style="display: flex;"></CurrencyChanger>
+          <CurrencyChanger
+            class="nav-link"
+            style="display: flex"
+          ></CurrencyChanger>
         </li>
         <li class="nav-about">
           <ul class="nav-content">
@@ -59,7 +73,9 @@
               <!-- <a href="#"></a> -->
             </li>
             <li>
-              <router-link to="/privacy">{{ $t("navbar.privacy") }}</router-link>
+              <router-link to="/privacy">{{
+                $t("navbar.privacy")
+              }}</router-link>
             </li>
             <li>
               <router-link to="/refund">{{ $t("navbar.refund") }}</router-link>
@@ -67,7 +83,11 @@
           </ul>
         </li>
       </ul>
-      <ul class="navbar-nav mx-auto mt-2 mt-lg-0 text-center" id="navbar-nav" v-else>
+      <ul
+        class="navbar-nav mx-auto mt-2 mt-lg-0 text-center"
+        id="navbar-nav"
+        v-else
+      >
         <li class="nav-item about about_sm">
           <router-link to="/about" class="lg">
             <a class="nav-link">{{ $t("message.about") }}</a>
@@ -97,10 +117,16 @@
           </router-link>
         </li>
         <li class="lang_sm about">
-          <LanguageDropdown class="nav-link" style="display: flex;"></LanguageDropdown>
+          <LanguageDropdown
+            class="nav-link"
+            style="display: flex"
+          ></LanguageDropdown>
         </li>
         <li class="lang_sm about">
-          <CurrencyChanger class="nav-link" style="display: flex;"></CurrencyChanger>
+          <CurrencyChanger
+            class="nav-link"
+            style="display: flex"
+          ></CurrencyChanger>
         </li>
         <li class="nav-about">
           <ul class="nav-content">
@@ -108,7 +134,9 @@
               <router-link to="/terms">{{ $t("navbar.terms") }}</router-link>
             </li>
             <li>
-              <router-link to="/privacy">{{ $t("navbar.privacy") }}</router-link>
+              <router-link to="/privacy">{{
+                $t("navbar.privacy")
+              }}</router-link>
             </li>
             <li>
               <router-link to="/refund">{{ $t("navbar.refund") }}</router-link>
@@ -123,52 +151,73 @@
     <div class="lang_lg ml-2">
       <CurrencyChanger class="lang"></CurrencyChanger>
     </div>
-    <button class="nav-btns nav_lg_btn" style="margin-left: 1vw;" @click="showsModal()">
+    <button
+      class="nav-btns nav_lg_btn"
+      style="margin-left: 1vw"
+      @click="showsModal()"
+    >
       <img
         src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656"
         @click="showsModal()"
         alt="Shopping Cart"
         width="33px"
       />
-      <span id="count">{{cartItemCount}}</span>
+      <span id="count">{{ cartItemCount }}</span>
     </button>
     <div>
       <transition name="modal">
         <div class="modal-mask" ref="mycart">
           <div class="modal-wrapper">
             <div class="modal-dialog" role="document">
-              <div class="modal-content" style="color: #000 !important;">
-                <div class="modal-header" style="margin-top:4% !important;">
+              <div class="modal-content" style="color: #000 !important">
+                <div class="modal-header" style="margin-top: 4% !important">
                   <h5 class="modal-title">{{ $t("message.cartname") }}</h5>
-                  <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close">
+                  <button
+                    type="button"
+                    class="close mr-1"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
                     <span aria-hidden="true" @click="closeModal()">
                       <svg role="presentation" viewBox="0 0 16 14">
-                        <path d="M15 0L1 14m14 0L1 0" fill="none" fill-rule="evenodd" />
+                        <path
+                          d="M15 0L1 14m14 0L1 0"
+                          fill="none"
+                          fill-rule="evenodd"
+                        />
                       </svg>
                     </span>
                   </button>
                 </div>
-                <div class="modal-timer" v-if="cartItemCount!=0">
-                  <template v-if="currentLanguage =='en'">
-                    Due to Limited Stock and High Demand ⌛ We can only
-                    hold your order for
+                <div class="modal-timer" v-if="cartItemCount != 0">
+                  <template v-if="currentLanguage == 'en'">
+                    Due to Limited Stock and High Demand ⌛ We can only hold
+                    your order for
                   </template>
-                  <template v-else>بسبب المخزون المحدود والطلب المرتفع ⌛يمكننا فقط الاحتفاظ بطلبك لـ</template>
-                  <span style="font-weight:bold">{{ formattedTimeLeft }}</span>
-                  <template v-if="currentLanguage =='en'">minutes...</template>
+                  <template v-else
+                    >بسبب المخزون المحدود والطلب المرتفع ⌛يمكننا فقط الاحتفاظ
+                    بطلبك لـ</template
+                  >
+                  <span style="font-weight: bold">{{ formattedTimeLeft }}</span>
+                  <template v-if="currentLanguage == 'en'">minutes...</template>
                   <template v-else>دقيقة ...</template>
                   <!--  -->
                 </div>
                 <div class="modal-body">
-                  <p class="cart-empty" v-if="cartItemCount==0">{{currentLanguage =='en' ? 'Your cart is empty.':'السلة فارغة'}}</p>
+                  <p class="cart-empty" v-if="cartItemCount == 0">
+                    {{
+                      currentLanguage == "en"
+                        ? "Your cart is empty."
+                        : "السلة فارغة"
+                    }}
+                  </p>
                   <!-- -----------------------------pallalet cart----------------- -->
                   <div
                     class="row p-4 mt-2 border-bottom"
-                    v-for="(item,index) in cart "
+                    v-for="(item, index) in cart"
                     :key="item.id"
                   >
-
-                    <div class="col-md-sm-4 ml-1" >
+                    <div class="col-md-sm-4 ml-1">
                       <img :src="item.product.artistMinPalettes.img" />
                     </div>
                     <div class="col-md-sm-8 ml-3">
@@ -178,14 +227,15 @@
                       <!-- <h6  style="font-size:14px">{{ item.sizeTarget }}  {{item.sizeCm}} </h6> -->
                       <h6
                         class="move"
-                        style="margin-top:10px"
+                        style="margin-top: 10px"
                         v-if="currency == 'sar'"
-                      >{{item.product.M_price_sar}}.00 {{ $t("currency.sar") }}</h6>
-                      <h6
-                        class="move"
-                        style="margin-top:10px"
-                        v-else
-                      >{{ $t("currency.usd1") }} {{item.price}}.00</h6>
+                      >
+                        {{ item.product.M_price_sar }}.00
+                        {{ $t("currency.sar") }}
+                      </h6>
+                      <h6 class="move" style="margin-top: 10px" v-else>
+                        {{ $t("currency.usd1") }} {{ item.price }}.00
+                      </h6>
                       <!-- <v-form class="control-increse" style="width:50%;display:inline-block">
                         <v-text-field v-model=" item.quantity ">
                           <v-icon slot="append" @click="addToCart(item.product )">mdi-plus</v-icon>
@@ -200,27 +250,42 @@
                       <button
                         class="ml-3 btn delete"
                         @click.prevent="clearProductFromCart(index)"
-                      >{{ $t("message.remove") }}</button>
+                      >
+                        {{ $t("message.remove") }}
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer modal-cart-footer" v-if="cartItemCount>0">
+                <div
+                  class="modal-footer modal-cart-footer"
+                  v-if="cartItemCount > 0"
+                >
                   <router-link
-                    style="margin: auto;color: #fff;"
-                    :to="{ path: '/checkout', query: { myprop: this.pallatecart }}"
+                    style="margin: auto; color: #fff"
+                    :to="{
+                      path: '/checkout',
+                      query: { myprop: this.pallatecart },
+                    }"
                   >
                     <button
                       type="button"
                       class="btn checkout mb-6"
-                      style="font-size: 18px;"
+                      style="font-size: 18px"
                       v-if="currency == 'sar'"
                     >
-                      {{ $t("message.total") }} : {{cartTotalPriceSAR}} {{ $t("currency.sar") }}&nbsp;
+                      {{ $t("message.total") }} : {{ cartTotalPriceSAR }}
+                      {{ $t("currency.sar") }}&nbsp;
                       <strong>.</strong>
                       &nbsp; {{ $t("message.checkout") }}
                     </button>
-                    <button type="button" class="btn checkout mb-6" style="font-size: 18px;" v-else>
-                      {{ $t("message.total") }} : {{cartTotalPrice}} {{ $t("currency.usd1") }}&nbsp;
+                    <button
+                      type="button"
+                      class="btn checkout mb-6"
+                      style="font-size: 18px"
+                      v-else
+                    >
+                      {{ $t("message.total") }} : {{ cartTotalPrice }}
+                      {{ $t("currency.usd1") }}&nbsp;
                       <strong>.</strong>
                       &nbsp; {{ $t("message.checkout") }}
                     </button>
@@ -236,14 +301,12 @@
 </template>
 
 <script>
-
 import "jquery";
 import $ from "jquery";
 const TIME_LIMIT = 900;
 import LanguageDropdown from "./LanguageDropdown";
 import CurrencyChanger from "./CurrencyChanger";
 export default {
-
   computed: {
     cartTotalPrice() {
       return this.$store.getters.cartTotalPrice;
@@ -295,7 +358,7 @@ export default {
     },
     timeLeft() {
       return TIME_LIMIT - this.timePassed;
-    }
+    },
   },
   watch: {
     $route(nv, ov) {
@@ -335,10 +398,8 @@ export default {
       let navabr = document.getElementById("navbar");
       if (this.$route.name == "shop" && newWidth < 768) {
         navbar.style.backgroundColor = "transparent";
-        
       } else {
         navbar.style.backgroundColor = "#fff";
-        
       }
     },
     timer(newTimer, oldTimeer) {
@@ -355,7 +416,7 @@ export default {
         this.timePassed = 0;
         this.$store.commit("CHANGE_TIMER", false);
       }
-    }
+    },
   },
   components: { LanguageDropdown, CurrencyChanger },
   data() {
@@ -366,17 +427,17 @@ export default {
       cartcount: "",
       mycart: "",
       windowWidth: window.innerWidth,
-      minPalettes:"",
+      minPalettes: "",
       timePassed: 0,
-      timerInterval: null
+      timerInterval: null,
     };
   },
   mounted() {
-      axios
-        .get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
-        .then(response => {
-          this.minPalettes = response.data.minPalettes[0];
-        })
+    axios
+      .get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
+      .then((response) => {
+        this.minPalettes = response.data.minPalettes[0];
+      });
     //       let offsetContent = $('.content').offset().top;
     // let offsetFooter = $('.footer').offset().footer;
     // $(document).scroll(function() {
@@ -400,11 +461,11 @@ export default {
 
     axios
       .get("/api/getpallatecart")
-      .then(res => {
+      .then((res) => {
         this.cartcount = res.data.palettes.length;
         this.pallatecart = res.data.palettes;
       })
-      .catch(error => console.log(error.response.data));
+      .catch((error) => console.log(error.response.data));
     let self = this;
 
     // document.getElementById("navbarTogglerDemo03").onclick = function() {
@@ -419,7 +480,7 @@ export default {
       //     width = ;
       //   } else width = container.offsetHeight;
       //   console.log(width);
-      window.onscroll = function() {
+      window.onscroll = function () {
         // console.log(window.scrollY);
         if (window.innerWidth < 768) {
           if (window.scrollY < width) {
@@ -449,11 +510,10 @@ export default {
     },
     handleScroll(event) {
       if (this.$route.name == "shop")
-        setTimeout(function() {
+        setTimeout(function () {
           var footer = document.getElementById("footer");
           var addToCart = document.getElementById("addToCartsm");
           if (window.scrollY > 5000) addToCart.style.display = "none";
-
           else addToCart.style.display = "";
           addToCart.style.zIndex = "9999";
         }, 50);
@@ -462,7 +522,7 @@ export default {
       let mycarts = this.$refs.mycart;
       $(mycarts).css({
         left: "100%",
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
       });
       $(".modal-cart-footer").removeClass("animation", "i 0.5s ");
     },
@@ -509,13 +569,13 @@ export default {
     decreaseProduct(product) {
       this.$store.dispatch("decreaseProduct", {
         product,
-        quantity: 1
+        quantity: 1,
       });
     },
     addToCart(product) {
       this.$store.dispatch("addProductToCart", {
         product,
-        quantity: 1
+        quantity: 1,
       });
     },
     clearProductFromCart(index) {
@@ -537,23 +597,23 @@ export default {
     remove($id) {
       axios
         .post("/api/removefromcart?id=" + $id)
-        .then(res => {
+        .then((res) => {
           this.pallatecart.splice(res.data.paletteCart, 1);
           $("#count")[0].innerText--;
         })
-        .catch(error => console.log(error.response.data));
-    }
-  }
+        .catch((error) => console.log(error.response.data));
+    },
+  },
 };
 </script>
 
 <style>
-count{
-    background: white;
-    color:black;
+.count {
+  background: white;
+  color: black;
 }
-html{
-  overflow:inherit !important;
+html {
+  overflow: inherit !important;
   overflow-x: hidden !important;
 }
 .modal-timer {
@@ -566,8 +626,6 @@ html{
   height: 100vh;
   left: 100%;
   width: 100%;
-  display: none;
-
   display: block;
   transition: left 0.8s, backgroundColor 0.2s;
 }
@@ -577,17 +635,14 @@ html{
   vertical-align: middle;
   float: right;
   position: relative;
-
   transition: all 1s;
-  /* top: 67px; */
-  /* left: 15px; */
 }
 
 .modal-content {
   top: -15px !important;
   overflow: scroll;
   width: 436px;
-  min-height:11vh;
+  min-height: 11vh;
   border-radius: 0;
   left: 4%;
   background: #f2efeb;
@@ -598,9 +653,6 @@ html{
   }
 }
 @media (min-width: 991px) {
-  .modal-content {
-    /* min-height: 860px; */
-  }
   .navbar {
     background-color: transparent;
   }
@@ -616,7 +668,7 @@ html{
   flex: 1 1 auto;
   overflow: auto;
   padding: 1rem;
-        margin:10px 0px;
+  margin: 10px 0px;
 }
 /* .modal-body{
     position: absolute;
@@ -806,14 +858,14 @@ svg {
   .sm {
     display: block;
   }
-  .modal-body{
-      padding:25px !important;
+  .modal-body {
+    padding: 25px !important;
   }
-  .modal-header{
-      margin-top:0px;
+  .modal-header {
+    margin-top: 0px;
   }
-  .modal-dialog{
-      margin-right:0px !important;
+  .modal-dialog {
+    margin-right: 0px !important;
   }
 }
 
@@ -923,9 +975,9 @@ svg {
   display: none;
 }
 @media (max-width: 767px) {
-    .cart-empty{
-        width:100%;
-    }
+  .cart-empty {
+    width: 100%;
+  }
 
   .lang_sm {
     display: block;
@@ -1005,6 +1057,7 @@ svg {
 .navbar-light {
   background: #fff !important;
 }
+
 /* @media (min-width: 768px) {
   .navbar-dark {
     background: #fff !important;
@@ -1015,8 +1068,7 @@ svg {
     background: transparent !important;
   }
 } */
-.navbar-toggler {
-}
+
 .navbar-toggler {
   position: relative;
   display: none;
@@ -1038,6 +1090,9 @@ svg {
   opacity: 1;
   border-radius: 1px;
   background-color: white;
+}
+.navbar-light .navbar-toggler span {
+  background-color: black !important;
 }
 .navbar-toggler span:first-child {
   top: 0;
