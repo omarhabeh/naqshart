@@ -419,7 +419,6 @@
                           src="/images/mada.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
@@ -433,7 +432,6 @@
                           src="/images/stcpay.jpeg"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
@@ -447,7 +445,6 @@
                           src="/images/visa.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
@@ -461,7 +458,6 @@
                           src="/images/master.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
@@ -476,10 +472,10 @@
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
+                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>
@@ -1158,7 +1154,6 @@
                           src="/images/mada.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
@@ -1166,13 +1161,12 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
-                         @click="form.paymentMethod = 'STC_PAY'"
+                        @click="form.paymentMethod = 'STC_PAY'"
                       >
                         <img
                           src="/images/stcpay.jpeg"
                           alt=""
                           style="width: 100px"
-                         
                         />
                       </v-btn>
                     </div>
@@ -1186,7 +1180,6 @@
                           src="/images/visa.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
@@ -1200,7 +1193,6 @@
                           src="/images/master.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
@@ -1215,10 +1207,10 @@
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                          
                         />
                       </v-btn>
                     </div>
+                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>
@@ -1540,6 +1532,16 @@ export default {
     };
   },
   mounted() {
+    var wpwlOptions = {
+      paymentTarget: "_top",
+      applePay: {
+        displayName: "MyStore",
+        total: { label: "COMPANY, INC." },
+        merchantCapabilities: ["supports3DS"],
+        supportedNetworks: ["masterCard", "visa", "mada"],
+        supportedCountries: ["SA"],
+      },
+    };
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
