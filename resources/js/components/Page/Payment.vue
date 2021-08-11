@@ -413,12 +413,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'MADA'"
                       >
                         <img
                           src="/images/mada.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'MADA'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -426,12 +427,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'STC_PAY'"
                       >
                         <img
                           src="/images/stcpay.jpeg"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'STC_PAY'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -439,12 +441,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'VISA'"
                       >
                         <img
                           src="/images/visa.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'VISA'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -452,12 +455,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'MASTER'"
                       >
                         <img
                           src="/images/master.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'MASTER'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -466,12 +470,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'APPLEPAY'"
                       >
                         <img
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'APPLEPAY'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -1147,12 +1152,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'MADA'"
                       >
                         <img
                           src="/images/mada.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'MADA'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -1160,12 +1166,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                         @click="form.paymentMethod = 'STC_PAY'"
                       >
                         <img
                           src="/images/stcpay.jpeg"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'STC_PAY'"
+                         
                         />
                       </v-btn>
                     </div>
@@ -1173,12 +1180,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'VISA'"
                       >
                         <img
                           src="/images/visa.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'VISA'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -1186,12 +1194,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'MASTER'"
                       >
                         <img
                           src="/images/master.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'MASTER'"
+                          
                         />
                       </v-btn>
                     </div>
@@ -1200,12 +1209,13 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
+                        @click="form.paymentMethod = 'APPLEPAY'"
                       >
                         <img
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                          @click="form.paymentMethod = 'APPLEPAY'"
+                          
                         />
                       </v-btn>
                     </div>
