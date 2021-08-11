@@ -166,7 +166,7 @@
             <div class="modal-content" style="display: contents">
               <div class="moda-body">
                 <form
-                  :action="`/api/payment/${id}/APPLEPAY`"
+                  :action="`/api/payment/${id}/${form.paymentMethod}`"
                   class="paymentWidgets"
                   :data-brands="form.paymentMethod"
                 ></form>
@@ -875,7 +875,7 @@
             <div class="modal-content" style="display: contents">
               <div class="moda-body">
                 <form
-                  :action="'/api/payment/' + id + '/APPLEPAY'"
+                  :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
                   :data-brands="form.paymentMethod"
                 ></form>
@@ -1503,7 +1503,7 @@ export default {
         postcode: null,
         items: [],
         promocode: "",
-        paymentMethod:"VISA",
+        paymentMethod: "VISA",
         shippment_res: 0,
       },
       discount: "",
@@ -1530,16 +1530,6 @@ export default {
     };
   },
   mounted() {
-    var wpwlOptions = {
-        paymentTarget:"_top",
-        applePay: {
-            displayName: "MyStore",
-            total: { label: "COMPANY, INC." },
-            merchantCapabilities: ["supports3DS"],
-            supportedNetworks: ["masterCard", "visa", "mada"],
-            supportedCountries: ["SA"]
-        }
-    }
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
@@ -1629,12 +1619,9 @@ export default {
     send() {
       this.loading = true;
       this.form.shippment_res = parseFloat(this.Shipping_res);
-      console.log(this.form.paymentMethod);
-      console.log('asd');
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
-            
           $("#exampleModalCenter").modal("show");
           this.formview = data.data.orderid;
           this.id = data.data.orderid;

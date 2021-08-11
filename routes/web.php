@@ -30,10 +30,10 @@ Route::get('/trackemail',function(){
     $order = Order::find(211);
     $palettes = OrderPalette::where('order_id',211)->get()->first();
     $palette = Palette::find($palettes->palatte_id);
-    Mail::to($order->email)->send(new track($order,'assaas',$palette));
+    Mail::to('l6h2010@hotmail.com')->send(new track($order,'assaas',$palette));
 });
 Route::get('/test',function(){
-    return view('test');
+    return new joinusNotification('omar');
 });
 Route::get('/export_excel/excel', 'InvitationController@excel')->name('export_excel.excel');
 Route::get('/aramexcode/{id}/{code}',function($id,$code){

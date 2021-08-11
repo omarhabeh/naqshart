@@ -162,7 +162,7 @@
                                     sure to complete the order ?')"]) !!}
                                 </div> --}}
                                 <div class='btn-group'>
-                                    <button class="btn btn-danger btn-xs" onclick="return clicked({!!$appliedartist->id!!})"><i class="glyphicon glyphicon-saved"></i></button>
+                                    <button class="btn btn-danger btn-xs" onclick="return clicked({!!$appliedartist->id!!})" type="submit"><i class="glyphicon glyphicon-saved"></i></button>
                                 </div>
                                 @endif
                                 {!! Form::close() !!}
@@ -198,7 +198,7 @@
             return true;
         }
     });
-        return false;
+        return true;
     }
 </script>
 @endsection

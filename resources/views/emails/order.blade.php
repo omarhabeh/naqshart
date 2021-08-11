@@ -1,18 +1,16 @@
 @component('mail::message')
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet"> 
 <style>
-    @font-face {
-    font-family: "tajawal-regular";
-    src: url("/fonts/Tajawal-Regular.ttf");
-    font-style: normal;
-    font-weight: 500;
-    font-size: 17px;
-}
+
 img{
     width:300px;
 }
 *{
-    font-family: 'tajawal-regular', sans-serif !important;
+    font-family: 'Tajawal', sans-serif !important;
     font-size: 20px;
+    direction: ltr;
 }
 .footer *,.header{
     text-align: center !important;
@@ -68,11 +66,11 @@ h1{
     padding-top: 0px;
 }
 </style>
-<link rel="stylesheet" href="//cdn.shopify.com/app/services/30004362/assets/76713951280/checkout_stylesheet/v2-ltr-edge-c3b6d318409215f8f96ba35f2a7373c0-176600" media="all" />
+<link rel="stylesheet" href="https://cdn.shopify.com/app/services/30004362/assets/76713951280/checkout_stylesheet/v2-ltr-edge-c3b6d318409215f8f96ba35f2a7373c0-176600" media="all" />
 
-![Some option text][logo]
+![logo][logo]
 
-[logo]: {{asset('/images/Logo_new.png')}} "Logo"
+[logo]: {{asset('https://naqshart.com/images/Logo_grey.png')}} "Logo"
 <small style="width: 25%;
 margin-top: -60px;">Order #{{$order->id}}</small>
 

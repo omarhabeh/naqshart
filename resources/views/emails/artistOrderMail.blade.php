@@ -1,19 +1,16 @@
 @component('mail::message')
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
-    @font-face {
-    font-family: "tajawal-regular";
-    src: url("https://naqshart.com/fonts/Tajawal-Regular.ttf");
-    font-style: normal;
-    font-weight: 500;
-    font-size: 17px;
-}
 img{
     width:150px;
 }
 *{
-    font-family: 'tajawal-regular', sans-serif !important;
+    font-family: 'Tajawal', sans-serif !important;
     text-align: right !important;
     font-size: 20px;
+    direction: rtl;
 }
 .footer *,.header{
     text-align: center !important;
@@ -40,9 +37,10 @@ hr{
     color:#d3d3d3;
 }
 </style>
-![Some option text][logo]
 
-[logo]: {{asset('/images/Logo_grey.png')}} "Logo"
+![logo][logo]
+
+[logo]: {{asset('https://naqshart.com/images/Logo_grey.png')}} "Logo"
 
 <h1> !تم طلب إحدى أعمالك الفنية </h1>
 
