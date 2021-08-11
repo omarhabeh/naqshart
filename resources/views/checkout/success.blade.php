@@ -93,7 +93,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
     <header class="banner" data-header role="banner">
       <div class="wrap">
 
-  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--large" src="/images/logo_new.png" /></a>
+  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--large" src="https://naqshart.com/images/Logo_new.png" /></a>
 
 <h1 class="visually-hidden">
   Thank you for your purchase!
@@ -136,7 +136,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
         <div class="main">
           <header class="main__header" role="banner">
 
-  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--large" src="/images/logo_new.png" /></a>
+  <a class="logo logo--left" href="/"><img alt="Naqsh art" class="logo__image logo__image--large" src="https://naqshart.com/images/Logo_new.png" /></a>
 
 <h1 class="visually-hidden">
   Thank you for your purchase!
@@ -279,7 +279,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
         <aside class="sidebar" role="complementary">
           <div class="sidebar__header">
 
-  <a class="logo logo--left" href="/"><img alt="Ecstase" class="logo__image logo__image--large" src="/images/logo_new.png" /></a>
+  <a class="logo logo--left" href="/"><img alt="Ecstase" class="logo__image logo__image--large" src="https://naqshart.com/images/Logo_new.png" /></a>
 
 <h1 class="visually-hidden">
   Thank you for your purchase!

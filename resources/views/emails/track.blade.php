@@ -80,7 +80,7 @@ h1{
 
 ![logo][logo]
 
-[logo]: {{asset('https://naqshart.com/images/Logo_grey.png')}} "Logo"
+[logo]: {{asset('https://naqshart.com/images/Logo_new.png')}} "Logo"
 <small style="width: 25%;margin-top: -60px;" class="order">ORDER #{{$order->id}}</small>
 <h1 style="color: black">Your art piece is on the way! </h1>
 <h2>your tracking code is {{$ordernum}}</h2>
@@ -95,7 +95,7 @@ h1{
               <td class="product__image">
                 <div class="product-thumbnail ">
       <div class="product-thumbnail__wrapper">
-        <img  class="product-thumbnail__image" src="https://naqshart.com/{{$palette->img}}" />
+        <img  class="product-thumbnail__image" src="https://naqshart.com/{{$palette->images[0]->img}}" />
       </div>
       </div>
               </td>

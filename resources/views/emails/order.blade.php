@@ -2,6 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="https://cdn.shopify.com/app/services/30004362/assets/76713951280/checkout_stylesheet/v2-ltr-edge-c3b6d318409215f8f96ba35f2a7373c0-176600" media="all" />
 <style>
 
 img{
@@ -66,11 +67,11 @@ h1{
     padding-top: 0px;
 }
 </style>
-<link rel="stylesheet" href="https://cdn.shopify.com/app/services/30004362/assets/76713951280/checkout_stylesheet/v2-ltr-edge-c3b6d318409215f8f96ba35f2a7373c0-176600" media="all" />
+
 
 ![logo][logo]
 
-[logo]: {{asset('https://naqshart.com/images/Logo_grey.png')}} "Logo"
+[logo]: {{asset('https://naqshart.com/images/Logo_new.png')}} "Logo"
 <small style="width: 25%;
 margin-top: -60px;">Order #{{$order->id}}</small>
 
