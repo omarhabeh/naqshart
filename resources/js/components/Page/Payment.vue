@@ -1199,7 +1199,7 @@
 
                     <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
-                        type="sumbit"
+                        
                         style="border: none !important; background: none"
                         @click="form.paymentMethod = 'APPLEPAY'"
                       >
@@ -1210,6 +1210,7 @@
                         />
                       </v-btn>
                     </div>
+                    <v-btn type="submit">Submit</v-btn>
                     <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
@@ -1931,8 +1932,6 @@ export default {
       margin-top: 0;
       float: left;
     }
-    .cbox2 .section__content {
-    }
   }
   @media (min-width: 750px) {
     .cbox2 {
@@ -2022,7 +2021,7 @@ export default {
     height: 24px;
     -webkit-transition: opacity 0.5s cubic-bezier(0.3, 0, 0, 1);
     transition: opacity 0.5s cubic-bezier(0.3, 0, 0, 1);
-    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   .payment-icon--visa {
     background-image: url(//cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg),
