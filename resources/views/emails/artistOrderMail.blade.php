@@ -11,11 +11,10 @@ img{
     font-family: 'Tajawal', sans-serif !important;
     text-align: right !important;
     font-size: 20px;
-    direction: rtl;
 }
 .footer *,.header{
     text-align: center !important;
-    font-size: 15px !important;
+    font-size: 12px !important;
 }
 .product-thumbnail__image{
     width:100px;
@@ -27,8 +26,18 @@ img{
     display: grid;
     padding-left: 5px;
 }
+.product__description{
+    width: 40%;
+    margin-top:5%;
+}
+.product__description__name{
+    color: black;
+    margin-bottom: -5px;
+}
 .product__image{
     display: block;
+    float: left;
+    width: 100px
 }
 .order-summary__small-text{
     font-size: 15px;
@@ -37,16 +46,32 @@ img{
 hr{
     color:#d3d3d3;
 }
+p{
+    direction:rtl;
+}
+h1{
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+.product-table{
+    margin: 30px 8px !important;
+}
+.header {
+    display: none !important;
+}
+.product__price *{
+    font-size:17px;
+}
 </style>
 
 ![logo][logo]
 
 [logo]: {{asset('https://naqshart.com/images/Logo_new.png')}} "Logo"
 
-<h1> !تم طلب إحدى أعمالك الفنية </h1>
-
-تهانينا {{$palette->tag}}!
-تم طلب أحد أعمالك الفنية ,واصل فنك وابداعك
+<h1>تم طلب إحدى أعمالك الفنية </h1>
+<p>
+    تهانينا {{$palette->tag}}! <br>
+    تم طلب أحد أعمالك الفنية ,واصل فنك وابداعك</p>
 
 <hr>
 <table class="product-table" style="width:100%;">

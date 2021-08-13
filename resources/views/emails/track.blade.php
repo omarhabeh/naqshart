@@ -21,7 +21,7 @@ img{
 }
 .footer *,.header{
     text-align: center !important;
-    font-size: 15px !important;
+    font-size: 12px !important;
 }
 .product-thumbnail__image{
     width:100px;
@@ -74,6 +74,16 @@ h1{
 }
 .total-line-table__tbody + .total-line-table__tbody .total-line:first-child th, .total-line-table__tbody + .total-line-table__tbody .total-line:first-child td, .total-line-table__tbody + .total-line-table__footer .total-line:first-child th, .total-line-table__tbody + .total-line-table__footer .total-line:first-child td{
     padding-top: 0px;
+}
+h1{
+    font-size: 25px;
+margin-bottom: 15px;
+}
+.product-table{
+    margin: 30px 8px !important;
+}
+.header{
+    display: none !important;
 }
 </style>
 

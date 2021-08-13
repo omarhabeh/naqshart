@@ -15,7 +15,7 @@ img{
 }
 .footer *,.header{
     text-align: center !important;
-    font-size: 15px !important;
+    font-size: 12px !important;
 }
 .product-thumbnail__image{
     width:100px;
@@ -66,19 +66,34 @@ h1{
 .total-line-table__tbody + .total-line-table__tbody .total-line:first-child th, .total-line-table__tbody + .total-line-table__tbody .total-line:first-child td, .total-line-table__tbody + .total-line-table__footer .total-line:first-child th, .total-line-table__tbody + .total-line-table__footer .total-line:first-child td{
     padding-top: 0px;
 }
+h1{
+    font-size: 25px;
+margin-bottom: 15px;
+}
+.product-table{
+    margin: 30px 8px !important;
+}
+.header {
+    display: none !important;
+}
+p{
+    text-align: left !important;
+}
 </style>
-
 
 ![logo][logo]
 
 [logo]: {{asset('https://naqshart.com/images/Logo_new.png')}} "Logo"
+
 <small style="width: 25%;
 margin-top: -60px;">Order #{{$order->id}}</small>
 
 <h1 style="color: black"> Thank you for your order! </h1>
-Hi  {{$order->fname}},
+<p>
+    Hi  {{$order->fname}},
 We hope you enjoyed the digital gallery; We will send you tracking information when
 the order ships, you can find your order information bellow
+</p>
     <hr>
     <h2 style="color: black">Order Summary</h2>
     <table class="product-table" style="width:100%;">
@@ -145,15 +160,10 @@ the order ships, you can find your order information bellow
       </table>
     <hr>
     <div class="content-box">
-        <div class="content-box__row content-box__row--no-border">
-            <h2>Customer information</h2>
-        </div>
 <div class="content-box__row">
     <div class="section__content">
         <div class="section__content__column section__content__column--half">
         <div class="text-container">
-            <h3 class="heading-3">Contact information</h3>
-            <p><bdo dir="ltr">{{$order->email}}</bdo></p>
                 <h3 class="heading-3">Shipping address</h3>
                 <address class="address">{{$order->fname}} {{$order->lname}}<br />{{$order->address}}<br />{{$order->city}} {{$order->postcode}}<br />{{$order->country}}<br />{{$order->phonecode}}{{$order->phone}}</address>
                 <h3 class="heading-3">Shipping method</h3>
@@ -165,13 +175,12 @@ the order ships, you can find your order information bellow
                         <h3 class="heading-3">Payment method</h3>
                         <li class="payment-method-list__item">
                             @if ($order->payment_method == "VISA")
-                            <i class="payment-icon payment-icon--visa payment-method-list__item-icon">
+                            <i class="payment-icon payment-icon--visa payment-method-list__item-icon"></i> 
                             @endif
                             @if ($order->payment_method == "MASTER")
-                            <i class="payment-icon payment-icon--master payment-method-list__item-icon">
+                            <i class="payment-icon payment-icon--master payment-method-list__item-icon"></i> 
                             @endif
-              <span class="visually-hidden">{{$order->payment_method}}</span>
-        </i>    <span class="payment-method-list__item__info">ending with {{$data->card->last4Digits}}</span>
+          <span class="payment-method-list__item__info">ending with {{$data->card->last4Digits}}</span>
             <span class="payment-method-list__item__amount emphasis"> - {{$data->currency}} {{$data->amount}}</span>
         </li>
             </ul>

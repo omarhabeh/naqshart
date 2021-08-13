@@ -475,7 +475,6 @@
                         />
                       </v-btn>
                     </div>
-                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>
@@ -1199,7 +1198,7 @@
 
                     <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
-                        
+                        type="submit"
                         style="border: none !important; background: none"
                         @click="form.paymentMethod = 'APPLEPAY'"
                       >
@@ -1210,8 +1209,6 @@
                         />
                       </v-btn>
                     </div>
-                    <v-btn type="submit">Submit</v-btn>
-                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>

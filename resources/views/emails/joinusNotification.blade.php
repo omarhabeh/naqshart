@@ -16,7 +16,7 @@ img{
 }
 .footer *,.header{
     text-align: center !important;
-    font-size: 15px !important;
+    font-size: 12px !important;
 }
 .product-thumbnail__image{
     width:100px;
@@ -39,7 +39,11 @@ hr{
     color:#d3d3d3;
 }
 h1{
-    font-size:30px;
+    font-size:25px;
+    margin-bottom: 15px;
+}
+.header {
+    display: none !important;
 }
 </style>
 
@@ -48,10 +52,12 @@ h1{
 [logo]: {{asset('https://naqshart.com/images/Logo_new.png')}} "Logo"
 
 <h1> تم استلام طلب الانضمام! </h1>
+<p>
 مرحباً {{$name}},
 تم استلام طلب انضمامك لعائلة نقش  .
 ونود إعلامك بإضافتك لقائمة الدعوات لورش العمل والمناسبات التي تنظمها نقش.
 واصل فنك وابداعك
+</p>
     <hr>
     <div class="footer">
         <span>إذا كانت لديك أي أسئلة، يرجى الرد على هذا البريد الإلكتروني أو التواصل معنا على <a href="mailto:hello@naqshart.com">hello@naqshart.com</a>

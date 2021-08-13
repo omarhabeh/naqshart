@@ -18,9 +18,12 @@ export default {
 }
 </script>
 <style scoped>
+@media only screen and (min-width: 1000px) {
 .col{
     padding: 130px 140px;
 }
+}
+
 h1{
     font-size: 150px;
 }
