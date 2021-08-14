@@ -156,13 +156,16 @@
                                 {!! Form::open(['route' => ['orders.complete', $appliedartist->id], 'method' =>
                                 'put']) !!}
                                 @if ($appliedartist->paymentstatus == 'Processing')
-                                {{-- <div class='btn-group'>
-                                    {!! Form::button('<i class="glyphicon glyphicon-saved"></i>', ['type' =>
-                                    'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you
-                                    sure to complete the order ?')"]) !!}
-                                </div> --}}
                                 <div class='btn-group'>
                                     <button class="btn btn-danger btn-xs" onclick="return clicked({!!$appliedartist->id!!})" type="submit"><i class="glyphicon glyphicon-saved"></i></button>
+                                </div>
+                                @endif
+                                {!! Form::close() !!}
+                                {!! Form::open(['route' => ['orders.finished', $appliedartist->id], 'method' =>
+                                'put']) !!}
+                                @if ($appliedartist->paymentstatus == 'delivering')
+                                <div class='btn-group'>
+                                    <button class="btn btn-danger btn-xs" onclick="return popup()" type="submit"><i class="glyphicon glyphicon-saved"></i></button>
                                 </div>
                                 @endif
                                 {!! Form::close() !!}
@@ -199,6 +202,12 @@
         }
     });
         return true;
+    }
+    function popup(){
+        if (confirm("Mark this order as  completed?")) {
+        return true; 
+    }
+        return false;
     }
 </script>
 @endsection

@@ -48,6 +48,7 @@ Route::group(['middleware' => 'isadmin'], function () {
     Route::get('daily', 'OrderController@daily');
     Route::put('orders/{order}', 'OrderController@update')->name('orders.refund');
     Route::put('orders/complete/{order}', 'OrderController@complete')->name('orders.complete');
+    Route::put('orders/finished/{order}', 'OrderController@finished')->name('orders.finished');
     Route::get('appliedorders/{id?}', 'OrderController@orderindex')->name('appliedorder.show');
 
     Route::get('addpaletteimages/{palette?}/create', 'PaletteimageController@create')->name("addimgpalette");

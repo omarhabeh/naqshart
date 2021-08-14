@@ -97,6 +97,12 @@ class OrderController extends Controller
     public function complete(Request $request, Order $order)
     {
         if ($order->paymentstatus == 'Processing')
+            $order->update(['paymentstatus' => 'delivering']);
+        return \back();
+    }
+    public function finished(Request $request, Order $order)
+    {
+        if ($order->paymentstatus == 'delivering')
             $order->update(['paymentstatus' => 'Completed']);
         return \back();
     }
