@@ -88,15 +88,12 @@ export default {
     axios
       .get("/api/counter")
       .then((result) => {
-        if (result.data.count) {
+        
           let rand = Math.floor(Math.random() * (49 - 42 + 1)) + 42;
           this.numbers = result.data.count + rand;
           //actual visitors + 50 rang(-3,+3)
-        }
+        
       })
-      .catch((err) => {
-        console.log();
-      });
   },
 };
 </script>

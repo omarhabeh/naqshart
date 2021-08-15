@@ -1503,7 +1503,7 @@ export default {
         postcode: null,
         items: [],
         promocode: "",
-        paymentMethod: "VISA",
+        paymentMethod: "APPLEPAY",
         shippment_res: 0,
       },
       discount: "",

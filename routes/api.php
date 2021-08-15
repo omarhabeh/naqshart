@@ -19,7 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get("/counter", function () {
-    return response()->json(['count' => Cache::get("visitors-ips")->count()]);
+    if(Cache::get("visitors-ips")){
+        return response()->json(['count' => Cache::get("visitors-ips")->count()]);
+    }
+    else{
+        return response()->json(['count' => rand(0,10)]);
+    }
+    
 });
 
 Route::middleware('api')->group(function () {
