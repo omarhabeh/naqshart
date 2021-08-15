@@ -100,9 +100,10 @@ export default {
   text-align: center;
 }
 .product-detail-text .title {
-  font-size: 40px;
+  font-size: 40px !important;
   margin: 0 0 20px;
   font-weight: bold;
+  font-family: 'tajawal-regular'!important;
 }
 .product-detail-text .text {
   font-size: 22px;
