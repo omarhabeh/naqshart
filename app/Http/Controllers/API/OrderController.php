@@ -122,7 +122,7 @@ class OrderController extends Controller
         $request['totalprice'] = $totalprice['totalprice'] + $this->shippment_price;
         $request['discount'] = $totalprice['discount_amount'];
         $request['shippment'] = $request->shippment_res;
-        $checkoutid =  $this->get_checkout_id(number_format($request['totalprice'], 2), $this->methods['APPLEPAY'], $request);
+        $checkoutid =  $this->get_checkout_id(number_format($request['totalprice'], 2), $this->methods[$request->paymentMethod], $request);
         if ($checkoutid) {
             $request['paymentid'] = $checkoutid->id;
 
@@ -136,7 +136,7 @@ class OrderController extends Controller
 
         $order = Order::create($request->only(['promocode', 'email', 'fname', 'lname', 'address', 'apartment', 'city', 'postcode', 'goverment', 'country', 'goverment', 'country', 'phone', 'phonecode', 'paymentid', 'paymentstatus', 'discount', 'totalprice', 'payment-transaction-return']));
         $order->update([
-            'payment_method' => 'APPLEPAY'
+            'payment_method' => $request->paymentMethod
         ]);
         $retitems = $this->save_order_items($order, $totalprice['baletteitems']);
         $view = view('ajax.form')->with(['checkoutid' => $checkoutid->id, 'orderid' => $order->id])
@@ -1205,7 +1205,8 @@ class OrderController extends Controller
                     {
                         "name": "Zimbabwe",
                         "code": "ZW"
-                    }]';
+                    }
+]';
         $countries = json_decode($json);
         return collect($countries)->where('name', $country)->pluck('code')->first();
     }
