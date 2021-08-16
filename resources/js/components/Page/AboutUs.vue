@@ -316,27 +316,27 @@ export default {
     if (this.$route.query.mydata == "artist") {
       this.artist = true;
       this.mission = false;
-       var el = this.$el.getElementsByClassName("artists ")[0];
-  el.scrollIntoView();
+//        var el = document.getElementsByClassName("artists")[0];
+//   el.scrollIntoView();
     } else if (this.$route.query.mydata == "contact") {
       this.support = true;
       this.mission = false;
-       var el = this.$el.getElementsByClassName("support ")[0];
-  el.scrollIntoView();
+//        var el = document.getElementsByClassName("support")[0];
+//   el.scrollIntoView();
     } 
     else if (this.$route.query.mydata == "join") {
       this.mission = false;
       this.joinus = true;
-       var el = this.$el.getElementsByClassName("joinus")[0];
-  el.scrollIntoView();
+//        var el = document.getElementsByClassName("joinus")[0];
+//   el.scrollIntoView();
     }
     else if (this.$route.query.mydata == "mission") {
       this.mission = true;
       this.joinus = false;
       this.support = false;
         this.artists = false;
-        var el = this.$el.getElementByID("mission");
-  el.scrollIntoView();
+//         var el = document.getElementByID("mission");
+//   el.scrollIntoView();
       
     }
     else{
@@ -344,8 +344,9 @@ export default {
         this.joinus = false;
         this.support = false;
         this.artists = false;
-        var el = this.$el.getElementByID("mission ");
-  el.scrollIntoView();}
+//         var el = document.getElementByID("mission ");
+//   el.scrollIntoView();
+  }
     axios
       .get("/api/get-about-content")
       .then((response) => {
@@ -397,39 +398,39 @@ export default {
         this.mission = false;
         this.support = false;
         this.joinus = false;
-         var el = this.$el.getElementsByClassName("artists ")[0];
-  el.scrollIntoView();
+//          var el = document.getElementsByClassName("artists ")[0];
+//   el.scrollIntoView();
       } else if (this.$route.query.mydata == "contact") {
         this.support = true;
         this.mission = false;
         this.artist = false;
         this.joinus = false;
-        var el = this.$el.getElementsByClassName("support")[0];
-  el.scrollIntoView();
+//         var el = document.getElementsByClassName("support")[0];
+//   el.scrollIntoView();
       } 
       else if (this.$route.query.mydata == "join") {
         this.mission = false;
         this.support = false;
         this.artist = false;
         this.joinus = true;
-        var el = this.$el.getElementsByClassName("joinus")[0];
-  el.scrollIntoView();
+//         var el = document.getElementsByClassName("joinus")[0];
+//   el.scrollIntoView();
       } 
       else if (this.$route.query.mydata == "mission") {
         this.mission = true;
         this.joinus = false;
         this.support = false;
         this.artist = false;
-        var el = this.$el.getElementByID("mission");
-  el.scrollIntoView();
+//         var el = document.getElementByID("mission");
+//   el.scrollIntoView();
       } 
       else {
         this.mission = true;
         this.joinus = false;
         this.support = false;
         this.artist = false;
-        var el = this.$el.getElementByID("mission");
-  el.scrollIntoView();
+//         var el = document.getElementByID("mission");
+//   el.scrollIntoView();
       }
     },
   },
