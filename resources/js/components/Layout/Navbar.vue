@@ -45,7 +45,7 @@
           </router-link>
         </li>
         <li class="nav-item shop shop_sm">
-          <router-link to="/shop?mydata=1">
+          <router-link :to="'/shop?mydata='+onePallete">
             <a class="nav-link">Gallery</a>
           </router-link>
         </li>
@@ -430,6 +430,7 @@ export default {
       minPalettes: "",
       timePassed: 0,
       timerInterval: null,
+      onePallete: 1,
     };
   },
   mounted() {
@@ -438,6 +439,12 @@ export default {
       .then((response) => {
         this.minPalettes = response.data.minPalettes[0];
       });
+
+    axios.get("/api/all-palettes").then((response) => {
+      this.onePallete = response.data.palettes[0].id;
+      console.log(response.data.palettes[0].id);
+    });
+
     //       let offsetContent = $('.content').offset().top;
     // let offsetFooter = $('.footer').offset().footer;
     // $(document).scroll(function() {

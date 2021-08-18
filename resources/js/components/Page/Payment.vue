@@ -461,7 +461,7 @@
                         />
                       </v-btn>
                     </div>
- <!-- <div class="logo_payment apple col-lg-2 col-md-6">
+ <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
@@ -473,7 +473,8 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div> -->
+                    </div>
+                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>
@@ -1208,8 +1209,8 @@
                         />
                       </v-btn>
                     </div>
-<form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"  @click="form.paymentMethod = 'APPLEPAY'"></form>
-                    <!-- <div class="logo_payment apple col-lg-2 col-md-6">
+<form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY" ></form>
+                    <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="submit"
                         style="border: none !important; background: none"
@@ -1221,7 +1222,7 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div> -->
+                    </div>
                   </v-row>
                 </div>
               </div>
@@ -1671,7 +1672,17 @@ export default {
 </script>
 
 <style scoped>
-.wpwl-apple-pay-button{-webkit-appearance: -apple-pay-button !important;}
+/* .wpwl-apple-pay-button{-webkit-appearance: -apple-pay-button !important;} */
+.wpwl-form {
+max-width:100% !important;
+}
+.wpwl-apple-pay-button {
+font-size: 16px !important;
+display: block !important;
+width: 100% !important;
+-webkit-appearance: -apple-pay-button;
+}
+
 .form {
   width: 87%;
   margin: auto;
