@@ -461,7 +461,7 @@
                         />
                       </v-btn>
                     </div>
-                    <div class="logo_payment apple col-lg-2 col-md-6">
+                    <!-- <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
@@ -473,8 +473,8 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div>
-                    <!-- <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form> -->
+                    </div> -->
+                    <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY"></form>
                   </v-row>
                 </div>
               </div>
@@ -502,19 +502,6 @@
           </v-container>
         </v-form>
         <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
-        <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY" @submit.prevent="send()">
-         <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'APPLEPAY'"
-                      >
-                        <img
-                          src="/images/applepay.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-        </form>
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
         <div class="discount_section mt-5">
@@ -1195,7 +1182,7 @@
                         />
                       </v-btn>
                     </div>
-                    <div class="logo_payment apple col-lg-2 col-md-6">
+                    <!-- <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="submit"
                         style="border: none !important; background: none"
@@ -1207,7 +1194,7 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div>
+                    </div> -->
                   </v-row>
                 </div>
               </div>
