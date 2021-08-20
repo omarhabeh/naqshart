@@ -502,7 +502,7 @@
           </v-container>
         </v-form>
         <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
-        <!-- <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY"  @click="form.paymentMethod = 'APPLEPAY'" @submit.prevent="send()">
+        <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY" @submit.prevent="send()">
          <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
@@ -514,7 +514,7 @@
                           style="width: 100px"
                         />
                       </v-btn>
-        </form> -->
+        </form>
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
         <div class="discount_section mt-5">
