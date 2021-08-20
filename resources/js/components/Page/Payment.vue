@@ -168,7 +168,7 @@
                 <form
                   :action="`/api/payment/${id}/${form.paymentMethod}`"
                   class="paymentWidgets"
-                  data-brands="APPLEPAY"
+                  :data-brands="form.paymentMethod"
                 ></form>
               </div>
             </div>
@@ -461,7 +461,7 @@
                         />
                       </v-btn>
                     </div>
- <!-- <div class="logo_payment apple col-lg-2 col-md-6">
+ <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
@@ -473,7 +473,7 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div> -->
+                    </div>
                     <!-- <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form> -->
                   </v-row>
                 </div>
@@ -891,7 +891,7 @@
                 <form
                   :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
-                  data-brands="APPLEPAY"
+                  :data-brands="form.paymentMethod"
                 ></form>
               </div>
             </div>
@@ -1209,7 +1209,7 @@
                         />
                       </v-btn>
                     </div>
-                    <!-- <div class="logo_payment apple col-lg-2 col-md-6">
+                    <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="submit"
                         style="border: none !important; background: none"
@@ -1221,7 +1221,7 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div> -->
+                    </div>
                   </v-row>
                 </div>
               </div>
