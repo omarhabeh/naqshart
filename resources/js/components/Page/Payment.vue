@@ -461,7 +461,7 @@
                         />
                       </v-btn>
                     </div>
- <div class="logo_payment apple col-lg-2 col-md-6">
+                    <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
@@ -479,20 +479,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- <v-btn
-              color="#197bbd"
-              style="
-                float: right;
-                margin: 20px 0;
-                height: 10px;
-                font-weight: 100;
-                text-transform: none;
-              "
-              class="check_btn"
-              type="submit"
-              >Continue to payment</v-btn
-            > -->
             <v-btn
               color="#197bbd"
               style="
@@ -528,7 +514,6 @@
                         />
                       </v-btn>
         </form> -->
-
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
         <div class="discount_section mt-5">
@@ -1671,7 +1656,9 @@ export default {
 </script>
 
 <style scoped>
-.wpwl-apple-pay-button{-webkit-appearance: -apple-pay-button !important;}
+.wpwl-apple-pay-button {
+  -webkit-appearance: -apple-pay-button !important;
+}
 .form {
   width: 87%;
   margin: auto;
