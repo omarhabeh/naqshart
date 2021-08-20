@@ -168,7 +168,7 @@
                 <form
                   :action="`/api/payment/${id}/${form.paymentMethod}`"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                  data-brands="APPLEPAY"
                 ></form>
               </div>
             </div>
@@ -461,7 +461,7 @@
                         />
                       </v-btn>
                     </div>
- <div class="logo_payment apple col-lg-2 col-md-6">
+ <!-- <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
@@ -473,8 +473,8 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div>
-                    <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
+                    </div> -->
+                    <!-- <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form> -->
                   </v-row>
                 </div>
               </div>
@@ -515,7 +515,7 @@
             /> -->
           </v-container>
         </v-form>
-        <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY"  @click="form.paymentMethod = 'APPLEPAY'" @submit.prevent="send()">
+        <!-- <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY"  @click="form.paymentMethod = 'APPLEPAY'" @submit.prevent="send()">
          <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
@@ -527,7 +527,7 @@
                           style="width: 100px"
                         />
                       </v-btn>
-        </form>
+        </form> -->
 
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
@@ -891,7 +891,7 @@
                 <form
                   :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                  data-brands="APPLEPAY"
                 ></form>
               </div>
             </div>
@@ -1209,8 +1209,7 @@
                         />
                       </v-btn>
                     </div>
-<form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY" ></form>
-                    <div class="logo_payment apple col-lg-2 col-md-6">
+                    <!-- <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="submit"
                         style="border: none !important; background: none"
@@ -1222,7 +1221,7 @@
                           style="width: 100px"
                         />
                       </v-btn>
-                    </div>
+                    </div> -->
                   </v-row>
                 </div>
               </div>
@@ -1672,17 +1671,7 @@ export default {
 </script>
 
 <style scoped>
-/* .wpwl-apple-pay-button{-webkit-appearance: -apple-pay-button !important;} */
-.wpwl-form {
-max-width:100% !important;
-}
-.wpwl-apple-pay-button {
-font-size: 16px !important;
-display: block !important;
-width: 100% !important;
--webkit-appearance: -apple-pay-button;
-}
-
+.wpwl-apple-pay-button{-webkit-appearance: -apple-pay-button !important;}
 .form {
   width: 87%;
   margin: auto;
