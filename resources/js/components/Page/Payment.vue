@@ -501,6 +501,7 @@
             /> -->
           </v-container>
         </v-form>
+        <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
         <!-- <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY"  @click="form.paymentMethod = 'APPLEPAY'" @submit.prevent="send()">
          <v-btn
                         type="sumbit"
