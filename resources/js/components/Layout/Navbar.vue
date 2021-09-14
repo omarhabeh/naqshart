@@ -45,7 +45,7 @@
           </router-link>
         </li>
         <li class="nav-item shop shop_sm">
-          <router-link :to="'/shop?mydata='+onePallete">
+          <router-link :to="/shop">
             <a class="nav-link">Gallery</a>
           </router-link>
         </li>
