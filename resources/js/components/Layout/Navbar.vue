@@ -45,7 +45,7 @@
           </router-link>
         </li>
         <li class="nav-item shop shop_sm">
-          <router-link :to="/shop">
+          <router-link to="/shop">
             <a class="nav-link">Gallery</a>
           </router-link>
         </li>
@@ -101,7 +101,7 @@
         </li>
 
         <li class="nav-item shop shop_sm">
-          <router-link to="/shop?mydata=1">
+          <router-link to="/shop">
             <a class="nav-link">المعرض</a>
           </router-link>
         </li>
