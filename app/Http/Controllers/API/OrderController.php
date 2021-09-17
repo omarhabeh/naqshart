@@ -21,10 +21,10 @@ class OrderController extends Controller
     private $methods = [
         // test visa : 8ac7a4ca76890c29017689e9c445025e
         // prod visa : 8ac9a4c877676c8e017767baf9e6042f
-        'VISA' => '8ac7a4ca76890c29017689e9c445025e',
+        'VISA' => '8ac9a4c877676c8e017767baf9e6042f',
         'MASTER' => '8ac9a4c877676c8e017767baf9e6042f',
         'MADA' => '8ac9a4c877676c8e017767bc0ecd043f',
-        'APPLEPAY'=>'8ac7a4c97802e26b01781175350307a4',
+        'APPLEPAY'=>'8ac9a4cd7bc442bc017be3ad293652c0',
         'STC_PAY' => '8ac9a4c877676c8e017767baf9e6042f',
     ];
     public $shippment_price = 0;
@@ -48,14 +48,14 @@ class OrderController extends Controller
     {
         $entityID = $this->methods[$method];
         $order = Order::find($order);
-        $url = "https://test.oppwa.com/";
+        $url = "https://oppwa.com/";
         $url .= $request->resourcePath;
         $url .= "?entityId=$entityID";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjN2E0Y2E3Njg5MGMyOTAxNzY4OWU5ODE4YjAyNWF8aFh0M2JoR3pSOA=='
+            'Authorization:Bearer OGFjOWE0Yzg3NzY3NmM4ZTAxNzc2N2JhNzAyOTA0Mjh8TUpnNVFBUWozeQ=='
         ));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
@@ -226,7 +226,7 @@ class OrderController extends Controller
             $country = $orderData['country'];
             $countryCode = $this->getCountryCode($country);
             $shippment = $orderData['shippment'];
-            $url = "https://test.oppwa.com/v1/checkouts";
+            $url = "https://oppwa.com/v1/checkouts";
             $data = "entityId=$entityID" .
             "&amount=$price" .
             "&merchantTransactionId=$rand" .
@@ -245,7 +245,7 @@ class OrderController extends Controller
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Authorization:Bearer OGFjN2E0Y2E3Njg5MGMyOTAxNzY4OWU5ODE4YjAyNWF8aFh0M2JoR3pSOA=='
+                'Authorization:Bearer OGFjOWE0Yzg3NzY3NmM4ZTAxNzc2N2JhNzAyOTA0Mjh8TUpnNVFBUWozeQ=='
             ));
 
 
