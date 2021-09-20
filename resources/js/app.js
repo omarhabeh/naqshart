@@ -13,17 +13,20 @@ import VueInternationalization from "vue-i18n";
 import VueRouter from "vue-router";
 import Vuetify from "vuetify";
 import VueAwesomeSwiper from "vue-awesome-swiper";
-import VueResource from "vue-resource";
+import VueResource from "vue-resource"
 import Meta from 'vue-meta';
-import VueAnalytics from 'vue-analytics';
+// import VueAnalytics from 'vue-analytics';
 Vue.use(VueResource);
-
 Vue.use(Meta);
 // // import style
 // import 'swiper/css/swiper.css'
 // // If you use Swiper 6.0.0 or higher
 // import 'swiper/swiper-bundle.css'
+import VueGtag from "vue-gtag";
 
+Vue.use(VueGtag, {
+  config: { id: "UA-1234567-1" }
+});
 Vue.use(VueAwesomeSwiper /* { default options with global component } */ );
 
 /**
@@ -33,10 +36,7 @@ Vue.use(VueAwesomeSwiper /* { default options with global component } */ );
  */
 import router from "./Router/router.js";
 import store from "./store";
-Vue.use(VueAnalytics, {
-    id: 'UA-203154633-1',
-    router
-});
+
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 
