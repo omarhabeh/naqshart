@@ -16,7 +16,6 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import VueResource from "vue-resource";
 import Meta from 'vue-meta';
 import VueAnalytics from 'vue-analytics';
-import router from './router';
 Vue.use(VueResource);
 Vue.use(VueAnalytics, {
     id: 'UA-203154633-1',
