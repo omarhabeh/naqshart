@@ -17,10 +17,7 @@ import VueResource from "vue-resource";
 import Meta from 'vue-meta';
 import VueAnalytics from 'vue-analytics';
 Vue.use(VueResource);
-Vue.use(VueAnalytics, {
-    id: 'UA-203154633-1',
-    router
-});
+
 Vue.use(Meta);
 // // import style
 // import 'swiper/css/swiper.css'
@@ -36,7 +33,10 @@ Vue.use(VueAwesomeSwiper /* { default options with global component } */ );
  */
 import router from "./Router/router.js";
 import store from "./store";
-
+Vue.use(VueAnalytics, {
+    id: 'UA-203154633-1',
+    router
+});
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 
