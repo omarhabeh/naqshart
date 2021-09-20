@@ -25,7 +25,7 @@ Vue.use(Meta);
 import VueGtag from "vue-gtag";
 
 Vue.use(VueGtag, {
-  config: { id: "UA-1234567-1" }
+  config: { id: "UA-203154633-1" }
 });
 Vue.use(VueAwesomeSwiper /* { default options with global component } */ );
 
