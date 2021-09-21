@@ -413,7 +413,7 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'MADA'"
+                        @click="paymentMethodChange('MADA')"
                       >
                         <img
                           src="/images/mada.png"
@@ -426,7 +426,7 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'STC_PAY'"
+                        @click="paymentMethodChange('STC_PAY')"
                       >
                         <img
                           src="/images/stcpay.jpeg"
@@ -474,7 +474,11 @@
                         />
                       </v-btn>
                     </div>
-                    <form :action="`/api/payment/${id}/APPLEPAY`" class="paymentWidgets" data-brands="APPLEPAY"></form>
+                    <form
+                      :action="`/api/payment/${id}/APPLEPAY`"
+                      class="paymentWidgets"
+                      data-brands="APPLEPAY"
+                    ></form>
                   </v-row>
                 </div>
               </div>
@@ -501,7 +505,11 @@
             /> -->
           </v-container>
         </v-form>
-        <form action="https://gate2play.docs.oppwa.com/tutorials/integration-guide" class="paymentWidgets" data-brands="APPLEPAY"></form>
+        <form
+          action="https://gate2play.docs.oppwa.com/tutorials/integration-guide"
+          class="paymentWidgets"
+          data-brands="APPLEPAY"
+        ></form>
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
         <div class="discount_section mt-5">
@@ -1562,6 +1570,9 @@ export default {
       }
       return true;
     },
+    paymentMethodChange(value) {
+      return (this.form.paymentMethod = value);
+    },
     prev() {
       this.step--;
     },
@@ -1615,6 +1626,7 @@ export default {
     send() {
       this.loading = true;
       this.form.shippment_res = parseFloat(this.Shipping_res);
+      
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
