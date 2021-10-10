@@ -156,8 +156,7 @@
         <div
           class="modal show"
           id="exampleModalCenter"
-          tabindex="-1"
-          role="dialog"
+
           aria-labelledby="exampleModalCenterTitle"
           aria-hidden="true"
           show="true"
@@ -474,11 +473,11 @@
                         />
                       </v-btn>
                     </div>
-                    <form
+                    <!-- <form
                       :action="`/api/payment/${id}/APPLEPAY`"
                       class="paymentWidgets"
                       data-brands="APPLEPAY"
-                    ></form>
+                    ></form> -->
                   </v-row>
                 </div>
               </div>
@@ -505,11 +504,6 @@
             /> -->
           </v-container>
         </v-form>
-        <form
-          action="https://gate2play.docs.oppwa.com/tutorials/integration-guide"
-          class="paymentWidgets"
-          data-brands="APPLEPAY"
-        ></form>
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
         <div class="discount_section mt-5">
@@ -1497,7 +1491,7 @@ export default {
         postcode: null,
         items: [],
         promocode: "",
-        paymentMethod: "VISA",
+        paymentMethod: "",
         shippment_res: 0,
       },
       discount: "",
@@ -1527,13 +1521,13 @@ export default {
     var wpwlOptions = {
       paymentTarget: "_top",
       applePay: {
-        displayName: "MyStore",
+        displayName: "Naqshart",
         total: { label: "COMPANY, INC." },
         merchantCapabilities: ["supports3DS"],
         supportedNetworks: ["masterCard", "visa", "mada"],
-        supportedCountries: ["SA"],
-      },
-    };
+        supportedCountries: ["SA"]
+      }
+    }
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
@@ -1571,6 +1565,7 @@ export default {
       return true;
     },
     paymentMethodChange(value) {
+        console.log(value);
       return (this.form.paymentMethod = value);
     },
     prev() {
@@ -1626,7 +1621,7 @@ export default {
     send() {
       this.loading = true;
       this.form.shippment_res = parseFloat(this.Shipping_res);
-      
+        console.log(this.form.paymentMethod);
       axios
         .post("/api/add-order", this.form)
         .then((data) => {

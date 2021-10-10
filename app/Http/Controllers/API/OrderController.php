@@ -169,14 +169,9 @@ class OrderController extends Controller
 
         foreach ($arr as &$item) {
             $palette =   Palette::find($item['paletteid']);
-            // dump($palette);
             if ($palette) {
-
-                // $price = $palette->toArray()[$key[$item['palettesize']]];
                 $price = $palette->M_price_sar;
-                // dump($price);
                 $retarr['totalprice'] += $price * $item['quantity'];
-
                 $palette_items_data['size'] = $item['palettesize'];
                 $palette_items_data['price'] = strval($price);
                 $palette_items_data['quantity'] = strval($item['quantity']);
