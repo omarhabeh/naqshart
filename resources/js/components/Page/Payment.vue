@@ -463,14 +463,14 @@
                     <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
-                        style="border: none !important; background: none"
+                       
                         @click="form.paymentMethod = 'APPLEPAY'"
                       >
-                        <img
+                        <!-- <img
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                        />
+                        /> -->
                       </v-btn>
                     </div>
                     <!-- <form
@@ -1513,7 +1513,9 @@ export default {
       message: "",
       formview: "",
       discount_section: false,
-      paymentMethods: ["VISA", "MASTER", "MADA", "APPLEPAY", "STC_PAY"],
+      paymentMethods: ["VISA", "MASTER", "STC_PAY"],
+      paymentMethod1:"APPLEPAY",
+      paymentMethod2:"MADA",
       countryCode: "SA",
     };
   },
