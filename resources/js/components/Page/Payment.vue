@@ -166,7 +166,7 @@
                 <form
                   :action="`/api/payment/${id}/${form.paymentMethod}`"
                   class="paymentWidgets"
-                  data-brands="APPLEPAY"
+                  :data-brands="form.paymentMethod"
                 ></form>
               </div>
             </div>
@@ -471,6 +471,11 @@
                         /> -->
                       </v-btn>
                     </div>
+                    <!-- <form
+                      :action="`/api/payment/${id}/APPLEPAY`"
+                      class="paymentWidgets"
+                      data-brands="APPLEPAY"
+                    ></form> -->
                   </v-row>
                 </div>
               </div>
@@ -859,7 +864,7 @@
                 <form
                   :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
-                  data-brands="APPLEPAY"
+                  :data-brands="form.paymentMethod"
                 ></form>
               </div>
             </div>
@@ -1558,6 +1563,7 @@ export default {
       return true;
     },
     paymentMethodChange(value) {
+        
       console.log(value);
       return (this.form.paymentMethod = value);
     },
@@ -1636,7 +1642,6 @@ export default {
           );
           document.head.appendChild(tag);
           this.errors = "";
-          //   this.$store.dispatch("clearCartItems");
         })
 
         .catch((error) => {
@@ -1651,7 +1656,7 @@ export default {
 </script>
 
 <style scoped>
-.wpwl-form {
+/* .wpwl-form {
   max-width: 100% !important;
 }
 .wpwl-apple-pay-button {
@@ -1659,7 +1664,8 @@ export default {
   display: block !important;
   width: 100% !important;
   -webkit-appearance: -apple-pay-button !important;
-}
+} */
+.wpwl-apple-pay-button{-webkit-appearance: -apple-pay-button !important;}
 .form {
   width: 87%;
   margin: auto;
