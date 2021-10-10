@@ -460,7 +460,7 @@
                         />
                       </v-btn>
                     </div>
-                    <div class="logo_payment apple col-lg-2 col-md-6">
+                    <div class="col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
 
@@ -1184,7 +1184,7 @@
                         />
                       </v-btn>
                     </div>
-                    <div class="logo_payment apple col-lg-2 col-md-6">
+                    <div class="col-lg-2 col-md-6">
                       <v-btn
                         type="submit"
                         style="border: none !important; background: none"
