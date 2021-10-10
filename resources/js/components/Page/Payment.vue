@@ -463,7 +463,7 @@
                     <div class="logo_payment apple col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
-                       
+
                         @click="form.paymentMethod = 'APPLEPAY'"
                       >
                         <!-- <img
@@ -1190,11 +1190,11 @@
                         style="border: none !important; background: none"
                         @click="form.paymentMethod = 'APPLEPAY'"
                       >
-                        <img
+                        <!-- <img
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                        />
+                        /> -->
                       </v-btn>
                     </div>
                   </v-row>
@@ -1653,8 +1653,14 @@ export default {
 </script>
 
 <style scoped>
+.wpwl-form {
+max-width:100% !important;
+}
 .wpwl-apple-pay-button {
-  -webkit-appearance: -apple-pay-button !important;
+font-size: 16px !important;
+display: block !important;
+width: 100% !important;
+-webkit-appearance: -apple-pay-button !important;
 }
 .form {
   width: 87%;
