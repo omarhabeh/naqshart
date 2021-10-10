@@ -156,7 +156,6 @@
         <div
           class="modal show"
           id="exampleModalCenter"
-
           aria-labelledby="exampleModalCenterTitle"
           aria-hidden="true"
           show="true"
@@ -167,7 +166,7 @@
                 <form
                   :action="`/api/payment/${id}/${form.paymentMethod}`"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                  data-brands="APPLEPAY"
                 ></form>
               </div>
             </div>
@@ -463,7 +462,6 @@
                     <div class="col-lg-2 col-md-6">
                       <v-btn
                         type="sumbit"
-
                         @click="form.paymentMethod = 'APPLEPAY'"
                       >
                         <!-- <img
@@ -473,11 +471,6 @@
                         /> -->
                       </v-btn>
                     </div>
-                    <!-- <form
-                      :action="`/api/payment/${id}/APPLEPAY`"
-                      class="paymentWidgets"
-                      data-brands="APPLEPAY"
-                    ></form> -->
                   </v-row>
                 </div>
               </div>
@@ -866,7 +859,7 @@
                 <form
                   :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                  data-brands="APPLEPAY"
                 ></form>
               </div>
             </div>
@@ -1513,23 +1506,21 @@ export default {
       message: "",
       formview: "",
       discount_section: false,
-      paymentMethods: ["VISA", "MASTER", "STC_PAY"],
-      paymentMethod1:"APPLEPAY",
-      paymentMethod2:"MADA",
+      paymentMethods: ["VISA", "MASTER", "STC_PAY","APPLEPAY","MADA"],
       countryCode: "SA",
     };
   },
   mounted() {
     var wpwlOptions = {
-      paymentTarget: "_top",
-      applePay: {
-        displayName: "Naqshart",
-        total: { label: "COMPANY, INC." },
-        merchantCapabilities: ["supports3DS"],
-        supportedNetworks: ["masterCard", "visa", "mada"],
-        supportedCountries: ["SA"]
-      }
-    }
+        paymentTarget:"_top",
+        applePay: {
+            displayName: "Naqsh",
+            total: { label: "COMPANY, INC." },
+            merchantCapabilities: ["supports3DS"],
+            supportedNetworks: ["masterCard", "visa", "mada"],
+            supportedCountries: ["SA"]
+        }
+        };
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
@@ -1567,7 +1558,7 @@ export default {
       return true;
     },
     paymentMethodChange(value) {
-        console.log(value);
+      console.log(value);
       return (this.form.paymentMethod = value);
     },
     prev() {
@@ -1622,15 +1613,22 @@ export default {
     },
     send() {
       this.loading = true;
+      console.log("request was made");
+      let tag = document.createElement("script");
+      let scripttag = document.getElementsByClassName("thescript")[0];
+      if (scripttag != null) {
+        scripttag.remove();
+      }
       this.form.shippment_res = parseFloat(this.Shipping_res);
-        console.log(this.form.paymentMethod);
+      console.log(this.form.paymentMethod);
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
+          console.log(data);
           $("#exampleModalCenter").modal("show");
           this.formview = data.data.orderid;
           this.id = data.data.orderid;
-          let tag = document.createElement("script");
+          tag.classList.add("thescript");
           tag.setAttribute(
             "src",
             "https://oppwa.com/v1/paymentWidgets.js?checkoutId=" +
@@ -1654,13 +1652,13 @@ export default {
 
 <style scoped>
 .wpwl-form {
-max-width:100% !important;
+  max-width: 100% !important;
 }
 .wpwl-apple-pay-button {
-font-size: 16px !important;
-display: block !important;
-width: 100% !important;
--webkit-appearance: -apple-pay-button !important;
+  font-size: 16px !important;
+  display: block !important;
+  width: 100% !important;
+  -webkit-appearance: -apple-pay-button !important;
 }
 .form {
   width: 87%;
