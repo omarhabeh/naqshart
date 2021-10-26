@@ -166,8 +166,14 @@
                 <form
                   :action="`/api/payment/${id}/${form.paymentMethod}`"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                  :data-brands="`${form.paymentMethod} 'VISA MASTER MADA'`"
                 ></form>
+                <form
+                  :action="`/api/payment/${id}/STC_PAY`"
+                  class="paymentWidgets"
+                  :data-brands="`STC_PAY`"
+                ></form>
+
               </div>
             </div>
           </div>
@@ -437,7 +443,7 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'VISA'"
+                        @click="paymentMethodChange('VISA')"
                       >
                         <img
                           src="/images/visa.png"
@@ -450,7 +456,7 @@
                       <v-btn
                         type="sumbit"
                         style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'MASTER'"
+                        @click="paymentMethodChange('MASTER')"
                       >
                         <img
                           src="/images/master.png"
@@ -459,18 +465,19 @@
                         />
                       </v-btn>
                     </div>
-                    <div class="col-lg-2 col-md-6">
+                    <!-- <div class="col-lg-2 col-md-6">
+                        <apple-pay-button buttonstyle="black" type="buy" locale="el-GR"></apple-pay-button>
                       <v-btn
                         type="sumbit"
-                        @click="form.paymentMethod = 'APPLEPAY'"
+                        @click="paymentMethodChange('APPLEPAY')"
                       >
-                        <!-- <img
+                        <img
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                        /> -->
+                        />
                       </v-btn>
-                    </div>
+                    </div> -->
                     <!-- <form
                       :action="`/api/payment/${id}/APPLEPAY`"
                       class="paymentWidgets"
@@ -864,7 +871,12 @@
                 <form
                   :action="'/api/payment/' + id + '/' + form.paymentMethod"
                   class="paymentWidgets"
-                  :data-brands="form.paymentMethod"
+                  :data-brands="`${form.paymentMethod} 'VISA MASTER MADA'`"
+                ></form>
+                 <form
+                  :action="`/api/payment/${id}/STC_PAY`"
+                  class="paymentWidgets"
+                  :data-brands="`STC_PAY`"
                 ></form>
               </div>
             </div>
@@ -1182,19 +1194,19 @@
                         />
                       </v-btn>
                     </div>
-                    <div class="col-lg-2 col-md-6">
+                    <!-- <div class="col-lg-2 col-md-6">
                       <v-btn
                         type="submit"
                         style="border: none !important; background: none"
                         @click="form.paymentMethod = 'APPLEPAY'"
                       >
-                        <!-- <img
+                        <img
                           src="/images/applepay.png"
                           alt=""
                           style="width: 100px"
-                        /> -->
+                        />
                       </v-btn>
-                    </div>
+                    </div> -->
                   </v-row>
                 </div>
               </div>
@@ -1495,7 +1507,6 @@ export default {
       discount: "",
       discount_value: 0,
       discount_value_sar: 0,
-      //   cartTotalPrice: 0,
       id: "",
       mobileCode: mobileCodes,
       countries: countriesNames,
@@ -1516,6 +1527,9 @@ export default {
     };
   },
   mounted() {
+    let recaptchaScript = document.createElement('script')
+    recaptchaScript.setAttribute('src', 'https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js')
+    document.head.appendChild(recaptchaScript)
     var wpwlOptions = {
         paymentTarget:"_top",
         applePay: {
@@ -1563,8 +1577,16 @@ export default {
       return true;
     },
     paymentMethodChange(value) {
-        
-      console.log(value);
+        if(value == "VISA" || value == "MASTER" || value == "MADA"){
+            if (document.getElementsByClassName('wpwl-control-brand').length > 0){
+                document.getElementsByClassName('wpwl-control-brand')[0].value=value;
+                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-VISA');
+                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-MASTER');
+                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-MADA');
+                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-STC_PAY');
+                document.getElementsByClassName('wpwl-brand')[0].classList.add('wpwl-brand-'+value);
+            }
+        }
       return (this.form.paymentMethod = value);
     },
     prev() {
@@ -1619,18 +1641,15 @@ export default {
     },
     send() {
       this.loading = true;
-      console.log("request was made");
       let tag = document.createElement("script");
       let scripttag = document.getElementsByClassName("thescript")[0];
       if (scripttag != null) {
         scripttag.remove();
       }
       this.form.shippment_res = parseFloat(this.Shipping_res);
-      console.log(this.form.paymentMethod);
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
-          console.log(data);
           $("#exampleModalCenter").modal("show");
           this.formview = data.data.orderid;
           this.id = data.data.orderid;
@@ -1641,6 +1660,18 @@ export default {
               data.data.checkid
           );
           document.head.appendChild(tag);
+          if(document.getElementsByClassName('wpwl-container-card').length > 0){
+            if(this.form.paymentMethod == "STC_PAY"){
+                console.log('asd');
+                document.getElementsByClassName('wpwl-form-virtualAccount-STC_PAY')[0].style.display="block";
+                document.getElementsByClassName('wpwl-container-card')[0].style.display="none";
+            }
+            else{
+                console.log('asd2');
+                document.getElementsByClassName('wpwl-form-virtualAccount-STC_PAY')[0].style.display="none";
+                document.getElementsByClassName('wpwl-container-card')[0].style.display="block";
+            }
+          }
           this.errors = "";
         })
 

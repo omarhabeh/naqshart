@@ -51,7 +51,6 @@ class OrderController extends Controller
         $url = "https://oppwa.com/";
         $url .= $request->resourcePath;
         $url .= "?entityId=$entityID";
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -141,7 +140,6 @@ class OrderController extends Controller
         $retitems = $this->save_order_items($order, $totalprice['baletteitems']);
         $view = view('ajax.form')->with(['checkoutid' => $checkoutid->id, 'orderid' => $order->id])
             ->renderSections();
-
         return response()->json(['status' => true, 'data' => $order, 'items' => $retitems, 'checkid' => $checkoutid->id, 'orderid' => $order->id, $totalprice]);
     }
 
