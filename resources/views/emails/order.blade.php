@@ -180,7 +180,7 @@ the order ships, you can find your order information bellow
                             @if ($order->payment_method == "MASTER")
                             <i class="payment-icon payment-icon--master payment-method-list__item-icon"></i> 
                             @endif
-          <span class="payment-method-list__item__info">ending with {{$data->card->last4Digits}}</span>
+          <span class="payment-method-list__item__info">ending with {{$data->last4Digits}}</span>
             <span class="payment-method-list__item__amount emphasis"> - {{$data->currency}} {{$data->amount}}</span>
         </li>
             </ul>

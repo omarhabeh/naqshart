@@ -101,8 +101,9 @@
         </li>
 
         <li class="nav-item shop shop_sm">
-          <router-link to="/shop">
-            <a class="nav-link">المعرض</a>
+          <router-link to="/shop" >
+            <a class="nav-link" v-if="currentLanguage == 'ar'">المعرض</a>
+            <a class="nav-link" v-if="currentLanguage == 'en'">Gallery</a>
           </router-link>
         </li>
         <li class="nav-item home home_sm">
@@ -264,7 +265,6 @@
                     style="margin: auto; color: #fff"
                     :to="{
                       path: '/checkout',
-                      query: { myprop: this.pallatecart },
                     }"
                   >
                     <button

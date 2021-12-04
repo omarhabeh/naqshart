@@ -16,6 +16,7 @@ use App\Rules\instock;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\orderMail;
 use App\Mail\artistOrderMail;
+use Session;
 class OrderController extends Controller
 {
     private $methods = [
@@ -38,110 +39,177 @@ class OrderController extends Controller
     }
 
 
+    public function get_server_ip() {
+        $ipaddress = '';
+        if (env('HTTP_CLIENT_IP'))
+            $ipaddress = env('HTTP_CLIENT_IP');
+        else if(env('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = env('HTTP_X_FORWARDED_FOR');
+        else if(env('HTTP_X_FORWARDED'))
+            $ipaddress = env('HTTP_X_FORWARDED');
+        else if(env('HTTP_FORWARDED_FOR'))
+            $ipaddress = env('HTTP_FORWARDED_FOR');
+        else if(env('HTTP_FORWARDED'))
+        $ipaddress = env('HTTP_FORWARDED');
+        else if(env('REMOTE_ADDR'))
+            $ipaddress = env('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($order = null, $method = null, Request $request)
-    {
-        $entityID = $this->methods[$method];
-        $order = Order::find($order);
-        $url = "https://oppwa.com/";
-        $url .= $request->resourcePath;
-        $url .= "?entityId=$entityID";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjOWE0Yzg3NzY3NmM4ZTAxNzc2N2JhNzAyOTA0Mjh8TUpnNVFBUWozeQ=='
-        ));
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $responseData = curl_exec($ch);
-        if (curl_errno($ch)) {
-            return curl_error($ch);
-        }
-        curl_close($ch);
+    public function urwa_create(OrderResquest $request){
+    $this->shippment_price = $request->shippment_res;
+    $totalprice = $this->totalprice($request->items, $request->promocode);
+    $request['paymentstatus'] = 'pending';
+    $request['totalprice'] =  $totalprice['totalprice'] + $this->shippment_price;;
+    $request['discount'] = $totalprice['discount_amount'];
+    $request['shippment'] = $request->shippment_res;
+    $order = Order::create($request->only(['promocode', 'email', 'fname', 'lname', 'address', 'apartment', 'city', 'postcode', 'goverment', 'country', 'goverment', 'country', 'phone', 'phonecode', 'paymentid', 'paymentstatus', 'discount', 'totalprice', 'payment-transaction-return']));
+    $palletes = $this->save_order_items($order, $totalprice['baletteitems']);
+    $idorder =  $order->id;//Customer Order ID
+    $terminalId = "naqshart";// Will be provided by URWAY
+    $password = "naqshart@123";// Will be provided by URWAY
+    $merchant_key = "8f2e5f1b36b43f71b503c3033e3846b02023cbb6d5dd007cabe9b35388af8085";// Will be provided by URWAY
+    $currencycode = "SAR";
+    $amount = $request['totalprice'];
+    $ipp = $this->get_server_ip();
+    $txn_details= $idorder.'|'.$terminalId.'|'.$password.'|'.$merchant_key.'|'.$amount.'|'.$currencycode;
+    $hash=hash('sha256', $txn_details);
+    $fields = array(
+        'trackid' => $idorder,
+        'terminalId' => $terminalId,
+        'customerEmail' => 'customer@email.com',
+        'action' => "1",  // action is always 1
+        'merchantIp' =>$ipp,
+        'password'=> $password,
+        'currency' => $currencycode,
+        'country'=>"SA",
+        'amount' => $amount,
+        "udf1" =>"Test1",
+        "udf2" =>"http://127.0.0.1:8081/api/success",  //Response page URL
+        "udf3"=>"",
+        "udf4"=>"",
+        "udf5"=>json_decode($request),
+        'requestHash' => $hash  //generated Hash
+    );
+    $data = json_encode($fields);
+    $ch=curl_init('https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest'); // Will be provided by URWAY
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+       'Content-Type: application/json',
+       'Content-Length: ' . strlen($data))
+      );
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+    //execute post
+    $server_output =curl_exec($ch);
+    //close connection
+    curl_close($ch);
+    $result = json_decode($server_output);
+    if (!empty($result->payid) && !empty($result->targetUrl)) {
+       $url = $result->targetUrl . '?paymentid=' .  $result->payid;
+        return response()->json(['url'=>$url]);
 
-        $responseData = json_decode($responseData);
-        // dd($responseData);
-        //  dd($request->all(),$order->items,$responseData);
-        if (isset($responseData->id) && isset($responseData->result->description) &&  str_contains($responseData->result->description, 'succ')) {
-            //  return 'error' ;
-            $key['small'] = "S_avalible";
-            $key['medium'] = 'M_avalible';
-            $key['large'] = 'L_avalible';
-            $palettes = collect();
-            $pallete_price = 0;
-            foreach ($order->items as  $item) {
-                $palette  =  Palette::find($item->palatte_id);
-                $palettes->push($palette);
-                $palette_arr = $palette->toArray();
-                $quantity_left =  $palette_arr[$key[$item->size]];
-                $sub = $quantity_left - $item->quantity;
-                $subcopies = $palette->avalible_copies -  $item->quantity;
-                $palette->update([$key[$item->size] => $sub, 'avalible_copies' => $subcopies]);
-                Mail::to($palette->artistemail)->send(new artistOrderMail($palette));
-                $pallete_price += $item->price;
-            }
-            Mail::to($order->email)->send(new orderMail($responseData,$order,$palettes,$pallete_price));
-            Mail::to('hello@naqshart.com')->send(new orderMail($responseData,$order,$palettes,$pallete_price));
-            $order->update(['paymentstatus' => 'Processing']);
-            // return view('orders.successpayment', compact('order'));
+    }else{
+    return response()->json(['error'=>$result->result,'reason'=>$result->reason]);
+    }
+    }
 
-            return view('checkout.success', ['data' => $responseData, 'order'=>$order,'palettes'=>$palettes,'shipment'=>$this->shippment_price]);
-        } else {
+    public function success(Request $request){
+        $terminalId = "naqshart";// Will be provided by URWAY
+        $password = "naqshart@123";// Will be provided by URWAY
+        $key = "8f2e5f1b36b43f71b503c3033e3846b02023cbb6d5dd007cabe9b35388af8085";// Will be provided by URWAY
+        $keys['small'] = "S_avalible";
+        $keys['medium'] = 'M_avalible';
+        $keys['large'] = 'L_avalible';
+        $order=Order::with('items')->where('id',$request->TrackId)->first();
+        $requestHash = "" . $request->TranId . "|" . $key . "|" . $request->ResponseCode . "|" . $request->amount . "";
+	    $txn_details1 = "" . $request->TrackId . "|" . $terminalId . "|" . $password . "|" . $key . "|" . $request->amount . "|SAR";
+        $hash = hash('sha256', $requestHash);
+        if ($hash === $request->responseHash) {
+            $txn_details1 = "" . $request->TrackId . "|" . $terminalId . "|" . $password . "|" . $key . "|" . $request->amount . "|SAR";
+            //Secure check
+            $requestHash1 = hash('sha256', $txn_details1);
+            $apifields    = array(
+                'trackid' => $request->TrackId,
+                'terminalId' => $terminalId,
+                'action' => '10',
+                'merchantIp' => "",
+                'password' => $password,
+                'currency' => "SAR",
+                'transid' => "",
+                'transid' => $request->TranId,
+                'amount' => $request->amount,
+                'udf5' => "",
+                'udf3' => "",
+                'udf4' => "",
+                'udf1' => "",
+                'udf2' => "",
+                'requestHash' => $requestHash1
+            );
+            $apifields_string = json_encode($apifields);
+            $url = "https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest";
+            $ch  = curl_init($url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $apifields_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($apifields_string)
+            ));
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+            $apiresult = curl_exec($ch);
+            $urldecodeapi        = (json_decode($apiresult, true));
+            $inquiryResponsecode = $urldecodeapi['responseCode'];
+            $inquirystatus       = $urldecodeapi['result'];
+            $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+            if ($request->Result === 'Successful'  && $request->ResponseCode==='000') {
+                if($inquirystatus=='Successful' || $inquiryResponsecode=='000'){
+                    $palettes = collect();
+                    $responseData = collect();
+                    $responseData->last4Digits=substr($request->maskedPAN,-4);
+                    $responseData->amount=$request->amount;
+                    $responseData->payment_method=$request->cardBrand;
+                    $responseData->currency='SAR';
+                    $pallete_price = 0;
+                    foreach ($order->items as  $item) {
+                        $palette  =  Palette::find($item->palatte_id);
+                        $palettes->push($palette);
+                        $palette_arr = $palette->toArray();
+                        $quantity_left =  $palette_arr[$keys[$item->size]];
+                        $sub = $quantity_left - $item->quantity;
+                        $subcopies = $palette->avalible_copies -  $item->quantity;
+                        $palette->update([$keys[$item->size] => $sub, 'avalible_copies' => $subcopies]);
+                        if(!$pageWasRefreshed) {
+                            Mail::to($palette->artistemail)->send(new artistOrderMail($palette));
+                         } 
+                        $pallete_price += $item->price;
+                    }
+                    if(!$pageWasRefreshed) {
+                        Mail::to($order->email)->send(new orderMail($responseData,$order,$palettes,$pallete_price));
+                        Mail::to('hello@naqshart.com')->send(new orderMail($responseData,$order,$palettes,$pallete_price));
+                    }
+                    $order->update(['paymentstatus' => 'Processing']);
+                    return view('checkout.success', ['data' => $responseData, 'order'=>$order,'palettes'=>$palettes,'shipment'=>$this->shippment_price]);
+                }
+                else {
+                    $order->update(['paymentstatus' => 'Failed']);
+                    return view('checkout.error', ['msg' => 'Secure Check Failed']);
+                }
+            } 
+        } 
+        else{
             $order->update(['paymentstatus' => 'Failed']);
-            if (isset($responseData->result->description)) {
-                return view('checkout.error', ['msg' => $responseData->result->description]);
-                // session()->put(['paymentfail' =>  'Failed payment, please try again']);
-            }
-            else {
-                // session()->put(['paymentfail' =>  'Failed payment, please try again']);
-                // return redirect()->route('mainPage');
-                return view('checkout.error', ['msg' => 'error accured please contact us ']);
-            }
+            return view('checkout.error', ['msg' => 'Hash Mismatch, please contat us']);
         }
+        $order->update(['paymentstatus' => 'Failed']);
+        return view('checkout.error', ['msg' => 'error accured please contact us']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(OrderResquest $request)
-    {
-        $this->shippment_price  = $request->shippment_res;
-        $locale = app()->getLocale();
-        $totalprice = $this->totalprice($request->items, $request->promocode);
-        $request['paymentstatus'] = 'pending';
-        $request['totalprice'] = $totalprice['totalprice'] + $this->shippment_price;
-        $request['discount'] = $totalprice['discount_amount'];
-        $request['shippment'] = $request->shippment_res;
-        $checkoutid =  $this->get_checkout_id(number_format($request['totalprice'], 2), $this->methods[$request->paymentMethod], $request);
-        if ($checkoutid) {
-            $request['paymentid'] = $checkoutid->id;
-
-        } else {
-            $request['paymentid'] = 'failed transaction';
-            $order = Order::create($request->except('items'));
-            $retitems = $this->save_order_items($order, $totalprice['baletteitems']);
-            return response()->json(['status' => false, 'errors' => ['transaction request failed and we calling you shortly'], __('orderrequest.failed'), $totalprice, floatval($request['totalprice'])]);
-        }
-
-
-        $order = Order::create($request->only(['promocode', 'email', 'fname', 'lname', 'address', 'apartment', 'city', 'postcode', 'goverment', 'country', 'goverment', 'country', 'phone', 'phonecode', 'paymentid', 'paymentstatus', 'discount', 'totalprice', 'payment-transaction-return']));
-        $order->update([
-            'payment_method' => $request->paymentMethod
-        ]);
-        $retitems = $this->save_order_items($order, $totalprice['baletteitems']);
-        $view = view('ajax.form')->with(['checkoutid' => $checkoutid->id, 'orderid' => $order->id])
-            ->renderSections();
-        return response()->json(['status' => true, 'data' => $order, 'items' => $retitems, 'checkid' => $checkoutid->id, 'orderid' => $order->id, $totalprice]);
-    }
 
     /**
      * Display the specified resource.
@@ -202,63 +270,6 @@ class OrderController extends Controller
                 array_push($retarr, $orderitem);
             }
             return $retarr;
-        }
-    }
-
-    public function get_checkout_id($price = 0, $entityID, $orderData)
-    {
-        if ($price > 0) {
-
-            $rand = md5(uniqid(rand(), true));
-            $email = $orderData['email'];
-            $firstName = $orderData['fname'];
-            $lastName = $orderData['lname'];
-            $address = $orderData['address'];
-            $city = $orderData['city'];
-            $postcode = $orderData['postcode'];
-            $country = $orderData['country'];
-            $countryCode = $this->getCountryCode($country);
-            $shippment = $orderData['shippment'];
-            $url = "https://oppwa.com/v1/checkouts";
-            $data = "entityId=$entityID" .
-            "&amount=$price" .
-            "&merchantTransactionId=$rand" .
-            "&customer.email=$email" .
-            "&customer.givenName=$firstName" .
-            "&customer.surname=$lastName" .
-            "&billing.street1=$address" .
-            "&billing.state=$city" .
-            "&billing.city=$city" .
-            "&billing.postcode=$postcode" .
-            "&billing.country=$countryCode" .
-            "&currency=SAR" .
-            "&paymentType=DB";
-            // ."&testMode=EXTERNAL";
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Authorization:Bearer OGFjOWE0Yzg3NzY3NmM4ZTAxNzc2N2JhNzAyOTA0Mjh8TUpnNVFBUWozeQ=='
-            ));
-
-
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $responseData = curl_exec($ch);
-            if (curl_errno($ch)) {
-                return curl_error($ch);
-            }
-            curl_close($ch);
-
-            if ($responseData)
-                $responseData =  json_decode($responseData);
-            if ($responseData->result->description == 'successfully created checkout')
-                return $responseData;
-            return null;
-        } else {
-            return null;
         }
     }
 

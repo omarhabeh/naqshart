@@ -208,7 +208,7 @@ Shopify.cdnHost = "cdn.shopify.com";</script>
                     @endif
 
       <span class="visually-hidden">{{$order->payment_method}}</span>
-</i>    <span class="payment-method-list__item__info">ending with {{$data->card->last4Digits}}</span>
+</i>    <span class="payment-method-list__item__info">ending with {{$data->last4Digits}}</span>
     <span class="payment-method-list__item__amount emphasis"> - {{$data->currency}} {{$data->amount}}</span>
 </li>
 

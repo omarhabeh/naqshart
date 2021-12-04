@@ -71,6 +71,7 @@ Route::get('orders', 'OrderController@index')->middleware('modirator');
 Route::get('orders/{type}', 'OrderController@type')->middleware('modirator');
 Route::get('appliedorders/{id?}', 'OrderController@orderindex')->name('appliedorder.show')->middleware('modirator');
 
+
 Route::get('/home', 'HomeController@index')->name("home.index");
 Route::post('reviews-api', 'ReviewController@store');
 Route::post('aboutContacts-api', 'About_ContactController@store');

@@ -162,19 +162,7 @@
         >
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="display: contents">
-              <div class="moda-body">
-                <form
-                  :action="`/api/payment/${id}/${form.paymentMethod}`"
-                  class="paymentWidgets"
-                  :data-brands="`${form.paymentMethod} 'VISA MASTER MADA'`"
-                ></form>
-                <form
-                  :action="`/api/payment/${id}/STC_PAY`"
-                  class="paymentWidgets"
-                  :data-brands="`STC_PAY`"
-                ></form>
-
-              </div>
+              <div class="moda-body"></div>
             </div>
           </div>
         </div>
@@ -182,9 +170,10 @@
           class="form"
           @submit.prevent="send"
           autocomplete="on"
+          id="mainformEN"
           style="transition-duration: 5s; transition: all 2s linear"
         >
-          <v-container v-if="step == 1">
+          <v-container >
             <div class="alert text-left mb-3">
               <h5 class="red--text" v-if="errors.items">
                 {{ $t("message.noitem") }}
@@ -357,157 +346,25 @@
                 }}</span>
               </v-col>
             </v-row>
-
+          </v-container>
+           <v-container>
             <v-btn
+            type="submit" form="mainformEN"
               color="#197bbd"
               style="
                 float: right;
-                margin: 20px 0;
-                height: 10px;
+                margin-left:20px;
+                margin-bottom: 20px;
                 font-weight: 100;
                 text-transform: none;
               "
-              class="check_btn"
-              :disabled="FormNotFinished()"
-              @click.prevent="next()"
+              class="check_btn btn-primary"
             >
-              Next
+              Proceed to payment
             </v-btn>
-          </v-container>
-          <v-container v-if="step == 2">
-            <div class="content-box cbox1">
-              <div class="content-box__row content-box__row--no-border">
-                <h2>Customer information</h2>
-              </div>
-              <div class="content-box__row">
-                <div class="section__content">
-                  <div
-                    class="
-                      section__content__column section__content__column--half
-                    "
-                  >
-                    <div class="text-container">
-                      <h3 class="heading-3">Contact information</h3>
-
-                      <p>
-                        <bdo dir="ltr">{{ this.form.email }}</bdo>
-                      </p>
-                      <h3 class="heading-3">Shipping address</h3>
-                      <address class="address">
-                        {{ this.form.fname }} {{ this.form.lname }}<br />{{
-                          this.form.city
-                        }}<br />{{ this.form.address }} {{ this.form.postcode
-                        }}<br />{{ this.form.country }}<br />‎{{
-                          this.form.phone
-                        }}
-                      </address>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="content-box cbox2">
-              <div class="content-box__row content-box__row--no-border">
-                <h3 class="heading-3">Please choose the payment method</h3>
-              </div>
-              <div class="content-box__row">
-                <div class="section__content">
-                  <v-row>
-                    <div class="logo_payment mada col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="paymentMethodChange('MADA')"
-                      >
-                        <img
-                          src="/images/mada.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <div class="logo_payment stc col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="paymentMethodChange('STC_PAY')"
-                      >
-                        <img
-                          src="/images/stcpay.jpeg"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <div class="logo_payment visa col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="paymentMethodChange('VISA')"
-                      >
-                        <img
-                          src="/images/visa.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <div class="logo_payment master col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="paymentMethodChange('MASTER')"
-                      >
-                        <img
-                          src="/images/master.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <!-- <div class="col-lg-2 col-md-6">
-                        <apple-pay-button buttonstyle="black" type="buy" locale="el-GR"></apple-pay-button>
-                      <v-btn
-                        type="sumbit"
-                        @click="paymentMethodChange('APPLEPAY')"
-                      >
-                        <img
-                          src="/images/applepay.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div> -->
-                    <!-- <form
-                      :action="`/api/payment/${id}/APPLEPAY`"
-                      class="paymentWidgets"
-                      data-brands="APPLEPAY"
-                    ></form> -->
-                  </v-row>
-                </div>
-              </div>
-            </div>
-            <v-btn
-              color="#197bbd"
-              style="
-                float: right;
-                margin: 20px 0;
-                height: 10px;
-                font-weight: 100;
-                text-transform: none;
-                margin-right: 20px;
-              "
-              class="check_btn"
-              @click.prevent="prev()"
-            >
-              Previous
-            </v-btn>
-            <!-- <img
-              src="/images/tenor.gif"
-              v-show="loading"
-              style="width: 82px; float: right"
-            /> -->
-          </v-container>
+            <small class="servererror text-danger d-block"></small>
+            <small class="servererrorReason text-danger d-block"></small>
+             </v-container>
         </v-form>
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
@@ -602,7 +459,7 @@
               <div style="clear:both"></div>
           </div>-->
           <!-- </div> -->
-          <div v-if="step == 2 && Shipping_res != null">
+          <div v-if="Shipping_res != null">
             <span
               style="
                 font-size: 1.2em;
@@ -654,7 +511,7 @@
             </span>
             <div style="clear: both"></div>
           </div>
-          <div v-if="step == 2 && Shipping_res != null">
+          <div v-if="Shipping_res != null">
             <hr />
             <span
               style="
@@ -867,23 +724,12 @@
         >
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="display: contents">
-              <div class="moda-body">
-                <form
-                  :action="'/api/payment/' + id + '/' + form.paymentMethod"
-                  class="paymentWidgets"
-                  :data-brands="`${form.paymentMethod} 'VISA MASTER MADA'`"
-                ></form>
-                 <form
-                  :action="`/api/payment/${id}/STC_PAY`"
-                  class="paymentWidgets"
-                  :data-brands="`STC_PAY`"
-                ></form>
-              </div>
+              <div class="moda-body"></div>
             </div>
           </div>
         </div>
-        <v-form class="form" @submit.prevent="send">
-          <v-container v-if="step == 1">
+        <v-form class="form" @submit.prevent="send" id="mainformAR">
+          <v-container>
             <div class="alert text-center mb-3">
               <h5 class="red--text" v-if="errors.items">
                 {{ $t("message.noitem") }}
@@ -1085,152 +931,22 @@
                 ></v-select>
               </v-col>-->
             </v-row>
-
-            <v-btn
-              color="#197bbd"
-              style="
-                float: right;
-                margin: 20px 0;
-                height: 10px;
-                font-weight: 100;
-                text-transform: none;
-              "
-              class="check_btn"
-              :disabled="FormNotFinished()"
-              @click.prevent="next()"
-            >
-              التالي
-            </v-btn>
-            <div style="clear: both"></div>
           </v-container>
-          <v-container v-if="step == 2">
-            <div class="content-box cbox1">
-              <div class="content-box__row content-box__row--no-border">
-                <h2>بيانات العميل</h2>
-              </div>
-              <div class="content-box__row">
-                <div class="section__content">
-                  <div
-                    class="
-                      section__content__column section__content__column--half
-                    "
-                  >
-                    <div class="text-container">
-                      <h3 class="heading-3">معلومات التواصل</h3>
-
-                      <p>
-                        <bdo dir="ltr">{{ this.form.email }}</bdo>
-                      </p>
-                      <h3 class="heading-3">بيانات الشحن</h3>
-                      <address class="address">
-                        {{ this.form.fname }} {{ this.form.lname }}<br />{{
-                          this.form.city
-                        }}<br />{{ this.form.address }} {{ this.form.postcode
-                        }}<br />{{ this.form.country }}<br />‎{{
-                          this.form.phone
-                        }}
-                      </address>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="content-box cbox2">
-              <div class="content-box__row content-box__row--no-border">
-                <h3 class="heading-3">الرجاء اختيار طريقة الدفع</h3>
-              </div>
-              <div class="content-box__row">
-                <div class="section__content">
-                  <v-row>
-                    <div class="logo_payment mada col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'MADA'"
-                      >
-                        <img
-                          src="/images/mada.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <div class="logo_payment stc col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'STC_PAY'"
-                      >
-                        <img
-                          src="/images/stcpay.jpeg"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <div class="logo_payment visa col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'VISA'"
-                      >
-                        <img
-                          src="/images/visa.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <div class="logo_payment master col-lg-2 col-md-6">
-                      <v-btn
-                        type="sumbit"
-                        style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'MASTER'"
-                      >
-                        <img
-                          src="/images/master.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div>
-                    <!-- <div class="col-lg-2 col-md-6">
-                      <v-btn
-                        type="submit"
-                        style="border: none !important; background: none"
-                        @click="form.paymentMethod = 'APPLEPAY'"
-                      >
-                        <img
-                          src="/images/applepay.png"
-                          alt=""
-                          style="width: 100px"
-                        />
-                      </v-btn>
-                    </div> -->
-                  </v-row>
-                </div>
-              </div>
-            </div>
+          <v-container>
             <v-btn
+            type="submit" form="mainformAR"
               color="#197bbd"
               style="
                 float: right;
-                margin: 20px 0;
-                height: 10px;
+                margin-bottom: 20px;
+                margin-left:20px;
                 font-weight: 100;
                 text-transform: none;
-                margin-right: 20px;
               "
-              class="check_btn"
-              @click.prevent="prev()"
+              class="check_btn btn-primary"
             >
-              <span class="back">الرجوع</span>
+              اتمام عملية الشراء
             </v-btn>
-            <!-- <img
-              src="/images/tenor.gif"
-              class="loader"
-              style="width: 82px; float: right"
-            /> -->
           </v-container>
         </v-form>
       </div>
@@ -1325,7 +1041,7 @@
             </div>
           </div>
 
-          <div style="padding: 10px" v-if="step == 2 && Shipping_res != null">
+          <div style="padding: 10px" v-if="Shipping_res != null">
             <span style="float: right; font-size: 1.3em">حساب التوصيل</span>
             <span>
               <span style="color: #737171; padding-right: 10px">
@@ -1367,8 +1083,7 @@
             </span>
             <div style="clear: both"></div>
           </div>
-
-          <div style="padding: 10px" v-if="step == 2 && Shipping_res != null">
+          <div style="padding: 10px" v-if="Shipping_res != null">
             <hr />
             <span style="float: right; font-size: 1.3em">الحساب الإجمالي</span>
             <span>
@@ -1392,6 +1107,11 @@
         </div>
       </div>
     </div>
+      <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div>
+            <iframe src="#" frameborder="0" id="payment-frame"></iframe>
+        </div>
+        </div>
   </section>
 </template>
  <script>
@@ -1522,24 +1242,10 @@ export default {
       message: "",
       formview: "",
       discount_section: false,
-      paymentMethods: ["VISA", "MASTER", "STC_PAY","APPLEPAY","MADA"],
       countryCode: "SA",
     };
   },
   mounted() {
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js')
-    document.head.appendChild(recaptchaScript)
-    var wpwlOptions = {
-        paymentTarget:"_top",
-        applePay: {
-            displayName: "Naqsh",
-            total: { label: "COMPANY, INC." },
-            merchantCapabilities: ["supports3DS"],
-            supportedNetworks: ["masterCard", "visa", "mada"],
-            supportedCountries: ["SA"]
-        }
-        };
     this.$store.commit("CHANGE_TIMER", false);
     $(".modal-mask").css("display", "none");
 
@@ -1575,25 +1281,6 @@ export default {
         return false;
       }
       return true;
-    },
-    paymentMethodChange(value) {
-        if(value == "VISA" || value == "MASTER" || value == "MADA"){
-            if (document.getElementsByClassName('wpwl-control-brand').length > 0){
-                document.getElementsByClassName('wpwl-control-brand')[0].value=value;
-                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-VISA');
-                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-MASTER');
-                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-MADA');
-                document.getElementsByClassName('wpwl-brand')[0].classList.remove('wpwl-brand-STC_PAY');
-                document.getElementsByClassName('wpwl-brand')[0].classList.add('wpwl-brand-'+value);
-            }
-        }
-      return (this.form.paymentMethod = value);
-    },
-    prev() {
-      this.step--;
-    },
-    next() {
-      this.step++;
     },
     apply_discount() {
       //console.log(this.discount);
@@ -1641,44 +1328,29 @@ export default {
     },
     send() {
       this.loading = true;
-      let tag = document.createElement("script");
-      let scripttag = document.getElementsByClassName("thescript")[0];
-      if (scripttag != null) {
-        scripttag.remove();
-      }
+
       this.form.shippment_res = parseFloat(this.Shipping_res);
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
-          $("#exampleModalCenter").modal("show");
-          this.formview = data.data.orderid;
-          this.id = data.data.orderid;
-          tag.classList.add("thescript");
-          tag.setAttribute(
-            "src",
-            "https://oppwa.com/v1/paymentWidgets.js?checkoutId=" +
-              data.data.checkid
-          );
-          document.head.appendChild(tag);
-          if(document.getElementsByClassName('wpwl-container-card').length > 0){
-            if(this.form.paymentMethod == "STC_PAY"){
-                console.log('asd');
-                document.getElementsByClassName('wpwl-form-virtualAccount-STC_PAY')[0].style.display="block";
-                document.getElementsByClassName('wpwl-container-card')[0].style.display="none";
-            }
-            else{
-                console.log('asd2');
-                document.getElementsByClassName('wpwl-form-virtualAccount-STC_PAY')[0].style.display="none";
-                document.getElementsByClassName('wpwl-container-card')[0].style.display="block";
-            }
+          if(data.data.url != null){
+              console.log(data.data.url);
+              location.href=data.data.url;
+            // $('#payment-frame').attr('src', data.data.url);
+            // $('#payment-modal').modal('show');
           }
+          if(data.data.error){
+              $('.servererror').text(data.data.error);
+              $('.servererrorReason').text(data.data.reason);
+          }
+          $('.servererror').text('');
+          $('.servererrorReason').text('');
           this.errors = "";
         })
 
         .catch((error) => {
           this.errors = error.response.data.errors;
           console.log(error.response.data.errors);
-          this.step--;
         });
       this.loading = false;
     },
@@ -1696,7 +1368,13 @@ export default {
   width: 100% !important;
   -webkit-appearance: -apple-pay-button !important;
 } */
-.wpwl-apple-pay-button{-webkit-appearance: -apple-pay-button !important;}
+#payment-modal *{
+    width:100%;
+    height:100%;
+}
+#payment-modal{
+    overflow-y:hidden;
+}
 .form {
   width: 87%;
   margin: auto;
@@ -1730,7 +1408,6 @@ export default {
   border-radius: 5px;
   color: white;
   font-weight: 500;
-  padding: 25px 15px !important;
   text-align: center;
 }
 .price {
@@ -1976,7 +1653,7 @@ export default {
     }
     .cbox1 {
       float: left;
-      width: 40%;
+      width: 100%;
     }
     .logo_payment {
       max-width: 50%;

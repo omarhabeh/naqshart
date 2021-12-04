@@ -24,7 +24,7 @@ setInterval(() => {
     }, 1000);
 
 setTimeout(()=>{
-    history.go(-1);
+    location.href="/checkout";
 },3*1000);
 
 </script>

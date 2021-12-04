@@ -25,7 +25,7 @@ Route::get("/counter", function () {
     else{
         return response()->json(['count' => rand(0,10)]);
     }
-    
+
 });
 
 Route::middleware('api')->group(function () {
@@ -49,9 +49,10 @@ Route::group(['middleware' => ['visitor-counter']], function () {
     Route::get('getpallatecart', 'PaletteAPIController@getpallatecart');
     Route::post('removefromcart', 'PaletteAPIController@removefromcart');
     Route::get('/checkifcart', 'PaletteAPIController@checkifincart')->name('checkifcart');
+    Route::get('success','OrderController@success')->name('checkout.success');
     Route::group(['middleware' => ['api']], function () {
         Route::post('check-promo', 'CheckPromo@check_promo');
-        Route::post('add-order', 'OrderController@store');
+        Route::post('add-order', 'OrderController@urwa_create');
         Route::get('payment/{order?}/{method?}', 'OrderController@create')->name('payment');
         Route::post('artist-request', 'JoinUsController@crete_request');
         Route::get('get-about-content', 'AboutController@get_about_content');
