@@ -19,15 +19,6 @@ use App\Mail\artistOrderMail;
 use Session;
 class OrderController extends Controller
 {
-    private $methods = [
-        // test visa : 8ac7a4ca76890c29017689e9c445025e
-        // prod visa : 8ac9a4c877676c8e017767baf9e6042f
-        'VISA' => '8ac9a4c877676c8e017767baf9e6042f',
-        'MASTER' => '8ac9a4c877676c8e017767baf9e6042f',
-        'MADA' => '8ac9a4c877676c8e017767bc0ecd043f',
-        'APPLEPAY'=>'8ac9a4cd7bc442bc017be3ad293652c0',
-        'STC_PAY' => '8ac9a4c877676c8e017767baf9e6042f',
-    ];
     public $shippment_price = 0;
     /**
      * Display a listing of the resource.
@@ -69,8 +60,8 @@ class OrderController extends Controller
     $palletes = $this->save_order_items($order, $totalprice['baletteitems']);
     $idorder =  $order->id;//Customer Order ID
     $terminalId = "naqshart";// Will be provided by URWAY
-    $password = "naqshart@123";// Will be provided by URWAY
-    $merchant_key = "8f2e5f1b36b43f71b503c3033e3846b02023cbb6d5dd007cabe9b35388af8085";// Will be provided by URWAY
+    $password = "naqshart@URWAY_123";// Will be provided by URWAY
+    $merchant_key = "fb3742da128af60853970790ddc8c9705cc74e9e68946b283e086ac10004e54f";// Will be provided by URWAY
     $currencycode = "SAR";
     $amount = $request['totalprice'];
     $ipp = $this->get_server_ip();
@@ -79,7 +70,7 @@ class OrderController extends Controller
     $fields = array(
         'trackid' => $idorder,
         'terminalId' => $terminalId,
-        'customerEmail' => 'customer@email.com',
+        'customerEmail' => $request['email'],
         'action' => "1",  // action is always 1
         'merchantIp' =>$ipp,
         'password'=> $password,
@@ -87,14 +78,14 @@ class OrderController extends Controller
         'country'=>"SA",
         'amount' => $amount,
         "udf1" =>"Test1",
-        "udf2" =>"http://127.0.0.1:8081/api/success",  //Response page URL
+        "udf2" =>"naqshart.com/api/success",  //Response page URL
         "udf3"=>"",
         "udf4"=>"",
         "udf5"=>json_decode($request),
         'requestHash' => $hash  //generated Hash
     );
     $data = json_encode($fields);
-    $ch=curl_init('https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest'); // Will be provided by URWAY
+    $ch=curl_init('https://payments.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest'); // Will be provided by URWAY
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -120,8 +111,8 @@ class OrderController extends Controller
 
     public function success(Request $request){
         $terminalId = "naqshart";// Will be provided by URWAY
-        $password = "naqshart@123";// Will be provided by URWAY
-        $key = "8f2e5f1b36b43f71b503c3033e3846b02023cbb6d5dd007cabe9b35388af8085";// Will be provided by URWAY
+        $password = "naqshart@URWAY_1233";// Will be provided by URWAY
+        $key = "fb3742da128af60853970790ddc8c9705cc74e9e68946b283e086ac10004e54f";// Will be provided by URWAY
         $keys['small'] = "S_avalible";
         $keys['medium'] = 'M_avalible';
         $keys['large'] = 'L_avalible';
@@ -145,13 +136,13 @@ class OrderController extends Controller
                 'amount' => $request->amount,
                 'udf5' => "",
                 'udf3' => "",
-                'udf4' => "",
+                "udf4"=>"",
                 'udf1' => "",
                 'udf2' => "",
                 'requestHash' => $requestHash1
             );
             $apifields_string = json_encode($apifields);
-            $url = "https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest";
+            $url = "https://payments.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest";
             $ch  = curl_init($url);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $apifields_string);
@@ -186,7 +177,7 @@ class OrderController extends Controller
                         $palette->update([$keys[$item->size] => $sub, 'avalible_copies' => $subcopies]);
                         if(!$pageWasRefreshed) {
                             Mail::to($palette->artistemail)->send(new artistOrderMail($palette));
-                         } 
+                         }
                         $pallete_price += $item->price;
                     }
                     if(!$pageWasRefreshed) {
@@ -200,8 +191,8 @@ class OrderController extends Controller
                     $order->update(['paymentstatus' => 'Failed']);
                     return view('checkout.error', ['msg' => 'Secure Check Failed']);
                 }
-            } 
-        } 
+            }
+        }
         else{
             $order->update(['paymentstatus' => 'Failed']);
             return view('checkout.error', ['msg' => 'Hash Mismatch, please contat us']);
