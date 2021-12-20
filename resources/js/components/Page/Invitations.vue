@@ -59,7 +59,7 @@
             </div>
                 </div>
                 <div class="col-md-4">
-                     <img class="card-img-right flex-auto center-block img-logo img-all" src="/images/invitations/img.jpg" alt="Naqshart" height="500">
+                     <img class="card-img-right flex-auto center-block img-logo img-all" src="/images/invitations/img.png" alt="Naqshart" height="500">
                 </div>
             </div>
 
