@@ -85,8 +85,19 @@
               <img :src="palettesArtist.img" alt="..." />
               <div class="content" :class="{ active: index == 0 }">
                 <div class="triangle"></div>
-                <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
-                  <span class="px-1">{{ currentLanguage == "ar" ? palettesArtist.namear : palettesArtist.name }}</span> |
+                <h6
+                  :style="
+                    currency == 'sar' && currentLanguage == 'ar'
+                      ? 'direction: rtl !important;'
+                      : ''
+                  "
+                >
+                  <span class="px-1">{{
+                    currentLanguage == "ar"
+                      ? palettesArtist.namear
+                      : palettesArtist.name
+                  }}</span>
+                  |
                   <span class="price px-1" v-if="currency == 'sar'"
                     >{{ palettesArtist.M_price }} {{ $t("currency.sar") }}</span
                   >
@@ -130,8 +141,18 @@
                   />
                   <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
-                    <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
-                      <span class="px-1">{{currentLanguage == "ar"? palettesArtist.namear: palettesArtist.name}}</span>
+                    <h6
+                      :style="
+                        currency == 'sar' && currentLanguage == 'ar'
+                          ? 'direction: rtl !important;'
+                          : ''
+                      "
+                    >
+                      <span class="px-1">{{
+                        currentLanguage == "ar"
+                          ? palettesArtist.namear
+                          : palettesArtist.name
+                      }}</span>
                       |
                       <span class="price px-1 2" v-if="currency == 'sar'"
                         >{{ palettesArtist.M_price_sar }}
@@ -273,14 +294,22 @@
               <img :src="palettesArtist.img" alt="..." />
               <div class="content" :class="{ active: index == 0 }">
                 <div class="triangle"></div>
-                <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
+                <h6
+                  :style="
+                    currency == 'sar' && currentLanguage == 'ar'
+                      ? 'direction: rtl !important;'
+                      : ''
+                  "
+                >
                   <span class="px-1">{{
-                        currentLanguage == "ar"
-                          ? palettesArtist.namear
-                          : palettesArtist.name
-                      }}</span> |
+                    currentLanguage == "ar"
+                      ? palettesArtist.namear
+                      : palettesArtist.name
+                  }}</span>
+                  |
                   <span class="price px-1 3" v-if="currency == 'sar'"
-                    >{{  minPalettesActive.M_price_sar }} {{ $t("currency.sar") }}</span
+                    >{{ minPalettesActive.M_price_sar }}
+                    {{ $t("currency.sar") }}</span
                   >
                   <span class="price px-1" v-else
                     >{{ $t("currency.usd1") }}
@@ -322,7 +351,13 @@
                   />
                   <div class="content" :class="{ active: index == 0 }">
                     <div class="triangle"></div>
-                    <h6 :style="currency == 'sar' && currentLanguage == 'ar' ? 'direction: rtl !important;':''">
+                    <h6
+                      :style="
+                        currency == 'sar' && currentLanguage == 'ar'
+                          ? 'direction: rtl !important;'
+                          : ''
+                      "
+                    >
                       <span class="px-1">{{
                         currentLanguage == "ar"
                           ? palettesArtist.namear
@@ -497,7 +532,11 @@
             text-align: center;
           "
         >
-          {{currentLanguage == "ar"? minPalettesActive.namear: minPalettesActive.name}}
+          {{
+            currentLanguage == "ar"
+              ? minPalettesActive.namear
+              : minPalettesActive.name
+          }}
         </p>
       </div>
     </div>
@@ -555,7 +594,11 @@
           <!-- style="margin-top:78px" -->
           <div class="add-cart" id="scrolled" style="width: 34vw; bottom: 0vw">
             <h2 class="font-weight-bold">
-              {{currentLanguage == "ar"? minPalettesActive.namear: minPalettesActive.name}}
+              {{
+                currentLanguage == "ar"
+                  ? minPalettesActive.namear
+                  : minPalettesActive.name
+              }}
               <template v-if="currency == 'usd'">
                 <span v-if="active_el == 1"
                   >{{ $t("currency.usd1") }}
@@ -701,7 +744,7 @@
                 :style="'height:' + height"
                 :class="{ 'text-right': currentLanguage == 'ar' }"
               >
-                {{ minPalettesActive.descript }}
+                {{ minPalettesActive.description }}
                 <!-- <span class="font-weight-bold">This is the Classic</span>
                 , designed and manufactured by Ecstase,
                 the Classic is made up of a wooden frame, a passe-partout,
@@ -1059,7 +1102,7 @@ export default {
       })
       .catch((error) => console.log(error));
     axios.get("/api/content").then((response) => {
-      //   console.log(response);
+      console.log(response);
       this.content = response.data.content;
     });
     if (this.$route.query.mydata) {
@@ -1295,7 +1338,7 @@ export default {
     moveIndicators(index, moveSlide = true) {
       let list = document.getElementById("carousel-indicators");
       if (this.isMobileWindow) {
-        list.style.transform = "translateX(" + (80 - 80 * index) + "px)";
+        list.style.transform = "translateX(" + (80 - (80 * index)) + "px)";
         if (moveSlide) this.goToSlide(index);
         this.currentArtist = index;
       } else list.style.transform = "translateX(0px)";
@@ -1303,8 +1346,6 @@ export default {
     getdata($id) {
       // let indicators = document.getElementsByClassName("carousel-element");
       this.moveIndicators($id);
-
-      //
       //active-carsoul
       let id = 0;
       if (this.artists[$id]) {
@@ -1321,11 +1362,13 @@ export default {
           this.palettes = response.data.palettes;
           this.artist_text = response.data.artist[0];
           this.minPalettesActive = response.data.palettes[0];
-          if (this.minPalettesActive == null) {
-            this.minPalettesActive = "";
-          } else {
-            this.changeContent(this.currentLanguage);
-          }
+          this.secondImage = this.minPalettesActive.images[0].img;
+          this.goToSlideByID(this.minPalettesActive.id);
+        //   if (this.minPalettesActive == null) {
+        //     this.minPalettesActive = "";
+        //   } else {
+        //     // this.changeContent(this.currentLanguage);
+        //   }
 
           if (response.data.palettesArtists.length > 0) {
             this.firstminPalettes = response.data.palettesArtists[0].id;
@@ -1401,12 +1444,12 @@ export default {
         $(this).addClass("active").siblings().removeClass("active");
       });
       if (move) {
-        $("html,body").animate(
-          {
-            scrollTop: "450px",
-          },
-          500
-        );
+        // $("html,body").animate(
+        //   {
+        //     scrollTop: "450px",
+        //   },
+        //   500
+        // );
       }
 
       // if (!isNewRelease) {
