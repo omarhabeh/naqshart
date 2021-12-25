@@ -1363,7 +1363,7 @@ export default {
           this.artist_text = response.data.artist[0];
           this.minPalettesActive = response.data.palettes[0];
           this.secondImage = this.minPalettesActive.images[0].img;
-          this.goToSlideByID(this.minPalettesActive.id);
+          this.goToSlideByID_(this.minPalettesActive.id);
         //   if (this.minPalettesActive == null) {
         //     this.minPalettesActive = "";
         //   } else {
@@ -1444,12 +1444,12 @@ export default {
         $(this).addClass("active").siblings().removeClass("active");
       });
       if (move) {
-        // $("html,body").animate(
-        //   {
-        //     scrollTop: "450px",
-        //   },
-        //   500
-        // );
+        $("html,body").animate(
+          {
+            scrollTop: "450px",
+          },
+          500
+        );
       }
 
       // if (!isNewRelease) {
@@ -1533,6 +1533,26 @@ export default {
       this.swiper.slideTo(palleteIndex);
 
       this.addActive(palleteID, palleteIndex, true, artistID);
+      let artist = this.artists.filter((artist) => artist.id == artistID)[0];
+
+      this.paletteIndex = artist.artist_palettes.findIndex(
+        (palette) => palette.id == palleteID
+      );
+    },
+    goToSlideByID_(palleteID) {
+      let palleteIndex, pallete;
+      for (let index = 0; index < this.allPalettes.length; index++) {
+        if (this.allPalettes[index].id == palleteID) {
+          palleteIndex = index;
+          pallete = this.allPalettes[index];
+        }
+      }
+      let artistID = pallete.artist_id;
+
+      this.userChangingSlide = false;
+      this.swiper.slideTo(palleteIndex);
+
+      this.addActive(palleteID, palleteIndex, false, artistID);
       let artist = this.artists.filter((artist) => artist.id == artistID)[0];
 
       this.paletteIndex = artist.artist_palettes.findIndex(
