@@ -43,7 +43,7 @@ class PaletteimageRepository extends BaseRepository
     public function createPalatteImages(Request $request, $img)
     {
         // $file = $request->file('img')[0];
-        // $input = $request->all();
+        $input = $request->all();
         // $path = 'storage/' . $img->store('palettes', 'public');
         // $input['img'] = $path;
 
