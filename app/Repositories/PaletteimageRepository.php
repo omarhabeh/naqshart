@@ -49,7 +49,7 @@ class PaletteimageRepository extends BaseRepository
 
         $filename = time().'.'.$img->getClientOriginalExtension();
         $img->move(public_path().'/images/artists/', $filename);
-        $input['img'] = '/images/artists/'.$filename;
+        $input['img'] = 'images/artists/'.$filename;
 
         return $this->create($input);
     }
