@@ -93,12 +93,18 @@ class PaletteRepository extends BaseRepository
         // $img->save(public_path($path));
 
         $input = $request->all();
-        $path = 'storage/' . $request->img->store('palettes', 'public');
-        $input['img'] = $path;
+        // $path = 'storage/' . $request->img->store('palettes', 'public');
+        // $input['img'] = $path;
+        $filename = time().'.'.request()->img->getClientOriginalExtension();
+        request()->img->move(public_path().'/images/palettes/', $filename);
+        $input['img'] = '/images/palettes/'.$filename;
         // $path = 'storage/' . $request->img2->store('palettes', 'public');
         // $input['img2'] = $path;
-        $path = 'storage/' . $request->mobile_background->store('palettes', 'public');
-        $input['mobile_background'] = $path;
+        // $path = 'storage/' . $request->mobile_background->store('palettes', 'public');
+        // $input['mobile_background'] = $path;
+        $filename = time().'.'.request()->mobile_background->getClientOriginalExtension();
+        request()->mobile_background->move(public_path().'/images/palettes/', $filename);
+        $input['mobile_background'] = '/images/palettes/'.$filename;
         // $path = 'storage/' . $request->gif1->store('videos', 'public');
         // $input['gif1'] = $path;
         // $path = 'storage/' . $request->gif2->store('videos', 'public');
@@ -112,16 +118,21 @@ class PaletteRepository extends BaseRepository
         // $file = $request->file('img');
 
         if ($request->has('img')) {
-            $path = 'storage/' . $request->img->store('palettes', 'public');
-            $input['img'] = $path;
+            // $path = 'storage/' . $request->img->store('palettes', 'public');
+            $filename = time().'.'.request()->img->getClientOriginalExtension();
+            request()->img->move(public_path().'/images/palettes/', $filename);
+            $input['img'] = '/images/palettes/'.$filename;
         }
         // if ($request->has('img2')) {
         //     $path = 'storage/' . $request->img2->store('palettes', 'public');
         //     $input['img2'] = $path;
         // }
         if ($request->has('mobile_background')) {
-            $path = 'storage/' . $request->mobile_background->store('palettes', 'public');
-            $input['mobile_background'] = $path;
+            // $path = 'storage/' . $request->mobile_background->store('palettes', 'public');
+            // $input['mobile_background'] = $path;
+            $filename = time().'.'.request()->mobile_background->getClientOriginalExtension();
+            request()->mobile_background->move(public_path().'/images/palettes/', $filename);
+            $input['mobile_background'] = '/images/palettes/'.$filename;
         }
         // if ($request->has('gif1')) {
         //     $path = 'storage/' . $request->gif1->store('videos', 'public');

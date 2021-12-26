@@ -16,9 +16,11 @@ class SaveImageController extends Controller
     public function createImages(Request $request, $img)
     {
         $input = $request->all();
-        $path = 'storage/' . $img->store('artists', 'public');
-        $input['img'] = $path;
-
-        return $path;
+        // $path = 'storage/' . $img->store('artists', 'public');
+        // $input['img'] = $path;
+        $filename = time().'.'.$img->getClientOriginalExtension();
+        $img->move(public_path().'/images/artists/', $filename);
+        $input['img'] = '/images/artists/'.$filename;
+        return $input['img'];
     }
 }

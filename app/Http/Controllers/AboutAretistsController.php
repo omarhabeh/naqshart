@@ -62,6 +62,7 @@ class AboutAretistsController extends AppBaseController
         if ($files = $request->file('image_ar'))
         {
             $image =  $saveimage->createImages($request,$files);
+            
                 $input['image_ar'] = $image;
         }
         $aboutAretists = $this->aboutAretistsRepository->create($input);
