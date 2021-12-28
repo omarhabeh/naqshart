@@ -12,11 +12,8 @@ import Payment from "../components/Page/Payment";
 import JoinUs from "../components/Page/JoinUs";
 import Congrats from "../components/Page/Congrats";
 import PageNotFound from "../components/Page/PageNotFound";
-import VueGtag from "vue-gtag";
 
-Vue.use(VueGtag, {
-  config: { id: "UA-203154633-1" }
-});
+
 
 Vue.use(VueRouter);
 const routes = [{
@@ -73,5 +70,6 @@ const router = new VueRouter({
     hashbang: false,
     mode: "history"
 });
+
 
 export default router;

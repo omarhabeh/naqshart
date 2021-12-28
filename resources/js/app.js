@@ -24,9 +24,8 @@ Vue.use(Meta);
 // import 'swiper/swiper-bundle.css'
 import VueGtag from "vue-gtag";
 
-Vue.use(VueGtag, {
-  config: { id: "UA-203154633-1" }
-});
+
+
 Vue.use(VueAwesomeSwiper /* { default options with global component } */ );
 
 /**
@@ -39,7 +38,10 @@ import store from "./store";
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
-
+Vue.use(VueGtag, {
+    config: { id: "UA-203154633-1" },
+  },
+  router);
 Vue.use(VueInternationalization);
 import $ from "jquery";
 $.ajax({
