@@ -144,7 +144,7 @@
                         <input type="checkbox" class="form-check-input float-right" id="exampleCheck1" v-model='form.terms'> -->
                         <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="customSwitch1" v-model='form.terms'>
-                        <label class="custom-control-label lbl" for="customSwitch1">أوافق على <a href="naqshart.com/terms"> الشروط والأحكام</a></label>
+                        <label class="custom-control-label lbl" for="customSwitch1">أوافق على <a href="terms"> الشروط والأحكام</a></label>
                         </div>
                     </div>
                     <div class="form-group text-right">
