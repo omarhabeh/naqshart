@@ -49,7 +49,7 @@
         class="col"
         style="display: flex !important; justify-content: center !important"
       >
-        <img src="/images/tutorial.jpg" alt="" class="tutorial" />
+        <img src="/images/Tutorial.jpg" alt="" class="tutorial" />
       </div>
     </div>
   </div>
