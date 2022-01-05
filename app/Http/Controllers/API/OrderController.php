@@ -78,7 +78,7 @@ class OrderController extends Controller
         'country'=>"SA",
         'amount' => $amount,
         "udf1" =>"Test1",
-        "udf2" =>"naqshart.com/api/success",  //Response page URL
+        "udf2" =>"https://naqshart.com/api/success",  //Response page URL
         "udf3"=>"",
         "udf4"=>"",
         "udf5"=>json_decode($request),
