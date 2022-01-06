@@ -54,8 +54,7 @@ class OrderController extends Controller
     $this->shippment_price = $request->shippment_res;
     $totalprice = $this->totalprice($request->items, $request->promocode);
     $request['paymentstatus'] = 'pending';
-    // $request['totalprice'] =  $totalprice['totalprice'] + $this->shippment_price;
-    $request['totalprice'] =  $totalprice['totalprice'];
+    $request['totalprice'] =  $totalprice['totalprice'] + $this->shippment_price;
     $request['discount'] = $totalprice['discount_amount'];
     $request['shippment'] = $request->shippment_res;
     $order = Order::create($request->only(['promocode', 'email', 'fname', 'lname', 'address', 'apartment', 'city', 'postcode', 'goverment', 'country', 'goverment', 'country', 'phone', 'phonecode', 'paymentid', 'paymentstatus', 'discount', 'totalprice', 'payment-transaction-return']));
