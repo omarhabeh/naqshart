@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\orderMail;
 use App\Mail\artistOrderMail;
 use Session;
+use Illuminate\Support\Str;
 class OrderController extends Controller
 {
     public $shippment_price = 0;
@@ -158,7 +159,7 @@ class OrderController extends Controller
             $inquiryResponsecode = $urldecodeapi['responseCode'];
             $inquirystatus       = $urldecodeapi['result'];
             $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
-            if ($request->Result === 'Successful'  && $request->ResponseCode==='000') {
+            if (Str::contains($request->Result,'Succ')  && $request->ResponseCode==='000') {
                 if($inquirystatus=='Successful' || $inquiryResponsecode=='000'){
                     $palettes = collect();
                     $responseData = collect();
