@@ -77,7 +77,7 @@ class OrderController extends Controller
         'password'=> $password,
         'currency' => $currencycode,
         'country'=>"SA",
-        'amount' => $amount,
+        'amount' => 1,
         "udf1" =>"Test1",
         "udf2" =>"https://naqshart.com/api/success",  //Response page URL
         "udf3"=>"",
@@ -160,7 +160,7 @@ class OrderController extends Controller
             $inquirystatus       = $urldecodeapi['result'];
             $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
             if (Str::contains($request->Result,'Succ')  && $request->ResponseCode==='000') {
-                if($inquirystatus=='Successful' || $inquiryResponsecode=='000'){
+                if($inquirystatus=='Successful' || $inquiryResponsecode=='000' || $request->ResponseCode==='000'){
                     $palettes = collect();
                     $responseData = collect();
                     $responseData->last4Digits=substr($request->maskedPAN,-4);
