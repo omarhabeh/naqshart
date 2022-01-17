@@ -65,7 +65,6 @@ class OrderController extends Controller
     $merchant_key = "fb3742da128af60853970790ddc8c9705cc74e9e68946b283e086ac10004e54f";// Will be provided by URWAY
     $currencycode = "SAR";
     $amount = $request['totalprice'];
-    dd($totalprice , $amount);
     $ipp = $this->get_server_ip();
     $txn_details= $idorder.'|'.$terminalId.'|'.$password.'|'.$merchant_key.'|'.$amount.'|'.$currencycode;
     $hash=hash('sha256', $txn_details);
