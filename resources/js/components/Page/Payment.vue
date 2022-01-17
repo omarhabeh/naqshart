@@ -19,10 +19,24 @@
           <span style="float: right" class="mr-3">
             <span style="color: #737171"></span>
             <template v-if="currency == 'sar'"
-              >{{ $t("currency.sar") }} {{ cartTotalPriceSAR }}</template
+              >{{ $t("currency.sar") }}
+              {{
+                (
+                  cartTotalPriceSAR +
+                  parseFloat(Shipping_res) -
+                  discount_value_sar
+                ).toFixed(2)
+              }}</template
             >
             <template v-else
-              >{{ $t("currency.usd1") }} {{ cartTotalPrice }}</template
+              >{{ $t("currency.usd1") }}
+              {{
+                (
+                  cartTotalPrice +
+                  parseFloat(Shipping_res_us) -
+                  discount_value
+                ).toFixed(2)
+              }}</template
             >
             <!-- {{cartTotalPrice}} SAR -->
           </span>
@@ -43,10 +57,24 @@
           <span style="float: right" class="mr-3">
             <span style="color: #737171"></span>
             <template v-if="currency == 'sar'"
-              >{{ $t("currency.sar") }} {{ cartTotalPriceSAR }}</template
+              >{{ $t("currency.sar") }}
+              {{
+                (
+                  cartTotalPriceSAR +
+                  parseFloat(Shipping_res) -
+                  discount_value_sar
+                ).toFixed(2)
+              }}</template
             >
             <template v-else
-              >{{ $t("currency.usd1") }} {{ cartTotalPrice }}</template
+              >{{ $t("currency.usd1") }}
+              {{
+                (
+                  cartTotalPrice +
+                  parseFloat(Shipping_res_us) -
+                  discount_value
+                ).toFixed(2)
+              }}</template
             >
             <!-- {{cartTotalPrice}} SAR -->
           </span>
@@ -102,12 +130,85 @@
                   </v-btn>
                 </v-col>
               </v-row>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="alert alert-success"
+                    v-if="discount_status == true"
+                    role="alert"
+                  >
+                    the discount code was successfully applied.
+                  </div>
+                  <div
+                    class="alert alert-danger"
+                    v-if="discount_status == false"
+                    role="alert"
+                  >
+                    the discount code is wrong.
+                  </div>
+                </div>
+              </div>
             </v-form>
           </div>
           <hr />
+          <div>
+            <span
+              style="
+                font-size: 1.2em;
+                padding-left: 10px;
+                color: #323232;
+                font-weight: 600;
+              "
+              >Subtotal</span
+            >
+            <span style="float: right">
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.sar") }} {{ cartTotalPriceSAR }}</strong
+                  >
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.usd1") }} {{ cartTotalPrice }}</strong
+                  >
+                </template>
+              </span>
+            </span>
+            <div style="clear: both"></div>
+          </div>
+          <hr />
+          <div v-if="Shipping_res != 0">
+            <span
+              style="
+                font-size: 1.2em;
+                padding-left: 10px;
+                color: #323232;
+                font-weight: 600;
+              "
+              >Shipping</span
+            >
+            <span style="float: right">
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.sar") }} {{ Shipping_res }}</strong
+                  >
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.usd1") }} {{ Shipping_res_us }}</strong
+                  >
+                </template>
+              </span>
+            </span>
+            <div style="clear: both"></div>
+            <hr />
+          </div>
+
           <!-- <div class="discount_text" style="color:#737171;padding:10px"> -->
           <div style="padding: 10px" v-if="discount_value_sar != 0">
-            <span style="padding: 10px; color: #444f58">Subtotal</span>
+            <span style="padding: 10px; color: #444f58">Discount</span>
             <span
               style="float: right; color: #444f58; padding-right: 10px"
               v-if="currency == 'sar'"
@@ -119,8 +220,9 @@
               >{{ discount_value }} {{ $t("currency.usd1") }}</span
             >
             <div style="clear: both"></div>
+            <hr />
           </div>
-          <hr />
+
           <!-- <div class="mt-3">
                 <span>Shipping</span>
                 <span style="float:right">calculated at next</span>
@@ -134,12 +236,26 @@
               <span style="color: #737171; padding-right: 10px">
                 <template v-if="currency == 'sar'">
                   <strong style="color: #323232; font-size: 1.5em"
-                    >{{ $t("currency.sar") }} {{ cartTotalPriceSAR }}</strong
+                    >{{ $t("currency.sar") }}
+                    {{
+                      (
+                        cartTotalPriceSAR +
+                        parseFloat(Shipping_res) -
+                        discount_value_sar
+                      ).toFixed(2)
+                    }}</strong
                   >
                 </template>
                 <template v-else>
                   <strong style="color: #323232; font-size: 1.5em"
-                    >{{ $t("currency.usd1") }} {{ cartTotalPrice }}</strong
+                    >{{ $t("currency.usd1") }}
+                    {{
+                      (
+                        cartTotalPrice +
+                        parseFloat(Shipping_res_us) -
+                        discount_value
+                      ).toFixed(2)
+                    }}</strong
                   >
                 </template>
                 <!-- SAR&nbsp; &nbsp;
@@ -173,7 +289,7 @@
           id="mainformEN"
           style="transition-duration: 5s; transition: all 2s linear"
         >
-          <v-container >
+          <v-container>
             <div class="alert text-left mb-3">
               <h5 class="red--text" v-if="errors.items">
                 {{ $t("message.noitem") }}
@@ -347,13 +463,14 @@
               </v-col>
             </v-row>
           </v-container>
-           <v-container>
+          <v-container>
             <v-btn
-            type="submit" form="mainformEN"
+              type="submit"
+              form="mainformEN"
               color="#197bbd"
               style="
                 float: right;
-                margin-left:20px;
+                margin-left: 20px;
                 margin-bottom: 20px;
                 font-weight: 100;
                 text-transform: none;
@@ -364,7 +481,7 @@
             </v-btn>
             <small class="servererror text-danger d-block"></small>
             <small class="servererrorReason text-danger d-block"></small>
-             </v-container>
+          </v-container>
         </v-form>
       </div>
       <div class="col-md-5 lg_discount" style="background-color: #fafafa">
@@ -413,6 +530,24 @@
                   >
                 </v-col>
               </v-row>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="alert alert-success"
+                    v-if="discount_status == true"
+                    role="alert"
+                  >
+                    the discount code was successfully applied.
+                  </div>
+                  <div
+                    class="alert alert-danger"
+                    v-if="discount_status == false"
+                    role="alert"
+                  >
+                    the discount code is wrong.
+                  </div>
+                </div>
+              </div>
             </v-form>
           </div>
           <hr />
@@ -425,7 +560,7 @@
                 color: #535353;
                 font-weight: 600;
               "
-              >Subtotal</span
+              >Discount</span
             >
             <span
               style="
@@ -459,7 +594,7 @@
               <div style="clear:both"></div>
           </div>-->
           <!-- </div> -->
-          <div v-if="Shipping_res != null">
+          <div v-if="Shipping_res != 0">
             <span
               style="
                 font-size: 1.2em;
@@ -511,7 +646,7 @@
             </span>
             <div style="clear: both"></div>
           </div>
-          <div v-if="Shipping_res != null">
+          <div v-if="Shipping_res != 0">
             <hr />
             <span
               style="
@@ -527,13 +662,25 @@
                 <template v-if="currency == 'sar'">
                   <strong style="color: #323232; font-size: 1.5em"
                     >{{ $t("currency.sar") }}
-                    {{ cartTotalPriceSAR + parseFloat(Shipping_res) }}</strong
+                    {{
+                      (
+                        cartTotalPriceSAR +
+                        parseFloat(Shipping_res) -
+                        discount_value_sar
+                      ).toFixed(2)
+                    }}</strong
                   >
                 </template>
                 <template v-else>
                   <strong style="color: #323232; font-size: 1.5em"
                     >{{ $t("currency.usd1") }}
-                    {{ cartTotalPrice + parseFloat(Shipping_res_us) }}</strong
+                    {{
+                      (
+                        cartTotalPrice +
+                        parseFloat(Shipping_res_us) -
+                        discount_value
+                      ).toFixed(2)
+                    }}</strong
                   >
                 </template>
               </span>
@@ -561,10 +708,24 @@
           <span style="float: right" class="mr-3">
             <span style="color: #737171"></span>
             <template v-if="currency == 'sar'"
-              >{{ $t("currency.sar") }} {{ cartTotalPriceSAR }}</template
+              >{{ $t("currency.sar") }}
+              {{
+                (
+                  cartTotalPriceSAR +
+                  parseFloat(Shipping_res) -
+                  discount_value_sar
+                ).toFixed(2)
+              }}</template
             >
             <template v-else
-              >{{ $t("currency.usd1") }} {{ cartTotalPrice }}</template
+              >{{ $t("currency.usd1") }}
+              {{
+                (
+                  cartTotalPrice +
+                  parseFloat(Shipping_res_us) -
+                  discount_value
+                ).toFixed(2)
+              }}</template
             >
           </span>
           <div style="clear: both"></div>
@@ -584,10 +745,24 @@
           <span style="float: right" class="mr-3">
             <span style="color: #737171"></span>
             <template v-if="currency == 'sar'"
-              >{{ $t("currency.sar") }} {{ cartTotalPriceSAR }}</template
+              >{{ $t("currency.sar") }}
+              {{
+                (
+                  cartTotalPriceSAR +
+                  parseFloat(Shipping_res) -
+                  discount_value_sar
+                ).toFixed(2)
+              }}</template
             >
             <template v-else
-              >{{ $t("currency.usd1") }} {{ cartTotalPrice }}</template
+              >{{ $t("currency.usd1") }}
+              {{
+                (
+                  cartTotalPrice +
+                  parseFloat(Shipping_res_us) -
+                  discount_value
+                ).toFixed(2)
+              }}</template
             >
             <!-- {{cartTotalPrice}} SAR -->
           </span>
@@ -643,9 +818,82 @@
                   </v-btn>
                 </v-col>
               </v-row>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="alert alert-success"
+                    v-if="discount_status == true"
+                    role="alert"
+                  >
+                    تم تفعيل الكوبون
+                  </div>
+                  <div
+                    class="alert alert-danger"
+                    v-if="discount_status == false"
+                    role="alert"
+                  >
+                    الكوبون غير موجود
+                  </div>
+                </div>
+              </div>
             </v-form>
           </div>
           <hr />
+          <div>
+            <span
+              style="
+                float: right;
+                font-size: 1.2em;
+                padding-left: 10px;
+                color: #323232;
+                font-weight: 600;
+              "
+              >الحساب نصف الإجمالي</span
+            >
+            <span>
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.sar") }} {{ cartTotalPriceSAR }}</strong
+                  >
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.usd1") }} {{ cartTotalPrice }}</strong
+                  >
+                </template>
+              </span>
+            </span>
+          </div>
+          <hr />
+          <div v-if="Shipping_res != 0">
+            <span
+              style="
+                float: right;
+                font-size: 1.2em;
+                padding-left: 10px;
+                color: #323232;
+                font-weight: 600;
+              "
+              >حساب التوصيل</span
+            >
+            <span>
+              <span style="color: #737171; padding-right: 10px">
+                <template v-if="currency == 'sar'">
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.sar") }} {{ Shipping_res }}</strong
+                  >
+                </template>
+                <template v-else>
+                  <strong style="color: #323232; font-size: 1.5em"
+                    >{{ $t("currency.usd1") }} {{ Shipping_res_us }}</strong
+                  >
+                </template>
+              </span>
+            </span>
+            <div style="clear: both"></div>
+            <hr />
+          </div>
           <div
             class="discount_text"
             style="color: #737171; padding: 10px"
@@ -692,13 +940,21 @@
               <span style="color: #737171; padding-right: 10px">
                 <template v-if="currency == 'sar'">
                   <strong style="color: #323232; font-size: 1.5em">{{
-                    cartTotalPriceSAR
+                    (
+                      cartTotalPriceSAR +
+                      parseFloat(Shipping_res) -
+                      discount_value_sar
+                    ).toFixed(2)
                   }}</strong>
                   {{ $t("currency.sar") }}
                 </template>
                 <template v-else>
                   <strong style="color: #323232; font-size: 1.5em">{{
-                    cartTotalPrice
+                    (
+                      cartTotalPrice +
+                      parseFloat(Shipping_res_us) -
+                      discount_value
+                    ).toFixed(2)
                   }}</strong>
                   {{ $t("currency.usd1") }}
                 </template>
@@ -934,12 +1190,13 @@
           </v-container>
           <v-container>
             <v-btn
-            type="submit" form="mainformAR"
+              type="submit"
+              form="mainformAR"
               color="#197bbd"
               style="
                 float: right;
                 margin-bottom: 20px;
-                margin-left:20px;
+                margin-left: 20px;
                 font-weight: 100;
                 text-transform: none;
               "
@@ -999,6 +1256,24 @@
                   >
                 </v-col>
               </v-row>
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="alert alert-success"
+                    v-if="discount_status == true"
+                    role="alert"
+                  >
+                    تم تفعيل الكوبون
+                  </div>
+                  <div
+                    class="alert alert-danger"
+                    v-if="discount_status == false"
+                    role="alert"
+                  >
+                    الكوبون غير موجود
+                  </div>
+                </div>
+              </div>
             </v-form>
           </div>
           <hr />
@@ -1041,7 +1316,7 @@
             </div>
           </div>
 
-          <div style="padding: 10px" v-if="Shipping_res != null">
+          <div style="padding: 10px" v-if="Shipping_res != 0">
             <span style="float: right; font-size: 1.3em">حساب التوصيل</span>
             <span>
               <span style="color: #737171; padding-right: 10px">
@@ -1083,20 +1358,28 @@
             </span>
             <div style="clear: both"></div>
           </div>
-          <div style="padding: 10px" v-if="Shipping_res != null">
+          <div style="padding: 10px" v-if="Shipping_res != 0">
             <hr />
             <span style="float: right; font-size: 1.3em">الحساب الإجمالي</span>
             <span>
               <span style="color: #737171; padding-right: 10px">
                 <template v-if="currency == 'sar'">
                   <strong style="color: #323232; font-size: 1.5em">{{
-                    cartTotalPriceSAR + parseFloat(Shipping_res)
+                    (
+                      cartTotalPriceSAR +
+                      parseFloat(Shipping_res) -
+                      discount_value_sar
+                    ).toFixed(2)
                   }}</strong>
                   {{ $t("currency.sar") }}
                 </template>
                 <template v-else>
                   <strong style="color: #323232; font-size: 1.5em">{{
-                    cartTotalPrice + parseFloat(Shipping_res_us)
+                    (
+                      cartTotalPrice +
+                      parseFloat(Shipping_res_us) -
+                      discount_value
+                    ).toFixed(2)
                   }}</strong>
                   {{ $t("currency.usd1") }}
                 </template>
@@ -1107,11 +1390,18 @@
         </div>
       </div>
     </div>
-      <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div>
-            <iframe src="#" frameborder="0" id="payment-frame"></iframe>
-        </div>
-        </div>
+    <div
+      class="modal fade"
+      id="payment-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div>
+        <iframe src="#" frameborder="0" id="payment-frame"></iframe>
+      </div>
+    </div>
   </section>
 </template>
  <script>
@@ -1197,7 +1487,16 @@ export default {
           this.countryCode = codes[i].code;
         }
       }
-      this.cities = countries[newCountry];
+      axios
+        .get("/aramix/LocationCitiesFetching.php?country=" + this.countryCode)
+        .then((result) => {
+          if (result.data) {
+            this.cities = result.data.Cities.string;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   data() {
@@ -1205,8 +1504,8 @@ export default {
       errors: {},
       loading: false,
       step: 1,
-      Shipping_res: null,
-      Shipping_res_us: null,
+      Shipping_res: 0,
+      Shipping_res_us: 0,
       form: {
         email: null,
         lname: null,
@@ -1224,9 +1523,11 @@ export default {
         paymentMethod: "",
         shippment_res: 0,
       },
+      discount_status: null,
       discount: "",
       discount_value: 0,
       discount_value_sar: 0,
+      discount_notification: "",
       id: "",
       mobileCode: mobileCodes,
       countries: countriesNames,
@@ -1250,10 +1551,25 @@ export default {
     $(".modal-mask").css("display", "none");
 
     this.form.country = "Saudi Arabia";
-    this.cities = countries["Saudi Arabia"];
+    var newCountry = "Saudi Arabia";
+    for (var i = 0; i < codes.length; i++) {
+      if (codes[i].name == newCountry) {
+        this.countryCode = codes[i].code;
+      }
+    }
+    axios
+      .get("/aramix/LocationCitiesFetching.php?country=" + this.countryCode)
+      .then((result) => {
+        if (result.data) {
+          this.cities = result.data.Cities.string;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // this.cities = countries["Saudi Arabia"];
   },
   created() {
-    this.cartTotalPrice;
     this.cart.forEach((element) => {
       this.form.items.push({
         paletteid: element.product.id,
@@ -1287,19 +1603,37 @@ export default {
       axios
         .post("/api/check-promo", { code: this.discount })
         .then((data) => {
-          // console.log(data.data);
           if (data.data.status) {
-            var price = parseInt(data.data.percentage);
-            this.discount_value = (this.cartTotalPrice * price) / 100;
-            this.cartTotalPrice = this.cartTotalPrice - this.discount_value;
-            this.form.promocode = this.discount;
-            //SAR
-            this.discount_value_sar = (this.cartTotalPriceSAR * price) / 100;
-            this.cartTotalPriceSAR =
-              this.cartTotalPriceSAR - this.discount_value_sar;
+            if (data.data.all_shipping_cost == true) {
+              this.discount_status = true;
+              this.discount_value = this.Shipping_res_us;
+              this.form.promocode = this.discount;
+              //SAR
+              this.discount_value_sar = this.Shipping_res;
+            } else {
+              this.discount_status = true;
+              var price = parseInt(data.data.percentage);
+              this.discount_value = (
+                ((this.cartTotalPrice + parseFloat(this.Shipping_res_us)) *
+                  price) /
+                100
+              ).toFixed(2);
+              this.form.promocode = this.discount;
+              //SAR
+              this.discount_value_sar = (
+                ((this.cartTotalPriceSAR + this.Shipping_res) * price) /
+                100
+              ).toFixed(2);
+            }
+          } else {
+            this.discount_status = false;
+            this.discount_value = 0;
+            this.discount_value_sar = 0;
+            this.form.promocode = 0;
           }
         })
         .catch((e) => {
+          this.discount_status = false;
           console.log(e);
         });
     },
@@ -1333,18 +1667,17 @@ export default {
       axios
         .post("/api/add-order", this.form)
         .then((data) => {
-          if(data.data.url != null){
-              console.log(data.data.url);
-              location.href=data.data.url;
+          if (data.data.url != null) {
+            location.href = data.data.url;
             // $('#payment-frame').attr('src', data.data.url);
             // $('#payment-modal').modal('show');
           }
-          if(data.data.error){
-              $('.servererror').text(data.data.error);
-              $('.servererrorReason').text(data.data.reason);
+          if (data.data.error) {
+            $(".servererror").text(data.data.error);
+            $(".servererrorReason").text(data.data.reason);
           }
-          $('.servererror').text('');
-          $('.servererrorReason').text('');
+          $(".servererror").text("");
+          $(".servererrorReason").text("");
           this.errors = "";
         })
 
@@ -1368,12 +1701,12 @@ export default {
   width: 100% !important;
   -webkit-appearance: -apple-pay-button !important;
 } */
-#payment-modal *{
-    width:100%;
-    height:100%;
+#payment-modal * {
+  width: 100%;
+  height: 100%;
 }
-#payment-modal{
-    overflow-y:hidden;
+#payment-modal {
+  overflow-y: hidden;
 }
 .form {
   width: 87%;

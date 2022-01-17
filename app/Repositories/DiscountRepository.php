@@ -18,7 +18,8 @@ class DiscountRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'code',
-        'discount_percentage'
+        'discount_percentage',
+        'all_shipping_cost'
     ];
 
     /**

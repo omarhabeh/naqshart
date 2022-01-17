@@ -90,7 +90,7 @@ margin-top: -60px;">Order #{{$order->id}}</small>
 
 <h1 style="color: black"> Thank you for your order! </h1>
 <p>
-    Hi  {{$order->fname}},<br>
+    Hi  {{$order->fname}},<br />
 We hope you enjoyed our digital gallery. The tracking information will be shared once the order ships, you can find your order details below:
 </p>
     <hr>

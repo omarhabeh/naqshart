@@ -1338,7 +1338,7 @@ export default {
     moveIndicators(index, moveSlide = true) {
       let list = document.getElementById("carousel-indicators");
       if (this.isMobileWindow) {
-        list.style.transform = "translateX(" + (80 - (80 * index)) + "px)";
+        list.style.transform = "translateX(" + (80 - 80 * index) + "px)";
         if (moveSlide) this.goToSlide(index);
         this.currentArtist = index;
       } else list.style.transform = "translateX(0px)";
@@ -1364,11 +1364,11 @@ export default {
           this.minPalettesActive = response.data.palettes[0];
           this.secondImage = this.minPalettesActive.images[0].img;
           this.goToSlideByID_(this.minPalettesActive.id);
-        //   if (this.minPalettesActive == null) {
-        //     this.minPalettesActive = "";
-        //   } else {
-        //     // this.changeContent(this.currentLanguage);
-        //   }
+          //   if (this.minPalettesActive == null) {
+          //     this.minPalettesActive = "";
+          //   } else {
+          //     // this.changeContent(this.currentLanguage);
+          //   }
 
           if (response.data.palettesArtists.length > 0) {
             this.firstminPalettes = response.data.palettesArtists[0].id;

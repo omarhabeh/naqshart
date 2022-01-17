@@ -18,7 +18,7 @@ class Discount extends Model
     use SoftDeletes;
 
     public $table = 'discounts';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -26,7 +26,8 @@ class Discount extends Model
 
     public $fillable = [
         'code',
-        'discount_percentage'
+        'discount_percentage',
+        'all_shipping_cost'
     ];
 
     /**
@@ -37,7 +38,8 @@ class Discount extends Model
     protected $casts = [
         'id' => 'integer',
         'code' => 'string',
-        'discount_percentage' => 'string'
+        'discount_percentage' => 'string',
+        'all_shipping_cost'=>'boolean'
     ];
 
     /**
@@ -46,8 +48,8 @@ class Discount extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

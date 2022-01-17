@@ -17,10 +17,11 @@ class CheckPromo extends Controller
     public function check_promo(Request $request)
     {
 
+
                 $discount = Discount::where('code', '=', $request->code)->first();
                 if($discount)
         {
-            return response()->json(['status'=>true,'data'=>$discount,'percentage'=>$discount->discount_percentage]);
+            return response()->json(['status'=>true,'data'=>$discount,'percentage'=>$discount->discount_percentage,'all_shipping_cost'=>$discount->all_shipping_cost]);
         }
         else
         {

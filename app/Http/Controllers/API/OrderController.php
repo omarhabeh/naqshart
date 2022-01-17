@@ -54,7 +54,7 @@ class OrderController extends Controller
     $this->shippment_price = $request->shippment_res;
     $totalprice = $this->totalprice($request->items, $request->promocode);
     $request['paymentstatus'] = 'pending';
-    $request['totalprice'] =  $totalprice['totalprice'] + $this->shippment_price;
+    $request['totalprice'] =  $totalprice['totalprice'];
     $request['discount'] = $totalprice['discount_amount'];
     $request['shippment'] = $request->shippment_res;
     $order = Order::create($request->only(['promocode', 'email', 'fname', 'lname', 'address', 'apartment', 'city', 'postcode', 'goverment', 'country', 'goverment', 'country', 'phone', 'phonecode', 'paymentid', 'paymentstatus', 'discount', 'totalprice', 'payment-transaction-return']));
@@ -65,6 +65,7 @@ class OrderController extends Controller
     $merchant_key = "fb3742da128af60853970790ddc8c9705cc74e9e68946b283e086ac10004e54f";// Will be provided by URWAY
     $currencycode = "SAR";
     $amount = $request['totalprice'];
+    dd($totalprice , $amount);
     $ipp = $this->get_server_ip();
     $txn_details= $idorder.'|'.$terminalId.'|'.$password.'|'.$merchant_key.'|'.$amount.'|'.$currencycode;
     $hash=hash('sha256', $txn_details);
@@ -218,13 +219,13 @@ class OrderController extends Controller
         $retarr['totalprice'] = 0;
         $retarr['items'] = [];
         $retarr['discount_amount'] = null;
-
+        $shippment_price =  (float) $this->shippment_price;
         $retarr['baletteitems'] = [];
         $key['small'] = "S_price";
         $key['medium'] = 'M_price';
         $key['large'] = 'L_price';
 
-
+        $retarr['totalprice'] = $retarr['totalprice']+ $shippment_price;
         foreach ($arr as &$item) {
             $palette =   Palette::find($item['paletteid']);
             if ($palette) {
@@ -240,12 +241,20 @@ class OrderController extends Controller
 
         if ($promocode) {
             $discount = Discount::where('code', '=', $promocode)->first();
-            if ($discount) {
-                $discount =  $discount->discount_percentage;
-                $discount_amount =  $retarr['totalprice'] * ($discount / 100);
 
-                $retarr['totalprice'] =   $retarr['totalprice'] -  $discount_amount;
-                $retarr['discount_amount'] =  $discount;
+            if ($discount) {
+                if($discount->all_shipping_cost){
+                    $retarr['totalprice'] =   $retarr['totalprice'] - $shippment_price;
+                    $retarr['discount_amount'] =  $discount;
+                }
+                else{
+                    $discount =  $discount->discount_percentage;
+                    $discount_amount =  ($retarr['totalprice']) * ($discount / 100);
+
+                    $retarr['totalprice'] =  ($retarr['totalprice']) -  $discount_amount;
+                    $retarr['discount_amount'] =  $discount;
+                }
+
             }
         }
         return $retarr;
