@@ -984,7 +984,7 @@
             </div>
           </div>
         </div>
-        <v-form class="form" @submit.prevent="send" id="mainformAR">
+        <v-form class="form" @submit.prevent="send" id="mainformAR" autocomplete="on">
           <v-container>
             <div class="alert text-center mb-3">
               <h5 class="red--text" v-if="errors.items">
