@@ -32,6 +32,8 @@ Route::get('/aramexcode/{id}/{code}',function($id,$code){
     $palettes = OrderPalette::where('order_id',$id)->get()->first();
     $palette = Palette::find($palettes->palatte_id);
     Mail::to($order->email)->send(new track($order,$code,$palette));
+    if ($order->paymentstatus == 'Processing'){
+        $order->update(['paymentstatus' => 'delivering']); }
     return response()->json([$palette,$order,$palettes]);
 });
 Route::view('/', 'userLayout.home');

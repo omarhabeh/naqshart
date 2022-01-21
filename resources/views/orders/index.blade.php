@@ -153,14 +153,14 @@
                               
                                 {{-- <a style=" margin-left: 15px;" href="{{ route('appliedorder.show', [$appliedartist->id]) }}"
                                 class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a> --}}
-                                {!! Form::open(['route' => ['orders.complete', $appliedartist->id], 'method' =>
-                                'put']) !!}
+                                {{-- {!! Form::open(['route' => ['orders.complete', $appliedartist->id], 'method' =>
+                                'put']) !!} --}}
                                 @if ($appliedartist->paymentstatus == 'Processing')
                                 <div class='btn-group'>
-                                    <button class="btn btn-danger btn-xs" onclick="return clicked({!!$appliedartist->id!!})" type="submit"><i class="glyphicon glyphicon-saved"></i></button>
+                                    <button class="btn btn-danger btn-xs" onclick="clicked({!!$appliedartist->id!!})" type="submit"><i class="glyphicon glyphicon-saved"></i></button>
                                 </div>
                                 @endif
-                                {!! Form::close() !!}
+                                {{-- {!! Form::close() !!} --}}
                                 {!! Form::open(['route' => ['orders.finished', $appliedartist->id], 'method' =>
                                 'put']) !!}
                                 @if ($appliedartist->paymentstatus == 'delivering')
@@ -198,6 +198,7 @@
         success: function(res) {
             console.log(res);
             alert('successfully sent email and complete order!');
+            location.reload();
             return true;
         }
     });
