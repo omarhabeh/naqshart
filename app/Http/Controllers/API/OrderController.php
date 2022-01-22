@@ -21,6 +21,7 @@ use Illuminate\Support\Str;
 class OrderController extends Controller
 {
     public $shippment_price = 0;
+    public $balleteitems = [];
     /**
      * Display a listing of the resource.
      *
@@ -53,6 +54,7 @@ class OrderController extends Controller
     public function urwa_create(OrderResquest $request){
     $this->shippment_price = $request->shippment_res;
     $totalprice = $this->totalprice($request->items, $request->promocode);
+    $this->balleteitems = $totalprice['baletteitems'];
     $request['paymentstatus'] = 'pending';
     $request['totalprice'] =  $totalprice['totalprice'];
     $request['discount'] = $totalprice['discount_amount'];
