@@ -119,7 +119,7 @@ export default {
     display: none !important;
   }
   .hero-classic {
-    margin-top: 52px !important;
+    margin-top: 87px !important
   }
   #hero-container_2 {
     background-size: contain !important;

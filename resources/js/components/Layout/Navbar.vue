@@ -3,12 +3,103 @@
   <div>
     <div class="ticker-wrap">
       <div class="ticker">
-        <div class="ticker__item">
-          <h3 v-if="currentLanguage == 'en'">Free worldwide shipping</h3>
-          <h3 v-if="currentLanguage == 'ar'">شحن مجاني لجميع أنحاء العالم</h3>
-          <p v-if="currentLanguage == 'en'">use code: <b>art4all</b></p>
-          <p v-if="currentLanguage == 'ar'"><b>art4all</b>  :استخدم الكود</p>
-        </div>                                         
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+        <div class="ticker__item en" v-if="currentLanguage == 'en'">
+          <h3 class="en">Free worldwide shipping</h3>
+          <p>use code: <b>art4all</b></p>
+        </div>     
+        <div class="ticker__item ar" v-if="currentLanguage == 'ar'">
+          <h3 class="ar">شحن مجاني لجميع أنحاء العالم</h3>
+          <p> :استخدم الكود <b> art4all </b></p>
+        </div>     
+                                            
       </div>
     </div>
     <!-- end moving bar -->
@@ -407,13 +498,9 @@ export default {
         $("#navbar-toggler").addClass("shop");
       }
     },
-    // currentLanguage(newLang, oldLang) {
-    //   //   console.log($(".spinner-content"));
-    //   //   setInterval(() => {
-    //   $(".spinner-content").fadeIn("1000");
-    //   $(".spinner-content").fadeOut("1000");
-    //   //   }, 1000);
-    // },
+    currentLanguage(newLang, oldLang) {
+
+    },
     // currency(newCurrency, oldCurrency) {
     //   $(".spinner-content").fadeIn("1000");
     //   $(".spinner-content").fadeOut("1000");
@@ -459,10 +546,21 @@ export default {
   },
   mounted() {
     /* news bar */
-    var e = $('.ticker__item');
-    for (var i = 0; i < 100; i++) {
-        e.clone().insertAfter(e);
-    }
+    // console.log(this.$i18n.locale);
+    // if(this.$i18n.locale == 'en'){
+    //   var e = $('.ticker__item.en');
+    //   for (var i = 0; i < 100; i++) {
+    //       e.clone().insertAfter(e);
+    //   }
+    //   $('.ticker__item.ar').remove();
+    // }
+    // else{
+    //   var e = $('.ticker__item.ar');
+    //   for (var i = 0; i < 100; i++) {
+    //       e.clone().insertAfter(e);
+    //   }
+    //   $('.ticker__item.en').remove();
+    // }
     /* end news bar */
     axios
       .get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
@@ -1189,6 +1287,9 @@ svg {
   margin: 0 0 0 60px;
   color: black;
 font-weight: bold;
+}
+.ticker-wrap h3.ar{
+  margin: 0 0 60px 0;
 }
 .ticker-wrap p {
   font-size: 14px;
