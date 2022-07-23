@@ -1,243 +1,265 @@
 <template>
-  <nav
-    :class="'navbar navbar-expand-md ' + navbar + ' px-3 sticky-top'"
-    style="direction: ltr"
-    id="navbar"
-  >
-    <button
-      class="navbar-toggler"
-      id="navbar-toggler"
-      type="button"
-      @click="expanding()"
+  <!-- moving bar -->
+  <div>
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <div class="ticker__item">
+          <h3 v-if="currentLanguage == 'en'">Free worldwide shipping</h3>
+          <h3 v-if="currentLanguage == 'ar'">شحن مجاني لجميع أنحاء العالم</h3>
+          <p v-if="currentLanguage == 'en'">use code: <b>art4all</b></p>
+          <p v-if="currentLanguage == 'ar'"><b>art4all</b>  :استخدم الكود</p>
+        </div>                                         
+      </div>
+    </div>
+    <!-- end moving bar -->
+
+    <nav
+      :class="'navbar navbar-expand-md ' + navbar + ' px-3 sticky-top'"
+      style="direction: ltr"
+      id="navbar"
     >
-      <span></span>
-      <span></span>
-      <span></span>
-      <!-- <span :class="'navbar-toggler-icon '+toggleImage"></span> -->
-      <!-- <span class="navbar-toggler-icon" v-if="$route.name!='shop'"></span>
+      <button
+        class="navbar-toggler"
+        id="navbar-toggler"
+        type="button"
+        @click="expanding()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+        <!-- <span :class="'navbar-toggler-icon '+toggleImage"></span> -->
+        <!-- <span class="navbar-toggler-icon" v-if="$route.name!='shop'"></span>
       <i class="fas fa-bars" v-else style="color:#fff;"></i>-->
-    </button>
-    <a class="navbar-brand" href="/">
-      <img class="logo-ecs" :src="logoImage" width="32px" alt />
-    </a>
-    <button class="nav-btns nav_sm_btn" @click="showsModal()">
-      <img
-        :src="cartImage"
-        @click="showsModal()"
-        alt="Shopping Cart"
-        width="33px"
-      />
-      <span id="count">{{ cartItemCount }}</span>
-    </button>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img class="logo-ecs" :src="logoImage" width="32px" alt />
+      </a>
+      <button class="nav-btns nav_sm_btn" @click="showsModal()">
+        <img
+          :src="cartImage"
+          @click="showsModal()"
+          alt="Shopping Cart"
+          width="33px"
+        />
+        <span id="count">{{ cartItemCount }}</span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <ul
-        class="navbar-nav mx-auto mt-2 mt-lg-0 text-center"
-        id="navbar-nav"
-        v-if="$i18n.locale == 'en'"
-      >
-        <li class="nav-item home">
-          <router-link to="/">
-            <a class="nav-link">
-              {{ $t("message.home") }}
-              <span class="sr-only">(current)</span>
-            </a>
-          </router-link>
-        </li>
-        <li class="nav-item shop shop_sm">
-          <router-link to="/shop">
-            <a class="nav-link">Gallery</a>
-          </router-link>
-        </li>
-        <li class="nav-item about">
-          <router-link to="/about">
-            <a class="nav-link">{{ $t("message.about") }}</a>
-          </router-link>
-        </li>
-        <li class="lang_sm about">
-          <LanguageDropdown
-            class="nav-link"
-            style="display: flex"
-          ></LanguageDropdown>
-        </li>
-        <li class="lang_sm about">
-          <CurrencyChanger
-            class="nav-link"
-            style="display: flex"
-          ></CurrencyChanger>
-        </li>
-        <li class="nav-about">
-          <ul class="nav-content">
-            <li>
-              <router-link to="/terms">{{ $t("navbar.terms") }}</router-link>
-              <!-- <a href="#"></a> -->
-            </li>
-            <li>
-              <router-link to="/privacy">{{
-                $t("navbar.privacy")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/refund">{{ $t("navbar.refund") }}</router-link>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <ul
-        class="navbar-nav mx-auto mt-2 mt-lg-0 text-center"
-        id="navbar-nav"
-        v-else
-      >
-        <li class="nav-item about about_sm">
-          <router-link to="/about" class="lg">
-            <a class="nav-link">{{ $t("message.about") }}</a>
-          </router-link>
-          <router-link to="/" class="sm">
-            <a class="nav-link">
-              {{ $t("message.home") }}
-              <span class="sr-only">(current)</span>
-            </a>
-          </router-link>
-        </li>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul
+          class="navbar-nav mx-auto mt-2 mt-lg-0 text-center"
+          id="navbar-nav"
+          v-if="$i18n.locale == 'en'"
+        >
+          <li class="nav-item home">
+            <router-link to="/">
+              <a class="nav-link">
+                {{ $t("message.home") }}
+                <span class="sr-only">(current)</span>
+              </a>
+            </router-link>
+          </li>
+          <li class="nav-item shop shop_sm">
+            <router-link to="/shop">
+              <a class="nav-link">Gallery</a>
+            </router-link>
+          </li>
+          <li class="nav-item about">
+            <router-link to="/about">
+              <a class="nav-link">{{ $t("message.about") }}</a>
+            </router-link>
+          </li>
+          <li class="lang_sm about">
+            <LanguageDropdown
+              class="nav-link"
+              style="display: flex"
+            ></LanguageDropdown>
+          </li>
+          <li class="lang_sm about">
+            <CurrencyChanger
+              class="nav-link"
+              style="display: flex"
+            ></CurrencyChanger>
+          </li>
+          <li class="nav-about">
+            <ul class="nav-content">
+              <li>
+                <router-link to="/terms">{{ $t("navbar.terms") }}</router-link>
+                <!-- <a href="#"></a> -->
+              </li>
+              <li>
+                <router-link to="/privacy">{{
+                  $t("navbar.privacy")
+                }}</router-link>
+              </li>
+              <li>
+                <router-link to="/refund">{{
+                  $t("navbar.refund")
+                }}</router-link>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul
+          class="navbar-nav mx-auto mt-2 mt-lg-0 text-center"
+          id="navbar-nav"
+          v-else
+        >
+          <li class="nav-item about about_sm">
+            <router-link to="/about" class="lg">
+              <a class="nav-link">{{ $t("message.about") }}</a>
+            </router-link>
+            <router-link to="/" class="sm">
+              <a class="nav-link">
+                {{ $t("message.home") }}
+                <span class="sr-only">(current)</span>
+              </a>
+            </router-link>
+          </li>
 
-        <li class="nav-item shop shop_sm">
-          <router-link to="/shop" >
-            <a class="nav-link" v-if="currentLanguage == 'ar'">المعرض</a>
-            <a class="nav-link" v-if="currentLanguage == 'en'">Gallery</a>
-          </router-link>
-        </li>
-        <li class="nav-item home home_sm">
-          <router-link to="/" class="lg">
-            <a class="nav-link">
-              {{ $t("message.home") }}
-              <span class="sr-only">(current)</span>
-            </a>
-          </router-link>
-          <router-link to="/about" class="sm">
-            <a class="nav-link">{{ $t("message.about") }}</a>
-          </router-link>
-        </li>
-        <li class="lang_sm about">
-          <LanguageDropdown
-            class="nav-link"
-            style="display: flex"
-          ></LanguageDropdown>
-        </li>
-        <li class="lang_sm about">
-          <CurrencyChanger
-            class="nav-link"
-            style="display: flex"
-          ></CurrencyChanger>
-        </li>
-        <li class="nav-about">
-          <ul class="nav-content">
-            <li>
-              <router-link to="/terms">{{ $t("navbar.terms") }}</router-link>
-            </li>
-            <li>
-              <router-link to="/privacy">{{
-                $t("navbar.privacy")
-              }}</router-link>
-            </li>
-            <li>
-              <router-link to="/refund">{{ $t("navbar.refund") }}</router-link>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="lang_lg">
-      <LanguageDropdown class="lang"></LanguageDropdown>
-    </div>
-    <div class="lang_lg ml-2">
-      <CurrencyChanger class="lang"></CurrencyChanger>
-    </div>
-    <button
-      class="nav-btns nav_lg_btn"
-      style="margin-left: 1vw"
-      @click="showsModal()"
-    >
-      <img
-        src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656"
+          <li class="nav-item shop shop_sm">
+            <router-link to="/shop">
+              <a class="nav-link" v-if="currentLanguage == 'ar'">المعرض</a>
+              <a class="nav-link" v-if="currentLanguage == 'en'">Gallery</a>
+            </router-link>
+          </li>
+          <li class="nav-item home home_sm">
+            <router-link to="/" class="lg">
+              <a class="nav-link">
+                {{ $t("message.home") }}
+                <span class="sr-only">(current)</span>
+              </a>
+            </router-link>
+            <router-link to="/about" class="sm">
+              <a class="nav-link">{{ $t("message.about") }}</a>
+            </router-link>
+          </li>
+          <li class="lang_sm about">
+            <LanguageDropdown
+              class="nav-link"
+              style="display: flex"
+            ></LanguageDropdown>
+          </li>
+          <li class="lang_sm about">
+            <CurrencyChanger
+              class="nav-link"
+              style="display: flex"
+            ></CurrencyChanger>
+          </li>
+          <li class="nav-about">
+            <ul class="nav-content">
+              <li>
+                <router-link to="/terms">{{ $t("navbar.terms") }}</router-link>
+              </li>
+              <li>
+                <router-link to="/privacy">{{
+                  $t("navbar.privacy")
+                }}</router-link>
+              </li>
+              <li>
+                <router-link to="/refund">{{
+                  $t("navbar.refund")
+                }}</router-link>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="lang_lg">
+        <LanguageDropdown class="lang"></LanguageDropdown>
+      </div>
+      <div class="lang_lg ml-2">
+        <CurrencyChanger class="lang"></CurrencyChanger>
+      </div>
+      <button
+        class="nav-btns nav_lg_btn"
+        style="margin-left: 1vw"
         @click="showsModal()"
-        alt="Shopping Cart"
-        width="33px"
-      />
-      <span id="count">{{ cartItemCount }}</span>
-    </button>
-    <div>
-      <transition name="modal">
-        <div class="modal-mask" ref="mycart">
-          <div class="modal-wrapper">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content" style="color: #000 !important">
-                <div class="modal-header" style="margin-top: 4% !important">
-                  <h5 class="modal-title">{{ $t("message.cartname") }}</h5>
-                  <button
-                    type="button"
-                    class="close mr-1"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true" @click="closeModal()">
-                      <svg role="presentation" viewBox="0 0 16 14">
-                        <path
-                          d="M15 0L1 14m14 0L1 0"
-                          fill="none"
-                          fill-rule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </div>
-                <div class="modal-timer" v-if="cartItemCount != 0">
-                  <template v-if="currentLanguage == 'en'">
-                    Due to Limited Stock and High Demand ⌛ We can only hold
-                    your order for
-                  </template>
-                  <template v-else
-                    >بسبب المخزون المحدود والطلب المرتفع ⌛يمكننا فقط الاحتفاظ
-                    بطلبك لـ</template
-                  >
-                  <span style="font-weight: bold">{{ formattedTimeLeft }}</span>
-                  <template v-if="currentLanguage == 'en'">minutes...</template>
-                  <template v-else>دقيقة ...</template>
-                  <!--  -->
-                </div>
-                <div class="modal-body">
-                  <p class="cart-empty" v-if="cartItemCount == 0">
-                    {{
-                      currentLanguage == "en"
-                        ? "Your cart is empty."
-                        : "السلة فارغة"
-                    }}
-                  </p>
-                  <!-- -----------------------------pallalet cart----------------- -->
-                  <div
-                    class="row p-4 mt-2 border-bottom"
-                    v-for="(item, index) in cart"
-                    :key="item.id"
-                  >
-                    <div class="col-md-sm-4 ml-1">
-                      <img :src="item.product.artistMinPalettes.img" />
-                    </div>
-                    <div class="col-md-sm-8 ml-3">
-                      <span class="move move1">
-                        <strong>{{ item.product.name }}</strong>
+      >
+        <img
+          src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656"
+          @click="showsModal()"
+          alt="Shopping Cart"
+          width="33px"
+        />
+        <span id="count">{{ cartItemCount }}</span>
+      </button>
+      <div>
+        <transition name="modal">
+          <div class="modal-mask" ref="mycart">
+            <div class="modal-wrapper">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content" style="color: #000 !important">
+                  <div class="modal-header" style="margin-top: 4% !important">
+                    <h5 class="modal-title">{{ $t("message.cartname") }}</h5>
+                    <button
+                      type="button"
+                      class="close mr-1"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true" @click="closeModal()">
+                        <svg role="presentation" viewBox="0 0 16 14">
+                          <path
+                            d="M15 0L1 14m14 0L1 0"
+                            fill="none"
+                            fill-rule="evenodd"
+                          />
+                        </svg>
                       </span>
-                      <!-- <h6  style="font-size:14px">{{ item.sizeTarget }}  {{item.sizeCm}} </h6> -->
-                      <h6
-                        class="move"
-                        style="margin-top: 10px"
-                        v-if="currency == 'sar'"
-                      >
-                        {{ item.product.M_price_sar }}.00
-                        {{ $t("currency.sar") }}
-                      </h6>
-                      <h6 class="move" style="margin-top: 10px" v-else>
-                        {{ $t("currency.usd1") }} {{ item.price }}.00
-                      </h6>
-                      <!-- <v-form class="control-increse" style="width:50%;display:inline-block">
+                    </button>
+                  </div>
+                  <div class="modal-timer" v-if="cartItemCount != 0">
+                    <template v-if="currentLanguage == 'en'">
+                      Due to Limited Stock and High Demand ⌛ We can only hold
+                      your order for
+                    </template>
+                    <template v-else
+                      >بسبب المخزون المحدود والطلب المرتفع ⌛يمكننا فقط الاحتفاظ
+                      بطلبك لـ</template
+                    >
+                    <span style="font-weight: bold">{{
+                      formattedTimeLeft
+                    }}</span>
+                    <template v-if="currentLanguage == 'en'"
+                      >minutes...</template
+                    >
+                    <template v-else>دقيقة ...</template>
+                    <!--  -->
+                  </div>
+                  <div class="modal-body">
+                    <p class="cart-empty" v-if="cartItemCount == 0">
+                      {{
+                        currentLanguage == "en"
+                          ? "Your cart is empty."
+                          : "السلة فارغة"
+                      }}
+                    </p>
+                    <!-- -----------------------------pallalet cart----------------- -->
+                    <div
+                      class="row p-4 mt-2 border-bottom"
+                      v-for="(item, index) in cart"
+                      :key="item.id"
+                    >
+                      <div class="col-md-sm-4 ml-1">
+                        <img :src="item.product.artistMinPalettes.img" />
+                      </div>
+                      <div class="col-md-sm-8 ml-3">
+                        <span class="move move1">
+                          <strong>{{ item.product.name }}</strong>
+                        </span>
+                        <!-- <h6  style="font-size:14px">{{ item.sizeTarget }}  {{item.sizeCm}} </h6> -->
+                        <h6
+                          class="move"
+                          style="margin-top: 10px"
+                          v-if="currency == 'sar'"
+                        >
+                          {{ item.product.M_price_sar }}.00
+                          {{ $t("currency.sar") }}
+                        </h6>
+                        <h6 class="move" style="margin-top: 10px" v-else>
+                          {{ $t("currency.usd1") }} {{ item.price }}.00
+                        </h6>
+                        <!-- <v-form class="control-increse" style="width:50%;display:inline-block">
                         <v-text-field v-model=" item.quantity ">
                           <v-icon slot="append" @click="addToCart(item.product )">mdi-plus</v-icon>
                           <v-icon
@@ -246,59 +268,61 @@
                           >mdi-minus</v-icon>
                         </v-text-field>
                       </v-form> -->
-                    </div>
-                    <div class="pro">
-                      <button
-                        class="ml-3 btn delete"
-                        @click.prevent="clearProductFromCart(index)"
-                      >
-                        {{ $t("message.remove") }}
-                      </button>
+                      </div>
+                      <div class="pro">
+                        <button
+                          class="ml-3 btn delete"
+                          @click.prevent="clearProductFromCart(index)"
+                        >
+                          {{ $t("message.remove") }}
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div
-                  class="modal-footer modal-cart-footer"
-                  v-if="cartItemCount > 0"
-                >
-                  <router-link
-                    style="margin: auto; color: #fff"
-                    :to="{
-                      path: '/checkout',
-                    }"
+                  <div
+                    class="modal-footer modal-cart-footer"
+                    v-if="cartItemCount > 0"
                   >
-                    <button
-                      type="button"
-                      class="btn checkout mb-6"
-                      style="font-size: 18px"
-                      v-if="currency == 'sar'"
+                    <router-link
+                      style="margin: auto; color: #fff"
+                      :to="{
+                        path: '/checkout',
+                      }"
                     >
-                      {{ $t("message.total") }} : {{ cartTotalPriceSAR }}
-                      {{ $t("currency.sar") }}&nbsp;
-                      <strong>.</strong>
-                      &nbsp; {{ $t("message.checkout") }}
-                    </button>
-                    <button
-                      type="button"
-                      class="btn checkout mb-6"
-                      style="font-size: 18px"
-                      v-else
-                    >
-                      {{ $t("message.total") }} : {{ cartTotalPrice }}
-                      {{ $t("currency.usd1") }}&nbsp;
-                      <strong>.</strong>
-                      &nbsp; {{ $t("message.checkout") }}
-                    </button>
-                  </router-link>
+                      <button
+                        type="button"
+                        class="btn checkout mb-6"
+                        style="font-size: 18px"
+                        v-if="currency == 'sar'"
+                      >
+                        {{ $t("message.total") }} : {{ cartTotalPriceSAR }}
+                        {{ $t("currency.sar") }}&nbsp;
+                        <strong>.</strong>
+                        &nbsp; {{ $t("message.checkout") }}
+                      </button>
+                      <button
+                        type="button"
+                        class="btn checkout mb-6"
+                        style="font-size: 18px"
+                        v-else
+                      >
+                        {{ $t("message.total") }} : {{ cartTotalPrice }}
+                        {{ $t("currency.usd1") }}&nbsp;
+                        <strong>.</strong>
+                        &nbsp; {{ $t("message.checkout") }}
+                      </button>
+                    </router-link>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </transition>
-    </div>
-  </nav>
+        </transition>
+      </div>
+    </nav>
+  </div>
 </template>
+
 
 <script>
 import "jquery";
@@ -434,6 +458,12 @@ export default {
     };
   },
   mounted() {
+    /* news bar */
+    var e = $('.ticker__item');
+    for (var i = 0; i < 100; i++) {
+        e.clone().insertAfter(e);
+    }
+    /* end news bar */
     axios
       .get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
       .then((response) => {
@@ -901,7 +931,7 @@ svg {
 @media (min-width: 200px) {
   .navbar {
     position: fixed !important;
-    top: 0;
+    top: 34px;
     width: 100%;
   }
 }
@@ -1125,4 +1155,78 @@ svg {
 .navbar-toggler.shop span {
   background-color: #fff;
 }
+
+/* moving bar */
+* {
+  box-sizing: border-box;
+}
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+.ticker-wrap h3 {
+  font-size: 14px;
+  display: inline;
+  margin: 0 0 0 60px;
+  color: black;
+font-weight: bold;
+}
+.ticker-wrap p {
+  font-size: 14px;
+  display: inline;
+  margin: 0;
+    color: black
+}
+.ticker-wrap {
+    position:fixed;
+ z-index:9999;
+ top:0;
+ overflow:hidden;
+ width:200%;
+ padding:5px 0;
+ white-space:nowrap;
+ background-color:#f2efeb
+  }
+  .ticker__item *{
+      display:inline;
+  }
+.ticker-wrap .ticker {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 10px;
+  box-sizing: content-box;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: ticker;
+  animation-name: ticker;
+  -webkit-animation-duration: 400s;
+  animation-duration: 400s;
+}
+.ticker-wrap .ticker__item {
+  display: inline-block;
+  color: white;
+}
+
+/* end moving bar */
 </style>
